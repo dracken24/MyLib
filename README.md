@@ -12,7 +12,4 @@ Run the program
 make
 ```
 
-Raylib documentation
-```
-https://www.raylib.com/cheatsheet/cheatsheet.html
-```
+[Raylib documentation](https://www.raylib.com/cheatsheet/cheatsheet.html)
