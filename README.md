@@ -1,10 +1,10 @@
-# SMAG
+# MyLib
 
 Team project
 
 Install raylib
 ```
-pip install raylib
+pip install raylib pyray
 ```
 
 Run the program
@@ -12,3 +12,7 @@ Run the program
 make
 ```
 
+Raylib documentation
+```
+https://www.raylib.com/cheatsheet/cheatsheet.html
+```
