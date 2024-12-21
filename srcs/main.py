@@ -1,5 +1,4 @@
 import raylib
-from pyray import Rectangle
 
 WINDOW_WIDTH: int = 400
 WINDOW_HEIGHT: int = 640
@@ -82,7 +81,7 @@ def main():
 # Draw a button with a text and return if the mouse is over the button
 def draw_button(button: str) -> bool:
     # if mouser is over the button, Check collision with mouse and button
-    if (RL.CheckCollisionPointRec(RL.GetMousePosition(), Rectangle(dict_button[button]["x"], dict_button[button]["y"],
+    if (RL.CheckCollisionPointRec(RL.GetMousePosition(), (dict_button[button]["x"], dict_button[button]["y"],
                                 dict_button[button]["width"], dict_button[button]["height"]))):
         # If the mouse is over the button, check if the left mouse button is pressed and choose the good action
         if (RL.IsMouseButtonPressed(RL.MOUSE_BUTTON_LEFT)):
