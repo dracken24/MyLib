@@ -1,11 +1,12 @@
-import raylib
+# import raylib
+from pyray import *
 
 WINDOW_WIDTH: int = 400
 WINDOW_HEIGHT: int = 640
 WINDOW_TITLE: str = "MyLib"
 
-RL = raylib
-FONT_COLOR = RL.DARKGRAY
+# RL = raylib
+FONT_COLOR = DARKGRAY
 
 dict_button = {
     "start": {
@@ -15,8 +16,8 @@ dict_button = {
         "width": 200,
         "height": 50,
         "measure_text": 0,
-        "color": RL.BLUE,
-        "text_color": RL.WHITE,
+        "color": BLUE,
+        "text_color": WHITE,
         "is_clicked": False,
         "action": 1
     },
@@ -27,8 +28,8 @@ dict_button = {
         "width": 200,
         "height": 50,
         "measure_text": 0,
-        "color": RL.ORANGE,
-        "text_color": RL.WHITE,
+        "color": ORANGE,
+        "text_color": WHITE,
         "is_clicked": False,
         "action": 2
     }
@@ -37,54 +38,54 @@ dict_button = {
 # init principal variables for the program
 def init():
     # Window init
-    RL.InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE.encode('utf-8'))
-    RL.SetTargetFPS(60);  # FPS to 60
+    init_window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE.encode('utf-8'))
+    set_target_fps(60);  # FPS to 60
 
     # Init each text wide for center text in button
     for button in dict_button:
-        dict_button[button]["measure_text"] = int(RL.MeasureText(dict_button[button]["text"].encode('utf-8'), 20) / 2)
+        dict_button[button]["measure_text"] = int(measure_text(dict_button[button]["text"].encode('utf-8'), 20) / 2)
 
 def main():
 
     init()
 
-    while (not RL.WindowShouldClose()):    # Detect window close on x corner click or escape key
+    while (not window_should_close()):    # Detect window close on x corner click or escape key
         # Drawing begin
-        RL.BeginDrawing()
+        begin_drawing()
         
         # Clear screen with LIGHTGRAY color for reset UI at each frame (Use this color for backgroung)
-        RL.ClearBackground(RL.LIGHTGRAY)     
+        clear_background(LIGHTGRAY)     
 
         # Draw title text
-        text_width = RL.MeasureText(WINDOW_TITLE.encode('utf-8'), 20)
-        x_position = int(RL.GetScreenWidth() / 2 - text_width / 2)
+        text_width = measure_text(WINDOW_TITLE.encode('utf-8'), 20)
+        x_position = int(get_screen_width() / 2 - text_width / 2)
 
         # Draw all buttons
         for button in dict_button:
             draw_button(button)
 
         # Reset mouse left button pressed when button is released
-        if RL.IsMouseButtonReleased(RL.MOUSE_BUTTON_LEFT):
+        if is_mouse_button_released(MOUSE_BUTTON_LEFT):
             for butt in dict_button:
                 # if button clicked set to True, Set it to False
                 if dict_button[butt]["is_clicked"] == True:
                     dict_button[butt]["is_clicked"] = False
 
-        RL.DrawText(WINDOW_TITLE.encode('utf-8'), x_position, 20, 20, RL.DARKGRAY)
+        draw_text(WINDOW_TITLE.encode('utf-8'), x_position, 20, 20, DARKGRAY)
 
-        RL.EndDrawing()
+        end_drawing()
 
     # Close windows and openGL context properly at exit
-    RL.CloseWindow()
+    close_window()
 
 
 # Draw a button with a text and return if the mouse is over the button
 def draw_button(button: str) -> bool:
     # if mouser is over the button, Check collision with mouse and button
-    if (RL.CheckCollisionPointRec(RL.GetMousePosition(), (dict_button[button]["x"], dict_button[button]["y"],
+    if (check_collision_point_rec(get_mouse_position(), (dict_button[button]["x"], dict_button[button]["y"],
                                 dict_button[button]["width"], dict_button[button]["height"]))):
         # If the mouse is over the button, check if the left mouse button is pressed and choose the good action
-        if (RL.IsMouseButtonPressed(RL.MOUSE_BUTTON_LEFT)):
+        if (is_mouse_button_pressed(MOUSE_BUTTON_LEFT)):
             dict_button[button]["is_clicked"] = True  # Set True for the button clicked
 
             # ***************************************Actions for Buttons*****************************************
@@ -96,21 +97,21 @@ def draw_button(button: str) -> bool:
 
         # If Mouse is over button but not clicked, Use this color of button (DARKBLUE by default)
         elif dict_button[button]["is_clicked"] == False:
-            RL.DrawRectangle(dict_button[button]["x"], dict_button[button]["y"], dict_button[button]["width"], dict_button[button]["height"], RL.DARKBLUE)                      # Draw Button
-            RL.DrawText(dict_button[button]["text"].encode('utf-8'), int(dict_button[button]["x"] + dict_button[button]["width"] / 2 - dict_button[button]["measure_text"]),    # Draw Text
+            draw_rectangle(dict_button[button]["x"], dict_button[button]["y"], dict_button[button]["width"], dict_button[button]["height"], DARKBLUE)                      # Draw Button
+            draw_text(dict_button[button]["text"].encode('utf-8'), int(dict_button[button]["x"] + dict_button[button]["width"] / 2 - dict_button[button]["measure_text"]),    # Draw Text
                         int(dict_button[button]["y"] + dict_button[button]["height"] / 2 - 10), 20, dict_button[button]["text_color"])
             return True
         
         # If Mouse is over button and is clicked but mouse not release, Use this color of button (DARKGREEN by default)
         if dict_button[button]["is_clicked"] == True:
-            RL.DrawRectangle(dict_button[button]["x"], dict_button[button]["y"], dict_button[button]["width"], dict_button[button]["height"], RL.DARKGREEN)                     # Draw Button
-            RL.DrawText(dict_button[button]["text"].encode('utf-8'), int(dict_button[button]["x"] + dict_button[button]["width"] / 2 - dict_button[button]["measure_text"]),    # Draw Text
+            draw_rectangle(dict_button[button]["x"], dict_button[button]["y"], dict_button[button]["width"], dict_button[button]["height"], DARKGREEN)                     # Draw Button
+            draw_text(dict_button[button]["text"].encode('utf-8'), int(dict_button[button]["x"] + dict_button[button]["width"] / 2 - dict_button[button]["measure_text"]),    # Draw Text
                         int(dict_button[button]["y"] + dict_button[button]["height"] / 2 - 10), 20, dict_button[button]["text_color"])
             return True
     # If Mouse is not over button and is not clicked, Use this color of button (Color enter by user at start)
     else:
-        RL.DrawRectangle(dict_button[button]["x"], dict_button[button]["y"], dict_button[button]["width"], dict_button[button]["height"], dict_button[button]["color"])         # Draw Button
-        RL.DrawText(dict_button[button]["text"].encode('utf-8'), int(dict_button[button]["x"] + dict_button[button]["width"] / 2 - dict_button[button]["measure_text"]),        # Draw Text
+        draw_rectangle(dict_button[button]["x"], dict_button[button]["y"], dict_button[button]["width"], dict_button[button]["height"], dict_button[button]["color"])         # Draw Button
+        draw_text(dict_button[button]["text"].encode('utf-8'), int(dict_button[button]["x"] + dict_button[button]["width"] / 2 - dict_button[button]["measure_text"]),        # Draw Text
                     int(dict_button[button]["y"] + dict_button[button]["height"] / 2 - 10), 20, dict_button[button]["text_color"])
         return False
 
