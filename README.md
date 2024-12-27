@@ -18,7 +18,7 @@ Run the program from main.py
 make
 ```
 
-Pour installer Raylib dans l'environement jupyter:
+# Pour installer Raylib dans l'environement jupyter:
 
 1. Vérifier ou se situe votre environnement Python:
 
