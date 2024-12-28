@@ -1,7 +1,7 @@
 from pyray import * # Import for Raylib
 from init import *
 from buttons_functions import *
-from button import draw_button
+from my_button import *
 
 def main():
 
@@ -23,23 +23,21 @@ def main():
         x_position = int(get_screen_width() / 2 - text_width / 2)
 
         # Draw all buttons
-        for button in dict_button:
-            quit_ct, text, action = draw_button(button)
-            if (action == True):
-                affich_text = text
+        for button_key in dict_button:
+            button = dict_button[button_key]
+            if isinstance(button, MyButton):
+                text = button.draw_button()
+                if text is not None:
+                    affich_text = text
         
         # Draw text zone
         draw_rectangle(10, int(WINDOW_HEIGHT / 4 * 3), int(WINDOW_WIDTH - 20), int(WINDOW_HEIGHT / 4 - 10), WHITE)
         draw_text(affich_text, 20, int(WINDOW_HEIGHT / 4 * 3) + 10, 20, BLACK)
 
-        # Reset mouse left button pressed when button is released
-        if is_mouse_button_released(MOUSE_BUTTON_LEFT):
-            for butt in dict_button:
-                # if button clicked set to True, Set it to False
-                if dict_button[butt]["is_clicked"] == True:
-                    dict_button[butt]["is_clicked"] = False
+        draw_text(WINDOW_TITLE.encode('utf-8'), x_position, 15, 20, DARKGRAY)
 
-        draw_text(WINDOW_TITLE.encode('utf-8'), x_position, 20, 20, DARKGRAY)
+        if (affich_text == "Quitter"):
+            quit_ct = True
 
         end_drawing()
 
