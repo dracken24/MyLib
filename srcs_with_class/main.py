@@ -83,7 +83,7 @@ def main():
             button = dict_button[button_key] # Get the value from the key in the button dico
             text = button.draw_button()      # Get the return from the button
             # Get the text from the return of a button and affich it on the textBox if text is not None
-            if text is not None and text != "Quitter": 
+            if (text is not None and text != "Quitter"): 
                 affich_text = text
             # For Quit withe the "Quitter" button
             if (text == "Quitter"):

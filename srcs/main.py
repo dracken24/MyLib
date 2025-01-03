@@ -61,6 +61,13 @@ def main():
 
         end_drawing()
 
+        # Reset color clicked when relese mouse button
+        if (is_mouse_button_released(MOUSE_BUTTON_LEFT)):
+            for button_key in dict_button:
+                button = dict_button[button_key]
+                if (button["is_clicked"] == True):
+                    button["is_clicked"] = False
+
         line_ct = 0
 
     # Close windows and openGL context properly at exit
