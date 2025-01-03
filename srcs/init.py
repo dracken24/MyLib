@@ -4,6 +4,8 @@ WINDOW_WIDTH: int = 700
 WINDOW_HEIGHT: int = 600
 WINDOW_TITLE: str = "MyLib"
 
+TEXT_OFFSET = 20
+
 # RL = raylib
 FONT_COLOR = DARKGRAY
 BUTTON_HEIGHT = int(30 + 5)
