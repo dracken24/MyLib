@@ -26,22 +26,25 @@ def adjust_text_in_box_and_draw_result(box: Rectangle, text: str, line_position:
     if text_width > writable_length:
         line = text[:int(writable_length / 10.2)]   # Take a line in the text base on writable_length
 
+        # for check each char in the str for check for \n to do a new line
         ct: int = 0
         find: bool = False
-        for c in line:
+        for c in line: # if \n is find, give new value to line from start to \n and break
             if (c == '\n'):
                 line = text[:ct]
                 find = True
                 break
             ct += 1
-        
+
+        # Erase that line from the text at max length or at the \n(ct + 1 for skip \n)
         if (find == True):
             text = text[ct + 1:]
         else:
-            text = text[int(writable_length / 10.2):]   # Erase that line from the text
+            text = text[int(writable_length / 10.2):]
 
         draw_text(line, int(box.x + 10), adjusted_y, 20, BLACK) # Draw the line in the box
         line_ct += 1 # Add one to the line counter
+        
         # Call recursive function with the text less the cut line
         line_ct = adjust_text_in_box_and_draw_result(box, text, line_height + line_position, scroll_offset, line_ct)
     # If text fit in the box, just write it

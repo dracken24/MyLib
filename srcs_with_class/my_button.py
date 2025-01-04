@@ -8,12 +8,13 @@ class MyButton:
     # Constructor
     def __init__(self, x: float, y: float, width: float, height: float,
                 bgColor = GRAY, clickColor = WHITE, hoverColor = LIGHTGRAY,
-                    font_color = BLACK, text: str = "", font_size: int = 20) -> str:
+                    font_color = BLACK, title: str = "", text: str = "", font_size: int = 20) -> str:
         self.rect = Rectangle(x, y, width, height)
         self.bgColor = bgColor
         self.clickColor = clickColor
         self.hoverColor = hoverColor
         self.is_clicked = False
+        self.title = title
         self.text = text
         self.text_color = font_color
             
@@ -30,7 +31,7 @@ class MyButton:
         if check_collision_point_rec(get_mouse_position(), self.rect) and not skip_update:
             if is_mouse_button_down(MOUSE_BUTTON_LEFT):
                 draw_rectangle_rec(self.rect, self.clickColor)
-                draw_text(self.text.encode('utf-8'), int(text_pos.x), int(text_pos.y),
+                draw_text(self.title.encode('utf-8'), int(text_pos.x), int(text_pos.y),
                           self.font_size, self.text_color)
                 
                 if not self.is_clicked:
@@ -45,12 +46,12 @@ class MyButton:
                 self.is_clicked = False
 
             draw_rectangle_rec(self.rect, self.hoverColor)
-            draw_text(self.text.encode('utf-8'), int(text_pos.x), int(text_pos.y),
+            draw_text(self.title.encode('utf-8'), int(text_pos.x), int(text_pos.y),
                 self.font_size, self.text_color)
             
         else:
             draw_rectangle_rec(self.rect, self.bgColor)
-            draw_text(self.text.encode('utf-8'), int(text_pos.x), int(text_pos.y),
+            draw_text(self.title.encode('utf-8'), int(text_pos.x), int(text_pos.y),
                     self.font_size, self.text_color)
 
         draw_rectangle_lines_ex(self.rect, BOARDER_THICK, BORDER_COLOR)
@@ -62,6 +63,9 @@ class MyButton:
 
     def get_text(self):
         return self.text
+    
+    def get_title(self):
+        return self.title
 
 ########################################################################
                                 # SET

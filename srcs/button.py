@@ -7,7 +7,7 @@ BORDER_COLOR = DARKGRAY
 
 def draw_clicked_button(button: str, rect: Rectangle):
     draw_rectangle_rec(rect, dict_button[button]["clicked_color"])                     # Draw Button
-    draw_text(dict_button[button]["text"].encode('utf-8'), int(rect.x + rect.width / 2 - dict_button[button]["measure_text"]),    # Draw Text
+    draw_text(dict_button[button]["title"].encode('utf-8'), int(rect.x + rect.width / 2 - dict_button[button]["measure_text"]),    # Draw Text
                 int(rect.y + rect.height / 2 - 10), 20, dict_button[button]["text_color"])
     
     # Draw a button border
@@ -69,7 +69,7 @@ def draw_button(button: str) -> tuple:
         # If Mouse is over button but not clicked, Use this color of button (dict_button[button]["hover_color"])
         elif dict_button[button]["is_clicked"] == False:
             draw_rectangle_rec(rect, dict_button[button]["hover_color"])                      # Draw Button
-            draw_text(dict_button[button]["text"].encode('utf-8'), int(rect.x + rect.width / 2 - dict_button[button]["measure_text"]),    # Draw Text
+            draw_text(dict_button[button]["title"].encode('utf-8'), int(rect.x + rect.width / 2 - dict_button[button]["measure_text"]),    # Draw Text
                         int(rect.y + rect.height / 2 - 10), 20, dict_button[button]["text_color"])
         
         # If Mouse is over button and is clicked but mouse not release, Use this color of button (dict_button[button]["clicked_color"])
@@ -78,7 +78,7 @@ def draw_button(button: str) -> tuple:
     # If Mouse is not over button and is not clicked, Use this color of button (dict_button[button]["base_color"])
     else:
         draw_rectangle_rec(rect, dict_button[button]["base_color"])         # Draw Button
-        draw_text(dict_button[button]["text"].encode('utf-8'), int(rect.x + rect.width / 2 - dict_button[button]["measure_text"]),        # Draw Text
+        draw_text(dict_button[button]["title"].encode('utf-8'), int(rect.x + rect.width / 2 - dict_button[button]["measure_text"]),        # Draw Text
                     int(rect.y + rect.height / 2 - 10), 20, dict_button[button]["text_color"])
         
     # Draw a button border

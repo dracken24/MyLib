@@ -21,6 +21,7 @@ add_book: MyButton = MyButton(10,
                               DARKBLUE,
                               WHITE,
                               "Ajouter ou supprimer un livre dans la bibliotheque",
+                              "Text pour ajouter ou supprimer un livre dans la bibliotheque",
                               20)
 
 add_user: MyButton = MyButton(10,
@@ -32,6 +33,7 @@ add_user: MyButton = MyButton(10,
 							  DARKBLUE,
                               WHITE,
 							  "Ajouter ou supprimer un utilisateur",
+                              "Text pour ajouter ou supprimer un utilisateur",
                               20)
 
 emprunt: MyButton = MyButton(10,
@@ -43,6 +45,7 @@ emprunt: MyButton = MyButton(10,
 							 DARKBLUE,
                              WHITE,
 							 "Enregistrer un emprunt ou un retour",
+                             "Text pour enregistrer un emprunt ou un retour",
                              20)
 
 lister: MyButton = MyButton(10,
@@ -54,6 +57,7 @@ lister: MyButton = MyButton(10,
 							DARKBLUE,
                             WHITE,
 							"Lister les livres les plus empruntes",
+                            "Text pour lister les livres les plus empruntes",
                             20)
 
 calculer: MyButton = MyButton(10, (BUTTON_HEIGHT * 5 + 10),
@@ -64,6 +68,7 @@ calculer: MyButton = MyButton(10, (BUTTON_HEIGHT * 5 + 10),
 							  DARKBLUE,
                               WHITE,
 							  "Calculer la duree moyenne des emprunts par genre",
+                              "Text pour Calculer la duree moyenne des emprunts par genre",
                               20)
 
 identifier: MyButton = MyButton(10,
@@ -75,6 +80,7 @@ identifier: MyButton = MyButton(10,
 								DARKBLUE,
 								WHITE,
 								"Identifier les utilisateurs les plus actifs",
+                                "Text pour identifier les utilisateurs les plus actifs",
 								20)
 
 status: MyButton = MyButton(10,
@@ -86,6 +92,7 @@ status: MyButton = MyButton(10,
 							DARKBLUE,
 							WHITE,
 							"Afficher le statut de la bibliotheque sous forme de statistiques",
+                            "Text pour afficher le status de la bibliotheque",
 							20)
 
 diagramme: MyButton = MyButton(10,
@@ -97,6 +104,7 @@ diagramme: MyButton = MyButton(10,
 							   DARKBLUE,
                                WHITE,
 							   "Visualisation: Diagramme circulaire des emprunts par genre",
+                               "Faire apparaitre une box avec un diagramme circulaire detaille",
                                20)
 
 evolution: MyButton = MyButton(10,
@@ -108,6 +116,7 @@ evolution: MyButton = MyButton(10,
 							   DARKBLUE,
                                WHITE,
 							   "Visualisation: Evolution mensuelle des emprunt",
+                               "Text pour voir l'evolution mensuelle des emprunts",
                                20)
 
 quitter: MyButton = MyButton(10,
@@ -130,16 +139,16 @@ def init():
     set_target_fps(60);  # FPS to 60
 
     # Init each text wide in pixel for center text in button
-    add_book.set_mesure_text(int(measure_text(add_book.get_text().encode('utf-8'), 20) / 2))
-    add_user.set_mesure_text(int(measure_text(add_user.get_text().encode('utf-8'), 20) / 2))
-    emprunt.set_mesure_text(int(measure_text(emprunt.get_text().encode('utf-8'), 20) / 2))
-    lister.set_mesure_text(int(measure_text(lister.get_text().encode('utf-8'), 20) / 2))
-    calculer.set_mesure_text(int(measure_text(calculer.get_text().encode('utf-8'), 20) / 2))
-    identifier.set_mesure_text(int(measure_text(identifier.get_text().encode('utf-8'), 20) / 2))
-    status.set_mesure_text(int(measure_text(status.get_text().encode('utf-8'), 20) / 2))
-    diagramme.set_mesure_text(int(measure_text(diagramme.get_text().encode('utf-8'), 20) / 2))
-    evolution.set_mesure_text(int(measure_text(evolution.get_text().encode('utf-8'), 20) / 2))
-    quitter.set_mesure_text(int(measure_text(quitter.get_text().encode('utf-8'), 20) / 2))
+    add_book.set_mesure_text(int(measure_text(add_book.get_title().encode('utf-8'), 20) / 2))
+    add_user.set_mesure_text(int(measure_text(add_user.get_title().encode('utf-8'), 20) / 2))
+    emprunt.set_mesure_text(int(measure_text(emprunt.get_title().encode('utf-8'), 20) / 2))
+    lister.set_mesure_text(int(measure_text(lister.get_title().encode('utf-8'), 20) / 2))
+    calculer.set_mesure_text(int(measure_text(calculer.get_title().encode('utf-8'), 20) / 2))
+    identifier.set_mesure_text(int(measure_text(identifier.get_title().encode('utf-8'), 20) / 2))
+    status.set_mesure_text(int(measure_text(status.get_title().encode('utf-8'), 20) / 2))
+    diagramme.set_mesure_text(int(measure_text(diagramme.get_title().encode('utf-8'), 20) / 2))
+    evolution.set_mesure_text(int(measure_text(evolution.get_title().encode('utf-8'), 20) / 2))
+    quitter.set_mesure_text(int(measure_text(quitter.get_title().encode('utf-8'), 20) / 2))
 
     # Putt all buttons in a dictionary
     dict_button[add_book.get_text()] = add_book

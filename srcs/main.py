@@ -50,7 +50,7 @@ def main():
         draw_rectangle_rec(text_box, WHITE)
         
         # Passage explicite du scroll_offset
-        line_ct = adjust_text_in_box_and_draw_result(text_box, affich_text, 0, scroll_offset, line_ct)
+        line_ct = adjust_text_in_box_and_draw_result(text_box, affich_text, 0, scroll_offset)
 
         # For stop scrolling down text
         if (scroll_offset * -1 / TEXT_OFFSET > line_ct): # * -1 for compare scroll_offset (Is negative) with the number of line (ex: scroll_offset = -13 is = to line_ct = 13)
@@ -67,8 +67,6 @@ def main():
                 button = dict_button[button_key]
                 if (button["is_clicked"] == True):
                     button["is_clicked"] = False
-
-        line_ct = 0
 
     # Close windows and openGL context properly at exit
     close_window()
