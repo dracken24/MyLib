@@ -25,8 +25,21 @@ def adjust_text_in_box_and_draw_result(box: Rectangle, text: str, line_position:
     # if the text is to whide for the box
     if text_width > writable_length:
         line = text[:int(writable_length / 10.2)]   # Take a line in the text base on writable_length
-        text = text[int(writable_length / 10.2):]   # Erase that line from the text
+
+        ct: int = 0
+        find: bool = False
+        for c in line:
+            if (c == '\n'):
+                line = text[:ct]
+                find = True
+                break
+            ct += 1
         
+        if (find == True):
+            text = text[ct + 1:]
+        else:
+            text = text[int(writable_length / 10.2):]   # Erase that line from the text
+
         draw_text(line, int(box.x + 10), adjusted_y, 20, BLACK) # Draw the line in the box
         line_ct += 1 # Add one to the line counter
         # Call recursive function with the text less the cut line
