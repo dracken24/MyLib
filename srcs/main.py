@@ -1,6 +1,6 @@
-from pyray import window_should_close, get_mouse_wheel_move, is_mouse_button_released, begin_drawing, clear_background, draw_text, measure_text, draw_rectangle_rec, end_drawing, close_window, LIGHTGRAY, get_screen_width,MOUSE_BUTTON_LEFT # Import for Raylib
-from init import *
-from utility import *
+from pyray import window_should_close, get_mouse_wheel_move, is_mouse_button_released, begin_drawing, clear_background, draw_text, measure_text, draw_rectangle_rec, end_drawing, close_window, LIGHTGRAY, get_screen_width,MOUSE_BUTTON_LEFT, WHITE, DARKGRAY, Rectangle # Import for Raylib
+from init import init, TEXT_OFFSET, WINDOW_TITLE, WINDOW_HEIGHT, WINDOW_WIDTH, dict_button
+from utility import adjust_text_in_box_and_draw_result
 from buttons.button import draw_button
 
 """ Main function for run the programm """
