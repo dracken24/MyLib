@@ -17,24 +17,25 @@ def adjust_text_in_box_and_draw_result(box: Rectangle, text: str, line_position:
     begin_scissor_mode(int(box.x), int(box.y), int(box.width), int(box.height))
     
     text_width: int = measure_text(text.encode('utf-8'), 20)    # Check if text is more whide than the box
-    line_height: int = 22                                       # Space for offset each line in pixel
+    line_height: int = 20                                       # Space for offset each line in pixel
     writable_length: int = int(box.width - 20)                  # Writable whide space in the box (20 pixels offset)
 
     adjusted_y = int(box.y + line_position + scroll_offset)     # Adjust each line position in y
 
-    # if the text is to whide for the box
-    if text_width > writable_length:
-        line = text[:int(writable_length / 10.2)]   # Take a line in the text base on writable_length
+    line = text[:int(writable_length / 10.2)]   # Take a line in the text base on writable_length
 
-        # for check each char in the str for check for \n to do a new line
-        ct: int = 0
-        find: bool = False
-        for c in line: # if \n is find, give new value to line from start to \n and break
-            if (c == '\n'):
-                line = text[:ct]
-                find = True
-                break
-            ct += 1
+    # for check each char in the str for check for \n to do a new line
+    ct: int = 0
+    find: bool = False
+    for c in line: # if \n is find, give new value to line from start to \n and break
+        if (c == '\n'):
+            line = text[:ct]
+            find = True
+            break
+        ct += 1
+
+    # if the text is to whide for the box or \n find in line
+    if text_width > writable_length or find == True:
 
         # Erase that line from the text at max length or at the \n(ct + 1 for skip \n)
         if (find == True):
