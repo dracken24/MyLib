@@ -18,6 +18,12 @@ def main():
     mouse_wheel_ct = 0          # Mouse wheel counter
     line_ct: int = 0            # Line counter
 
+
+    text_box: Rectangle = Rectangle(10, int(WINDOW_HEIGHT / 4 * 3), int(WINDOW_WIDTH - 20), int(WINDOW_HEIGHT / 4 - 10)) # Make rectangle from values
+    # Draw title text
+    text_width = measure_text(WINDOW_TITLE.encode('utf-8'), 20) # For center the text in window
+    x_position = int(get_screen_width() / 2 - text_width / 2)
+    
     while (not quit_ct and not window_should_close()):    # Detect window close on x corner click, escape key or Quit button
         # Get the wheel movement
         wheel_move = get_mouse_wheel_move()
@@ -30,14 +36,12 @@ def main():
 
         # Drawing begin
         begin_drawing()
-        
+
         # Clear screen with LIGHTGRAY color for reset UI at each frame (Use this color for backgroung)
         clear_background(LIGHTGRAY)     
 
-        # Draw title text
-        text_width = measure_text(WINDOW_TITLE.encode('utf-8'), 20) # For center the text in window
-        x_position = int(get_screen_width() / 2 - text_width / 2)
-
+        # Draw the title
+        draw_text(WINDOW_TITLE.encode('utf-8'), x_position, 15, 20, DARKGRAY)
 
         # Draw all buttons
         for button in dict_button:
@@ -46,7 +50,6 @@ def main():
                 affich_text = text
         
         # Draw text zone
-        text_box: Rectangle = Rectangle(10, int(WINDOW_HEIGHT / 4 * 3), int(WINDOW_WIDTH - 20), int(WINDOW_HEIGHT / 4 - 10)) # Make rectangle from values
         draw_rectangle_rec(text_box, WHITE)
         
         # Passage explicite du scroll_offset
@@ -55,9 +58,6 @@ def main():
         # For stop scrolling down text
         if (scroll_offset * -1 / TEXT_OFFSET > line_ct): # * -1 for compare scroll_offset (Is negative) with the number of line (ex: scroll_offset = -13 is = to line_ct = 13)
             scroll_offset = line_ct * -1 * TEXT_OFFSET
-
-        # Draw the title
-        draw_text(WINDOW_TITLE.encode('utf-8'), x_position, 15, 20, DARKGRAY)
 
         end_drawing()
 

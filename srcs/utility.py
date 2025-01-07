@@ -13,7 +13,6 @@ from pyray import begin_scissor_mode, end_scissor_mode, draw_text, measure_text,
 """
 def adjust_text_in_box_and_draw_result(box: Rectangle, text: str, line_position: int = 0,
                                        scroll_offset: int = 0, line_ct: int = 0) -> int:
-    # Function for draw in a specific zone. (like writing text inside a box) 
     begin_scissor_mode(int(box.x), int(box.y), int(box.width), int(box.height))
     
     text_width: int = measure_text(text.encode('utf-8'), 20)    # Check if text is more whide than the box
