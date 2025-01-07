@@ -1,6 +1,14 @@
-from pyray import * # Import for Raylib
+from pyray import draw_rectangle_rec, draw_rectangle_lines_ex, draw_text, check_collision_point_rec, is_mouse_button_pressed, get_mouse_position, MOUSE_BUTTON_LEFT, Rectangle # Import for Raylib
 from init import *
-from buttons_functions import *
+from buttons.add_remove_books import add_remove_books
+from buttons.add_remove_users import add_remove_users
+from buttons.emprunt_retour_books import emprunt_retour_books
+from buttons.list_books import list_books
+from buttons.calcul_emprunt_books import calcul_emprunt_books
+from buttons.ident_actif_users import ident_actif_users
+from buttons.status import status
+from buttons.diagram import diagram
+from buttons.monthly_evolution import monthly_evolution
 
 BOARDER_THICK = 2
 BORDER_COLOR = DARKGRAY
@@ -63,7 +71,7 @@ def draw_button(button: str) -> tuple:
                 return False, dict_button[button]["text"], True
             elif dict_button[button]["action"] == 10:
                 print(f"{button} button Hit Action 10") # EXIT
-                return True, dict_button[button]["text"], True
+                return True, "Exit", True
             # *************************************************************************************************** 
 
         # If Mouse is over button but not clicked, Use this color of button (dict_button[button]["hover_color"])

@@ -1,8 +1,7 @@
-from pyray import * # Import for Raylib
+from pyray import window_should_close, get_mouse_wheel_move, is_mouse_button_released, begin_drawing, clear_background, draw_text, measure_text, draw_rectangle_rec, end_drawing, close_window, LIGHTGRAY, get_screen_width,MOUSE_BUTTON_LEFT # Import for Raylib
 from init import *
 from utility import *
-from buttons_functions import *
-from button import draw_button
+from buttons.button import draw_button
 
 """ Main function for run the programm """
 # lorem is to test the text box
@@ -42,7 +41,7 @@ def main():
         # Draw all buttons
         for button in dict_button:
             quit_ct, text, action = draw_button(button)
-            if (action == True and text != "Quitter"):
+            if (action == True and text != "Exit"):
                 affich_text = text
         
         # Draw text zone

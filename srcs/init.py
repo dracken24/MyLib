@@ -1,4 +1,4 @@
-from pyray import * # Import for Raylib
+from pyray import init_window, set_target_fps, measure_text, DARKGRAY, BLUE, DARKBLUE, DARKGREEN, WHITE, ORANGE, MAROON, RED # Import for Raylib
 
 WINDOW_WIDTH: int = 700
 WINDOW_HEIGHT: int = 600

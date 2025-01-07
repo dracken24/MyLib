@@ -1,4 +1,4 @@
-from pyray import * # Import for Raylib
+from pyray import begin_scissor_mode, end_scissor_mode, draw_text, measure_text, Rectangle, BLACK # Import for Raylib
 
 """Recursive function for draw and scroll text inside a box (rectangle)
     Args:
@@ -44,7 +44,7 @@ def adjust_text_in_box_and_draw_result(box: Rectangle, text: str, line_position:
 
         draw_text(line, int(box.x + 10), adjusted_y, 20, BLACK) # Draw the line in the box
         line_ct += 1 # Add one to the line counter
-        
+
         # Call recursive function with the text less the cut line
         line_ct = adjust_text_in_box_and_draw_result(box, text, line_height + line_position, scroll_offset, line_ct)
     # If text fit in the box, just write it
