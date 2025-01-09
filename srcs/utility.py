@@ -4,7 +4,7 @@ from pyray import begin_scissor_mode, end_scissor_mode, draw_text, measure_text,
     Args:
         box (Rectangle): Rectangle for draw text
         text (str): Text to draw
-        line_position (int): Position of the line in the box
+        line_position (int): Position in x of the line in the box
         scroll_offset (int): Scroll offset for base on mouse wheel
         line_ct (int): Text is cut in x line_ct to fix in box whide
     

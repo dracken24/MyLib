@@ -11,13 +11,11 @@ def main():
     # comment
     init()
 
-    # For Quit the main loop for exit programm
-    quit_ct: bool = False       # Couinter for the exit button
+    quit_ct: bool = False       # Counter for the exit button to quit main loop
     affich_text: str = lorem    # Text visible on the textBox
     scroll_offset: int = 0      # The offset for the text in the box
     mouse_wheel_ct = 0          # Mouse wheel counter
     line_ct: int = 0            # Line counter
-
 
     text_box: Rectangle = Rectangle(10, int(WINDOW_HEIGHT / 4 * 3), int(WINDOW_WIDTH - 20), int(WINDOW_HEIGHT / 4 - 10)) # Make rectangle from values
     # Draw title text

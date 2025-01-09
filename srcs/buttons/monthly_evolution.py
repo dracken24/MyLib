@@ -1,4 +1,4 @@
-from init import dict_button
+from init import dict_button, dict_books, dict_users, loans_list_dict
 
 # Visualization: Monthly evolution of borrowing
 def monthly_evolution(button: str):

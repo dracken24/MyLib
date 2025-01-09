@@ -13,7 +13,7 @@ BUTTON_HEIGHT = int(30 + 5)
 # Putt all buttons in a dictionary
 dict_button = {
 	"add_book": {  # Name for the button in dico (Key)
-        "title": "Ajouter ou supprimer un livre dans la bibliotheque",	# Text visible on button
+		"title": "Ajouter ou supprimer un livre dans la bibliotheque",	# Text visible on button
 		"text": "Text pour ajouter ou supprimer un livre dans la bibliotheque",	# Text for write on textBox
 		"x": 10,                            	# position x
 		"y": BUTTON_HEIGHT + 10,            	# position y
@@ -28,7 +28,7 @@ dict_button = {
 		"action": 1                         	# For launch good action in draw_button()
 	},
 	"add_user": {
-        "title": "Ajouter ou supprimer un utilisateur",
+		"title": "Ajouter ou supprimer un utilisateur",
 		"text": "Text pour ajouter ou supprimer un utilisateur",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 2) + 10,
@@ -164,12 +164,66 @@ dict_button = {
 	}
 }
 
+dict_books: dict = {
+	"Python Programming": {
+		"Auteur": "John Doe",
+		"Genre": "Programmation",
+		"Exemplaires": 5,
+		"Emprunts": 10
+	},
+	"The Great Gatsby": {
+		"Auteur": "F. Scott Fitzgerald",
+		"Genre": "Roman",
+		"Exemplaires": 2,
+		"Emprunts": 7
+	}
+}
+
+dict_users = {
+	"1": {
+		"Nom": "Smith",
+		"Pr ́enom": "Alice",
+		"Email": "alice@gmail.com",
+		"T ́el ́ephone": "514-888-9696",
+		"Emprunts": 5,
+		"2"
+		"ListeLivreLu":["Python Programming","The Great Gatsby","Marx’s Inferno",
+		"Atomic Habits"]
+	},
+	"2": {
+		"Nom": "Brown",
+		"Pr ́enom": "Bob",
+		"Email": "bob@gmail.com",
+		"T ́el ́ephone": "430-568-8985",
+		"Emprunts": 2,
+		"ListeLivreLu":["Python Programming","The Great Gatsby"]
+	}
+}
+
+loans_list_dict = [
+	{
+		"Utilisateur_ID": 1,
+		"Livre": "Python Programming",
+		"Date_Emprunt": "2024-12-01",
+		"Date_Retour": "2024-12-10"
+	},
+	{
+		"Utilisateur_ID": 2,
+		"Livre": "The Great Gatsby",
+		"Date_Emprunt": "2024-11-25",
+		"Date_Retour": None
+	}
+]
+
 # init principal variables for the program
 def init():
-    # Window init
-    init_window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE.encode('utf-8'))
-    set_target_fps(60);  # FPS to 60
+	# Window init
+	init_window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE.encode('utf-8'))
+	set_target_fps(60)  # FPS to 60
+	
+	for b in loans_list_dict:
+		print(b)
 
-    # Init each text wide in pixel for center text in button
-    for button in dict_button:
-        dict_button[button]["measure_text"] = int(measure_text(dict_button[button]["title"].encode('utf-8'), 20) / 2)
+	# Init each text wide in pixel for center text in button
+	for button in dict_button:
+		dict_button[button]["measure_text"] = int(measure_text(dict_button[button]["title"].encode('utf-8'), 20) / 2)
