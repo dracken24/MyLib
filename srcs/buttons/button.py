@@ -75,6 +75,7 @@ def draw_button(button: str) -> tuple:
                 input_text(button)           # Action for the button input_text clicked
                 draw_clicked_button(button, rect)
                 return False, dict_button[button]["text"], True
+                # return False, "skip", True
             elif dict_button[button]["action"] == 11:
                 print(f"{button} button Hit Action 10") # EXIT
                 return True, "Exit", True
