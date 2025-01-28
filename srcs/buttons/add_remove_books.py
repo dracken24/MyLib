@@ -1,9 +1,12 @@
 from init import dict_button, dict_books, dict_users, loans_list_dict
-from add_remove_users import User
+from buttons.add_remove_users import User
 dict_books = {}
 dict_users = {}
 import csv
 import os
+
+def add_remove_books(button: str):
+    print("add_remove_books")
 
 class Book:
     def __init__(self, book_name, author, genre, number_of_copies_available, total_times_rented=0):

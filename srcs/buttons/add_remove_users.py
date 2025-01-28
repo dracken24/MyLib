@@ -1,7 +1,7 @@
 from init import dict_button, dict_books, dict_users, loans_list_dict
 
-
-
+def add_remove_users(button: str):
+    print("add_remove_books")
 
 dict_users = {}
 import csv
