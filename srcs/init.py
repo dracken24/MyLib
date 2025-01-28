@@ -1,7 +1,7 @@
 from pyray import init_window, set_target_fps, measure_text, DARKGRAY, BLUE, DARKBLUE, DARKGREEN, WHITE, ORANGE, MAROON, RED # Import for Raylib
 
 WINDOW_WIDTH: int = 700
-WINDOW_HEIGHT: int = 600
+WINDOW_HEIGHT: int = 660
 WINDOW_TITLE: str = "MyLib"
 
 TEXT_OFFSET = 20
@@ -147,6 +147,21 @@ dict_button = {
 		"is_clicked": False,
 		"action": 9
 	},
+	"input": {
+		"title": "Input Utilisateur",
+		"text": "Text pour Input",
+		"x": 10,
+		"y": int(BUTTON_HEIGHT * 12) + 20,
+		"width": int(WINDOW_WIDTH - 20),
+		"height": int(BUTTON_HEIGHT - 5),
+		"measure_text": 0,
+		"base_color": BLUE,
+		"hover_color": DARKBLUE,
+		"clicked_color": DARKGREEN,
+		"text_color": WHITE,
+		"is_clicked": False,
+		"action": 10
+	},
 	"quitter": {
 		"title": "Quitter",
 		"text": "Text pour quitter le programme",
@@ -160,8 +175,8 @@ dict_button = {
 		"clicked_color": RED,
 		"text_color": WHITE,
 		"is_clicked": False,
-		"action": 10
-	}
+		"action": 11
+	},
 }
 
 dict_books: dict = {
@@ -182,19 +197,18 @@ dict_books: dict = {
 dict_users = {
 	"1": {
 		"Nom": "Smith",
-		"Pr ́enom": "Alice",
+		"Prénom": "Alice",
 		"Email": "alice@gmail.com",
-		"T ́el ́ephone": "514-888-9696",
+		"Téléphone": "514-888-9696",
 		"Emprunts": 5,
-		"2"
 		"ListeLivreLu":["Python Programming","The Great Gatsby","Marx’s Inferno",
 		"Atomic Habits"]
 	},
 	"2": {
 		"Nom": "Brown",
-		"Pr ́enom": "Bob",
+		"Prénom": "Bob",
 		"Email": "bob@gmail.com",
-		"T ́el ́ephone": "430-568-8985",
+		"Téléphone": "430-568-8985",
 		"Emprunts": 2,
 		"ListeLivreLu":["Python Programming","The Great Gatsby"]
 	}

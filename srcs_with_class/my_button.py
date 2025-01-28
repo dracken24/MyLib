@@ -1,5 +1,6 @@
-from pyray import * # Import for Raylib
-from pyray import  Rectangle, Vector2, Color, Font
+from pyray import Rectangle, Vector2, DARKGRAY, GRAY, LIGHTGRAY, WHITE, BLACK
+from pyray import check_collision_point_rec, get_mouse_position, is_mouse_button_down, MOUSE_BUTTON_LEFT
+from pyray import draw_rectangle_rec, draw_text, draw_rectangle_lines_ex, is_mouse_button_released
 
 BOARDER_THICK = 2
 BORDER_COLOR = DARKGRAY
@@ -8,7 +9,7 @@ class MyButton:
     # Constructor
     def __init__(self, x: float, y: float, width: float, height: float,
                 bgColor = GRAY, clickColor = WHITE, hoverColor = LIGHTGRAY,
-                    font_color = BLACK, title: str = "", text: str = "", font_size: int = 20) -> str:
+                    font_color = BLACK, title: str = "", text: str = "", font_size: int = 20):
         self.rect = Rectangle(x, y, width, height)
         self.bgColor = bgColor
         self.clickColor = clickColor
@@ -56,6 +57,9 @@ class MyButton:
 
         draw_rectangle_lines_ex(self.rect, BOARDER_THICK, BORDER_COLOR)
         return None
+    
+    def __str__(self):
+        return f"Button name: {self.title}"
 
 ########################################################################
                                 # GET
