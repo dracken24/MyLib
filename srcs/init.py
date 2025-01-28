@@ -197,19 +197,18 @@ dict_books: dict = {
 dict_users = {
 	"1": {
 		"Nom": "Smith",
-		"Pr ́enom": "Alice",
+		"Prénom": "Alice",
 		"Email": "alice@gmail.com",
-		"T ́el ́ephone": "514-888-9696",
+		"Téléphone": "514-888-9696",
 		"Emprunts": 5,
-		"2"
 		"ListeLivreLu":["Python Programming","The Great Gatsby","Marx’s Inferno",
 		"Atomic Habits"]
 	},
 	"2": {
 		"Nom": "Brown",
-		"Pr ́enom": "Bob",
+		"Prénom": "Bob",
 		"Email": "bob@gmail.com",
-		"T ́el ́ephone": "430-568-8985",
+		"Téléphone": "430-568-8985",
 		"Emprunts": 2,
 		"ListeLivreLu":["Python Programming","The Great Gatsby"]
 	}
