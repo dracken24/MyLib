@@ -1,14 +1,19 @@
 from init import dict_button, dict_books, dict_users, loans_list_dict
-dict_users = {}
-import json
 
+
+
+
+dict_users = {}
+import csv
+import os
 class User:
-    def __init__(self, first_name, last_name, email, phone_number, total_books_rented=0):
+    def __init__(self, first_name, last_name, email, phone_number, total_books_rented=0, read_books=None):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.phone_number = phone_number
         self.total_books_rented = int(total_books_rented)
+        self.read_books = read_books if read_books is not None else []
 
     def to_dict(self):
         """Convertir un utilisateur en dictionnaire."""
@@ -29,7 +34,13 @@ class User:
             email=data["email"],
             phone_number=data["phone_number"],
             total_books_rented=data["total_books_rented"],
+            read_books=data.get("read_books", [])
         )
+
+    def add_read_book(self, book_name):
+        """Ajouter un livre à la liste des livres lus s'il n'y est pas déjà."""
+        if book_name not in self.read_books:
+            self.read_books.append(book_name)
 
     def display_info(self):
         """Affiche les informations de l'utilisateur."""
@@ -57,7 +68,7 @@ def add_user():
         print("-" * 30)
         print(f"L'utilisateur {first_name} {last_name} a été ajouté avec succès.")
         print("-" * 30)
-        save_users()  # Sauvegarder après ajout
+        save_users_csv()  # Sauvegarder après ajout
 
 
 # Supprimer un utilisateur
@@ -68,7 +79,7 @@ def remove_user():
         print("-" * 30)
         print(f"L'utilisateur avec l'email {email} a été supprimé.")
         print("-" * 30)
-        save_users()  # Sauvegarder après suppression
+        save_users_csv()  # Sauvegarder après suppression
     else:
         print("-" * 30)
         print(f"Aucun utilisateur trouvé avec l'email {email}.")
@@ -86,56 +97,40 @@ def display_users():
         print("-" * 30)
 
 
-# Sauvegarder les utilisateurs dans un fichier JSON
-def save_users(file="users.json"):
-    with open(file, "w") as f:
-        users_to_save = {email: user.to_dict() for email, user in dict_users.items()}
-        json.dump(users_to_save, f, indent=4)
-    print("Les utilisateurs ont été sauvegardés avec succès.")
+def save_users_csv(file="users.csv"):
+    with open(file, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["first_name", "last_name", "email", "phone_number", "total_books_rented", "read_books"])
+        for user in dict_users.values():
+            writer.writerow([
+                user.first_name,
+                user.last_name,
+                user.email,
+                user.phone_number,
+                user.total_books_rented,
+                ";".join(user.read_books)  # Sauvegarder les livres lus comme une chaîne séparée par des points-virgules
+            ])
+    print("Les utilisateurs ont été sauvegardés dans le fichier CSV avec succès.")
 
-
-# Charger les utilisateurs depuis un fichier JSON
-def load_users(file="users.json"):
+def load_users_csv(file="users.csv"):
     global dict_users
-    try:
-        with open(file, "r") as f:
-            users_data = json.load(f)
-            dict_users = {
-                email: User.from_dict(data) for email, data in users_data.items()
-            }
-        print("Les utilisateurs ont été chargés avec succès.")
-    except FileNotFoundError:
-        print("Aucun fichier de sauvegarde trouvé. Création d'un nouveau fichier.")
+    dict_users.clear()
+    if os.path.exists(file):
+        with open(file, "r", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                # Handle the case where read_books column might not exist in older CSV files
+                read_books_str = row.get("read_books", "")
+                read_books = read_books_str.split(";") if read_books_str and read_books_str.strip() else []
+                dict_users[row["email"]] = User(
+                    first_name=row["first_name"],
+                    last_name=row["last_name"],
+                    email=row["email"],
+                    phone_number=row["phone_number"],
+                    total_books_rented=int(row["total_books_rented"]),
+                    read_books=read_books
+                )
+        print("Les utilisateurs ont été chargés depuis le fichier CSV avec succès.")
+    else:
+        print("Aucun fichier CSV trouvé.")
 
-
-# Menu principal
-def menu():
-    load_users()  # Charger les utilisateurs au démarrage
-    while True:
-        print("\n--- Menu de Gestion des Utilisateurs ---")
-        print("1. Ajouter un utilisateur")
-        print("2. Supprimer un utilisateur")
-        print("3. Afficher tous les utilisateurs")
-        print("4. Quitter")
-        print("-" * 30)
-        choice = input("Choisissez une option : ")
-        
-        if choice == "1":
-            add_user()
-        elif choice == "2":
-            remove_user()
-        elif choice == "3":
-            display_users()
-        elif choice == "4":
-            print("-" * 30)
-            print("Merci d'avoir utilisé le système de gestion des utilisateurs. À bientôt !")
-            print("-" * 30)
-            break
-        else:
-            print("-" * 30)
-            print("Choix invalide. Veuillez réessayer.")
-            print("-" * 30)
-
-
-# Lancer le menu principal
-menu()

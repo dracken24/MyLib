@@ -1,9 +1,9 @@
 from init import dict_button, dict_books, dict_users, loans_list_dict
+from add_remove_users import User
 dict_books = {}
 dict_users = {}
 import csv
 import os
-from users.remove_add_users import User
 
 class Book:
     def __init__(self, book_name, author, genre, number_of_copies_available, total_times_rented=0):
@@ -172,58 +172,7 @@ def user_rent_book():
     else:
         print(f"Aucun utilisateur trouvé avec l'email {email}.")
 
-# Menu principal
-def menu():
-    load_books_csv()
-    load_users_csv()
-    while True:
-        print("\n--- Menu de la Bibliothèque ---")
-        print("1. Ajouter un livre")
-        print("2. Supprimer un livre")
-        print("3. Emprunter un livre")
-        print("4. Retourner un livre")
-        print("5. Afficher tous les livres")
-        print("6. Afficher les utilisateurs")
-        print("7. Emprunter un livre (par utilisateur)")
-        print("8. Quitter")
-        choice = input("Entrer votre choix : ")
 
-        if choice == "1":
-            book_name = input("Entrer le nom du livre : ")
-            author = input("Entrer l'auteur : ")
-            genre = input("Entrer le genre : ")
-            total_times_rented = 0
-            while True:
-                number_of_copies_available = input("Entrer le nombre de copies disponibles : ")
-                if number_of_copies_available.isdigit():
-                    number_of_copies_available = int(number_of_copies_available)
-                    break
-                else:
-                    print("Veuillez entrer un nombre valide pour les copies disponibles.")
-            add_book(book_name, author, genre, number_of_copies_available, total_times_rented)
-        elif choice == "2":
-            book_name = input("Entrer le nom du livre à supprimer : ")
-            remove_book(book_name)
-        elif choice == "3":
-            book_name = input("Entrer le nom du livre à emprunter : ")
-            rent_book(book_name)
-        elif choice == "4":
-            book_name = input("Entrer le nom du livre à retourner : ")
-            return_book(book_name)
-        elif choice == "5":
-            display_books()
-        elif choice == "6":
-            display_users()
-        elif choice == "7":
-            user_rent_book()
-        elif choice == "8":
-            print("Merci d'avoir utilisé notre bibliothèque ! À bientôt.")
-            break
-        else:
-            print("-" * 30)
-            print("Choix invalide. Veuillez réessayer.")
-            print("-" * 30)
-            save_books_csv()
 
 def save_books_csv(file="books.csv"):
     with open(file, "w", newline="", encoding="utf-8") as f:
@@ -285,13 +234,12 @@ def load_users_csv(file="users.csv"):
             reader = csv.DictReader(f)
             dict_users.clear()
             for row in reader:
+                read_books = row["read_books"].split(";") if row["read_books"] else []
                 dict_users[row["email"]] = User(
                     email=row["email"],
                     first_name=row["first_name"],
                     last_name=row["last_name"],
-                    read_books=row["read_books"].split(";") if row["read_books"] else [],
+                    read_books=read_books,
                     total_books_rented=int(row["total_books_rented"])
                 )
 
-# Lancer le menu principal
-menu()
