@@ -1,8 +1,15 @@
-from init import dict_button, dict_books, dict_users, loans_list_dict
+from data_store import dict_button, dict_books, dict_users, loans_list_dict
 from time import sleep
 from datetime import datetime, timedelta
 
 WIP = "\n\033[93m\033[1mWIP\033[0m"
+
+class EmpruntReturnBooks:
+    def __init__(self):
+        print("EmpruntReturnBooks class init")
+
+    def update(self):
+        print("EmpruntReturnBooks Update")
 
 # Afficher of dicts
 def afficher_users():

@@ -1,6 +1,21 @@
 from pyray import init_window, set_target_fps, measure_text # Import for Raylib
 from pyray import DARKGRAY, BLUE, DARKBLUE, DARKGREEN, WHITE, ORANGE, MAROON, RED
 
+from buttons.my_button import MyButton
+from buttons.add_remove_books import AddRemBooks
+from buttons.add_remove_users import AddRemUser
+from buttons.calcul_emprunt_books import CalculEmpruntBooks
+from buttons.diagram import Diagram
+from buttons.emprunt_retour_books import EmpruntReturnBooks
+from buttons.ident_actif_users import IdentActifUsers
+from buttons.list_books import ListBooks
+from buttons.monthly_evolution import MonthlyEvolution
+from buttons.quit import Exit
+from buttons.status import Status
+
+from data_store import dict_books, dict_users, loans_list_dict, dict_button
+
+
 from text_entry import TextEntry
 
 WINDOW_WIDTH: int = 700
@@ -13,233 +28,172 @@ TEXT_OFFSET = 20
 FONT_COLOR = DARKGRAY
 BUTTON_HEIGHT = int(30 + 5)
 
-# Text_entry init
-
+############################### Text_entry init ###############################
 text_entry: TextEntry = TextEntry(
 	10,								# x
 	int(BUTTON_HEIGHT * 12) + 20,	# y
 	int(WINDOW_WIDTH - 20),			# width
 	int(BUTTON_HEIGHT - 5)			# height
 )
+################################################################################
 
-# Putt all buttons in a dictionary
-dict_button = {
-	"add_book": {  # Name for the button in dico (Key)
-		"title": "Ajouter ou supprimer un livre dans la bibliotheque",	# Text visible on button
-		"text": "Text pour ajouter ou supprimer un livre dans la bibliotheque",	# Text for write on textBox
-		"x": 10,                            	# position x
-		"y": BUTTON_HEIGHT + 10,            	# position y
-		"width": int(WINDOW_WIDTH - 20),    	# Button width
-		"height": int(BUTTON_HEIGHT - 5),  		# Button height
-		"measure_text": 0,                  	# For center text in button
-		"base_color": BLUE,                 	# Base button color
-		"hover_color": DARKBLUE,            	# mouse hover button color
-		"clicked_color": DARKGREEN,         	# Clicked button color
-		"text_color": WHITE,                	# Color for text
-		"is_clicked": False,                	# For launch action once until mouse button release
-		"action": 1                         	# For launch good action in draw_button()
-	},
-	"add_user": {
-		"title": "Ajouter ou supprimer un utilisateur",
-		"text": "Text pour ajouter ou supprimer un utilisateur",
-		"x": 10,
-		"y": int(BUTTON_HEIGHT * 2) + 10,
-		"width": int(WINDOW_WIDTH - 20),
-		"height": int(BUTTON_HEIGHT - 5),
-		"measure_text": 0,
-		"base_color": BLUE,
-		"hover_color": DARKBLUE,
-		"clicked_color": DARKGREEN,
-		"text_color": WHITE,
-		"is_clicked": False,
-		"action": 2
-	},
-	"emprunt": {
-		"title": "Enregistrer un emprunt ou un retour",
-		"text": "Text pour enregistrer un emprunt ou un retour",
-		"x": 10,
-		"y": int(BUTTON_HEIGHT * 3) + 10,
-		"width": int(WINDOW_WIDTH - 20),
-		"height": int(BUTTON_HEIGHT - 5),
-		"measure_text": 0,
-		"base_color": BLUE,
-		"hover_color": DARKBLUE,
-		"clicked_color": DARKGREEN,
-		"text_color": WHITE,
-		"is_clicked": False,
-		"action": 3
-	},
-	"lister": {
-		"title": "Lister les livres les plus empruntes",
-		"text": "Text pour lister les livres les plus empruntes",
-		"x": 10,
-		"y": int(BUTTON_HEIGHT * 4) + 10,
-		"width": int(WINDOW_WIDTH - 20),
-		"height": int(BUTTON_HEIGHT - 5),
-		"measure_text": 0,
-		"base_color": BLUE,
-		"hover_color": DARKBLUE,
-		"clicked_color": DARKGREEN,
-		"text_color": WHITE,
-		"is_clicked": False,
-		"action": 4
-	},
-	"calculer": {
-		"title": "Calculer la duree moyenne des emprunts par genre",
-		"text": "Text pour Calculer la duree moyenne des emprunts par genre",
-		"x": 10,
-		"y": int(BUTTON_HEIGHT * 5) + 10,
-		"width": int(WINDOW_WIDTH - 20),
-		"height": int(BUTTON_HEIGHT - 5),
-		"measure_text": 0,
-		"base_color": BLUE,
-		"hover_color": DARKBLUE,
-		"clicked_color": DARKGREEN,
-		"text_color": WHITE,
-		"is_clicked": False,
-		"action": 5
-	},
-	"identifier": {
-		"title": "Identifier les utilisateurs les plus actifs",
-		"text": "Text pour identifier les utilisateurs les plus actifs",
-		"x": 10,
-		"y": int(BUTTON_HEIGHT * 6) + 10,
-		"width": int(WINDOW_WIDTH - 20),
-		"height": int(BUTTON_HEIGHT - 5),
-		"measure_text": 0,
-		"base_color": BLUE,
-		"hover_color": DARKBLUE,
-		"clicked_color": DARKGREEN,
-		"text_color": WHITE,
-		"is_clicked": False,
-		"action": 6
-	},
-	"status": {
-		"title": "Afficher le statut de la bibliotheque sous forme de statistiques",
-		"text": "Text pour afficher le status de la bibliotheque",
-		"x": 10,
-		"y": int(BUTTON_HEIGHT * 7) + 10,
-		"width": int(WINDOW_WIDTH - 20),
-		"height": int(BUTTON_HEIGHT - 5),
-		"measure_text": 0,
-		"base_color": BLUE,
-		"hover_color": DARKBLUE,
-		"clicked_color": DARKGREEN,
-		"text_color": WHITE,
-		"is_clicked": False,
-		"action": 7
-	},
-	"diagramme": {
-		"title": "Visualisation: Diagramme circulaire des emprunts par genre",
-		"text": "Faire apparaitre une box avec un diagramme circulaire detaille",
-		"x": 10,
-		"y": int(BUTTON_HEIGHT * 8) + 10,
-		"width": int(WINDOW_WIDTH - 20),
-		"height": int(BUTTON_HEIGHT - 5),
-		"measure_text": 0,
-		"base_color": BLUE,
-		"hover_color": DARKBLUE,
-		"clicked_color": DARKGREEN,
-		"text_color": WHITE,
-		"is_clicked": False,
-		"action": 8
-	},
-	"evolution": {
-		"title": "Visualisation: Evolution mensuelle des emprunt",
-		"text": "Text pour voir l'evolution mensuelle des emprunts",
-		"x": 10,
-		"y": int(BUTTON_HEIGHT * 9) + 10,
-		"width": int(WINDOW_WIDTH - 20),
-		"height": int(BUTTON_HEIGHT - 5),
-		"measure_text": 0,
-		"base_color": BLUE,
-		"hover_color": DARKBLUE,
-		"clicked_color": DARKGREEN,
-		"text_color": WHITE,
-		"is_clicked": False,
-		"action": 9
-	# },
-	# "input": {
-	# 	"title": "Input Utilisateur",
-	# 	"text": "Text pour Input",
-	# 	"x": 10,
-	# 	"y": int(BUTTON_HEIGHT * 12) + 20,
-	# 	"width": int(WINDOW_WIDTH - 20),
-	# 	"height": int(BUTTON_HEIGHT - 5),
-	# 	"measure_text": 0,
-	# 	"base_color": BLUE,
-	# 	"hover_color": DARKBLUE,
-	# 	"clicked_color": DARKGREEN,
-	# 	"text_color": WHITE,
-	# 	"is_clicked": False,
-	# 	"action": 10
-	},
-	"quitter": {
-		"title": "Quitter",
-		"text": "Text pour quitter le programme",
-		"x": 10,
-		"y": int(BUTTON_HEIGHT * 10) + 20,
-		"width": int(WINDOW_WIDTH - 20),
-		"height": int(BUTTON_HEIGHT - 5),
-		"measure_text": 0,
-		"base_color": ORANGE,
-		"hover_color": MAROON,
-		"clicked_color": RED,
-		"text_color": WHITE,
-		"is_clicked": False,
-		"action": 11
-	},
-}
+######################### Buttons liked to class init ##########################
 
-dict_books: dict = {
-	"Python Programming": {
-		"Auteur": "John Doe",
-		"Genre": "Programmation",
-		"Exemplaires": 5,
-		"Emprunts": 10
-	},
-	"The Great Gatsby": {
-		"Auteur": "F. Scott Fitzgerald",
-		"Genre": "Roman",
-		"Exemplaires": 2,
-		"Emprunts": 7
-	}
-}
+add_rem_books: AddRemBooks = AddRemBooks()
+add_rem_users: AddRemUser = AddRemUser()
+calcul_emprunt: CalculEmpruntBooks = CalculEmpruntBooks()
+list_books: ListBooks = ListBooks()
+diagram: Diagram = Diagram()
+emprunt_retour: EmpruntReturnBooks = EmpruntReturnBooks()
+ident_actif_users: IdentActifUsers = IdentActifUsers()
+monthly_evolution = MonthlyEvolution()
+my_exit: Exit = Exit()
+status: Status = Status()
 
-dict_users = {
-	"1": {
-		"Nom": "Smith",
-		"Prénom": "Alice",
-		"Email": "alice@gmail.com",
-		"Téléphone": "514-888-9696",
-		"Emprunts": 5,
-		"ListeLivreLu":["Python Programming","The Great Gatsby","Marx’s Inferno",
-		"Atomic Habits"]
-	},
-	"2": {
-		"Nom": "Brown",
-		"Prénom": "Bob",
-		"Email": "bob@gmail.com",
-		"Téléphone": "430-568-8985",
-		"Emprunts": 2,
-		"ListeLivreLu":["Python Programming","The Great Gatsby"]
-	}
-}
+################################################################################
 
-loans_list_dict = [
-	{
-		"Utilisateur_ID": 1,
-		"Livre": "Python Programming",
-		"Date_Emprunt": "2024-12-01",
-		"Date_Retour": "2024-12-10"
-	},
-	{
-		"Utilisateur_ID": 2,
-		"Livre": "The Great Gatsby",
-		"Date_Emprunt": "2024-11-25",
-		"Date_Retour": None
-	}
-]
+################################# Buttons init #################################
+
+add_book: MyButton = MyButton(add_rem_books,
+							  10,
+							  (BUTTON_HEIGHT + 10),
+							  (WINDOW_WIDTH - 20),
+							  (BUTTON_HEIGHT - 5),
+							  0,
+							  BLUE,
+							  DARKGREEN,
+							  DARKBLUE,
+							  WHITE,
+							  "Ajouter ou supprimer un livre dans la bibliotheque",
+							  "Text pour ajouter ou supprimer un livre dans la bibliotheque",
+							  20)
+
+add_user: MyButton = MyButton(add_rem_users,
+							  10,
+							  (BUTTON_HEIGHT * 2 + 10),
+							  (WINDOW_WIDTH - 20),
+							  (BUTTON_HEIGHT - 5),
+							  1,
+							  BLUE,
+							  DARKGREEN,
+							  DARKBLUE,
+							  WHITE,
+							  "Ajouter ou supprimer un utilisateur",
+							  "Text pour ajouter ou supprimer un utilisateur",
+							  20)
+
+emprunt: MyButton = MyButton(emprunt_retour,
+							 10,
+							 (BUTTON_HEIGHT * 3 + 10),
+							 (WINDOW_WIDTH - 20),
+							 (BUTTON_HEIGHT - 5),
+							 2,
+							 BLUE,
+							 DARKGREEN,
+							 DARKBLUE,
+							 WHITE,
+							 "Enregistrer un emprunt ou un retour",
+							 "Text pour enregistrer un emprunt ou un retour",
+							 20)
+
+lister: MyButton = MyButton(list_books,
+							10,
+							(BUTTON_HEIGHT * 4 + 10),
+							(WINDOW_WIDTH - 20),
+							(BUTTON_HEIGHT - 5),
+							3,
+							BLUE,
+							DARKGREEN,
+							DARKBLUE,
+							WHITE,
+							"Lister les livres les plus empruntes",
+							"Text pour lister les livres les plus empruntes",
+							20)
+
+calculer: MyButton = MyButton(calcul_emprunt,
+							  10,
+							  (BUTTON_HEIGHT * 5 + 10),
+							  (WINDOW_WIDTH - 20),
+							  (BUTTON_HEIGHT - 5),
+							  4,
+							  BLUE,
+							  DARKGREEN,
+							  DARKBLUE,
+							  WHITE,
+							  "Calculer la duree moyenne des emprunts par genre",
+							  "Text pour Calculer la duree moyenne des emprunts par genre",
+							  20)
+
+identifier: MyButton = MyButton(ident_actif_users,
+								10,
+								(BUTTON_HEIGHT * 6 + 10),
+								(WINDOW_WIDTH - 20),
+								(BUTTON_HEIGHT - 5),
+								5,
+								BLUE,
+								DARKGREEN,
+								DARKBLUE,
+								WHITE,
+								"Identifier les utilisateurs les plus actifs",
+								"Text pour identifier les utilisateurs les plus actifs",
+								20)
+
+status: MyButton = MyButton(status,
+							10,
+							(BUTTON_HEIGHT * 7 + 10),
+							(WINDOW_WIDTH - 20),
+							(BUTTON_HEIGHT - 5),
+							6,
+							BLUE,
+							DARKGREEN,
+							DARKBLUE,
+							WHITE,
+							"Afficher le statut de la bibliotheque sous forme de statistiques",
+							"Text pour afficher le status de la bibliotheque",
+							20)
+
+diagramme: MyButton = MyButton(diagram,
+							   10,
+							   (BUTTON_HEIGHT * 8 + 10),
+							   (WINDOW_WIDTH - 20),
+							   (BUTTON_HEIGHT - 5),
+							   7,
+							   BLUE,
+							   DARKGREEN,
+							   DARKBLUE,
+							   WHITE,
+							   "Visualisation: Diagramme circulaire des emprunts par genre",
+							   "Faire apparaitre une box avec un diagramme circulaire detaille",
+							   20)
+
+evolution: MyButton = MyButton(monthly_evolution,
+							   10,
+							   (BUTTON_HEIGHT * 9 + 10),
+							   (WINDOW_WIDTH - 20),
+							   (BUTTON_HEIGHT - 5),
+							   8,
+							   BLUE,
+							   DARKGREEN,
+							   DARKBLUE,
+							   WHITE,
+							   "Visualisation: Evolution mensuelle des emprunt",
+							   "Text pour voir l'evolution mensuelle des emprunts",
+							   20)
+
+quitter: MyButton = MyButton(my_exit,
+							 10,
+							 (BUTTON_HEIGHT * 10 + 25),
+							 (WINDOW_WIDTH - 20),
+							 (BUTTON_HEIGHT - 5),
+							 9,
+							 ORANGE,
+							 RED,
+							 MAROON,
+							 WHITE,
+							 "Quitter",
+							 "Quitter",
+							 20)
+
 
 # init principal variables for the program
 def init():
@@ -251,5 +205,25 @@ def init():
 		print(b)
 
 	# Init each text wide in pixel for center text in button
-	for button in dict_button:
-		dict_button[button]["measure_text"] = int(measure_text(dict_button[button]["title"].encode('utf-8'), 20) / 2)
+	add_book.set_mesure_text(int(measure_text(add_book.get_title().encode('utf-8'), 20) / 2))
+	add_user.set_mesure_text(int(measure_text(add_user.get_title().encode('utf-8'), 20) / 2))
+	emprunt.set_mesure_text(int(measure_text(emprunt.get_title().encode('utf-8'), 20) / 2))
+	lister.set_mesure_text(int(measure_text(lister.get_title().encode('utf-8'), 20) / 2))
+	calculer.set_mesure_text(int(measure_text(calculer.get_title().encode('utf-8'), 20) / 2))
+	identifier.set_mesure_text(int(measure_text(identifier.get_title().encode('utf-8'), 20) / 2))
+	status.set_mesure_text(int(measure_text(status.get_title().encode('utf-8'), 20) / 2))
+	diagramme.set_mesure_text(int(measure_text(diagramme.get_title().encode('utf-8'), 20) / 2))
+	evolution.set_mesure_text(int(measure_text(evolution.get_title().encode('utf-8'), 20) / 2))
+	quitter.set_mesure_text(int(measure_text(quitter.get_title().encode('utf-8'), 20) / 2))
+
+	# Putt all buttons in a dictionary
+	dict_button[add_book.get_text()] = add_book
+	dict_button[add_user.get_text()] = add_user
+	dict_button[emprunt.get_text()] = emprunt
+	dict_button[lister.get_text()] = lister
+	dict_button[calculer.get_text()] = calculer
+	dict_button[identifier.get_text()] = identifier
+	dict_button[status.get_text()] = status
+	dict_button[diagramme.get_text()] = diagramme
+	dict_button[evolution.get_text()] = evolution
+	dict_button[quitter.get_text()] = quitter

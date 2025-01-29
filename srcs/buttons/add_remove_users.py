@@ -1,9 +1,16 @@
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-from init import dict_button, dict_books, dict_users, loans_list_dict
+from data_store import dict_button, dict_books, dict_users, loans_list_dict
 import csv
 import re  # Pour les validations d'email et de numéro de téléphone
+
+class AddRemUser:
+    def __init__(self):
+        print("AddRemUser class init")
+
+    def update(self):
+        print("AddRemUser Update")
 
 def add_remove_users(button):
     main_menu()

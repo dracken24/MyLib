@@ -6,8 +6,7 @@ from pyray import LIGHTGRAY, DARKGRAY, WHITE, MOUSE_BUTTON_LEFT
 
 from init import init, text_entry, TEXT_OFFSET, WINDOW_TITLE, WINDOW_HEIGHT, WINDOW_WIDTH, dict_button
 from utility import adjust_text_in_box_and_draw_result
-from buttons.button import draw_button
-# from text_entry import TextEntry
+from buttons.my_button import MyButton
 
 """ Main function for run the programm """
 # lorem is to test the text box
@@ -22,6 +21,8 @@ def main():
     scroll_offset: int = 0      # The offset for the text in the box
     mouse_wheel_ct = 0          # Mouse wheel counter
     line_ct: int = 0            # Line counter
+    # button_choice = -1          # For execute update function from good button
+    button_clicked: MyButton = None
 
     text_box: Rectangle = Rectangle(10, int(WINDOW_HEIGHT / 4 * 3), int(WINDOW_WIDTH - 20), int(WINDOW_HEIGHT / 4 - 10)) # Make rectangle from values
     # Draw title text
@@ -47,12 +48,21 @@ def main():
         # Draw the title
         draw_text(WINDOW_TITLE.encode('utf-8'), x_position, 15, 20, DARKGRAY)
 
+        
+
         # Draw all buttons
-        for button in dict_button:
-            quit_ct, text, action = draw_button(button)
-            # if (action == True and text != "Exit" and text != "skip"):
-            if (action == True and text != "Exit"):
-                affich_text = text
+        for button_key in dict_button:
+            button = dict_button[button_key] # Get the value from the key in the button dico
+            button_clicked_nbr = button.draw_button()      # Get the return from the button
+            # Get the text from the return of a button and affich it on the textBox if text is not None
+            if button_clicked_nbr is not None and button_clicked_nbr != 9:
+                button_clicked = button
+            # For Quit withe the "Quitter" button
+            if (button_clicked_nbr == 9):
+                quit_ct = True
+
+        if (button_clicked):
+            button_clicked.get_associate_class().update()
 
         entry_text: str = text_entry.get_text()
         if (entry_text):
@@ -64,8 +74,9 @@ def main():
         # Draw text zone
         draw_rectangle_rec(text_box, WHITE)
         
-        # Passage explicite du scroll_offset
-        line_ct = adjust_text_in_box_and_draw_result(text_box, affich_text, 0, scroll_offset)
+        # Cut the text to fit in Text vieuwer box
+        if (quit_ct == False):
+            line_ct = adjust_text_in_box_and_draw_result(text_box, affich_text, 0, scroll_offset)
 
         # For stop scrolling down text
         if (scroll_offset * -1 / TEXT_OFFSET > line_ct): # * -1 for compare scroll_offset (Is negative) with the number of line (ex: scroll_offset = -13 is = to line_ct = 13)
@@ -76,9 +87,9 @@ def main():
         # Reset color clicked when relese mouse button
         if (is_mouse_button_released(MOUSE_BUTTON_LEFT)):
             for button_key in dict_button:
-                button = dict_button[button_key]
-                if (button["is_clicked"] == True):
-                    button["is_clicked"] = False
+                button = dict_button[button_key] 
+                if (button.get_is_clicked() == True):
+                    button.set_is_clicked(False)
 
     # Close windows and openGL context properly at exit
     close_window()

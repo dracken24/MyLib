@@ -1,8 +1,15 @@
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-from init import dict_button, dict_books, dict_users, loans_list_dict
+from data_store import dict_button, dict_books, dict_users, loans_list_dict
 import csv
+
+class AddRemBooks:
+    def __init__(self):
+        print("AddRemBooks class init")
+
+    def update(self):
+        print("AddRemBooks Update")
 
 def add_remove_books(button: str):
     text: str = "--- Gestion des livres ---\n1 . Ajouter un livre\n2. Supprimer un livre\n3. Afficher tous les livres\n4. Quitter\n"
