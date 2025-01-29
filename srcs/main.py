@@ -1,7 +1,13 @@
-from pyray import window_should_close, get_mouse_wheel_move, is_mouse_button_released, begin_drawing, clear_background, draw_text, measure_text, draw_rectangle_rec, end_drawing, close_window, LIGHTGRAY, get_screen_width,MOUSE_BUTTON_LEFT, WHITE, DARKGRAY, Rectangle # Import for Raylib
-from init import init, TEXT_OFFSET, WINDOW_TITLE, WINDOW_HEIGHT, WINDOW_WIDTH, dict_button
+# Import for Raylib
+from pyray import window_should_close, clear_background, draw_text, end_drawing, close_window
+from pyray import get_mouse_wheel_move, is_mouse_button_released, begin_drawing, measure_text
+from pyray import Rectangle, draw_rectangle_rec, get_screen_width
+from pyray import LIGHTGRAY, DARKGRAY, WHITE, MOUSE_BUTTON_LEFT
+
+from init import init, text_entry, TEXT_OFFSET, WINDOW_TITLE, WINDOW_HEIGHT, WINDOW_WIDTH, dict_button
 from utility import adjust_text_in_box_and_draw_result
 from buttons.button import draw_button
+# from text_entry import TextEntry
 
 """ Main function for run the programm """
 # lorem is to test the text box
@@ -47,6 +53,13 @@ def main():
             # if (action == True and text != "Exit" and text != "skip"):
             if (action == True and text != "Exit"):
                 affich_text = text
+
+        entry_text: str = text_entry.get_text()
+        if (entry_text):
+            affich_text = entry_text
+
+        text_entry.update_textBox()
+        text_entry.draw_self()
         
         # Draw text zone
         draw_rectangle_rec(text_box, WHITE)

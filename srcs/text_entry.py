@@ -1,145 +1,144 @@
- # Import for Raylib
-from pyray import measure_text, text_subtext, draw_line_ex, begin_scissor_mode, end_scissor_mode, is_mouse_button_pressed
-from pyray import Vector2 ,Color, draw_rectangle_rec, draw_rectangle_lines_ex, draw_text, check_collision_point_rec
-from pyray import get_char_pressed, is_key_down, get_frame_time, text_subtext, fmaxf, Rectangle, get_mouse_position
+# Import for Raylib
 from pyray import get_mouse_position, check_collision_point_rec, set_mouse_cursor, is_mouse_button_pressed
-from pyray import MOUSE_CURSOR_IBEAM, MOUSE_LEFT_BUTTON, MOUSE_CURSOR_DEFAULT, KEY_BACKSPACE, KEY_REPEAT_DELAY, KEY_REPEAT_RATE
-from pyray import LIGHTGRAY, LIGHTDARKGREEN, MAROON, DARKGRAY, BLACK
-from pyray import KEY_DELETE, KEY_LEFT, KEY_RIGHT
+from pyray import draw_line_ex, begin_scissor_mode, end_scissor_mode, is_mouse_button_pressed
+from pyray import get_char_pressed, is_key_down, text_subtext, Rectangle, get_mouse_position
+from pyray import Vector2 ,Color, draw_rectangle_rec, draw_rectangle_lines_ex, draw_text
+from pyray import measure_text, text_subtext, check_collision_point_rec, is_key_pressed
+from pyray import MOUSE_CURSOR_IBEAM, MOUSE_LEFT_BUTTON, MOUSE_CURSOR_DEFAULT, KEY_BACKSPACE
+from pyray import KEY_DELETE, KEY_LEFT, KEY_RIGHT, KEY_ENTER
+from pyray import MAROON, BLACK, DARKBLUE, WHITE
+
+LIGHTDARKGREEN = ( 0, 166, 69, 255 )
 
 class TextEntry:
 	def __init__(self, x: float, y: float, width: float, height: float):
-		rect: Rectangle = { x, y, width, height }
-		text: str = ""
-		text_size: int = 0
-		cursorPosition: int = 0
-		textOffset: int = 0
-		is_active: bool = False
-		font_size: int = 20
-		spacing: int
-		fontColor: Color = BLACK
+		self.rect: Rectangle = Rectangle(x, y, width, height)
+		self.text: str = ""					# visible text
+		self.text_size: int = 0				# nbr of char
+		self.cursor_position: int = 0		# position of the cursor
+		self.text_offset: int = 1			# For adjust cursor with text
+		self.is_active: bool = False		# Textbox is active by clicking on it and inactive if clicking outside it
+		self.font_size: int = 20			# Fontsize for the text
+		self.font_color: Color = BLACK		# color for the text
 
-		isBackspaceHeld: bool = False
-		isDeleteHeld: bool = False
-		isLeftArrowHeld: bool = False
-		isRightArrowHeld: bool = False
-
+	# Draw the textbox
 	def draw_self(self):
-		draw_rectangle_rec(self.rect, LIGHTGRAY)
-		draw_rectangle_lines_ex(self.rect, 2, LIGHTDARKGREEN if self.is_active else DARKGRAY)
+		draw_text("Entrez votre texte ici:", int(self.rect.x), int(self.rect.y) - 20, 18, BLACK) # Text above textbox entry
 
-		pos: Vector2 = {self.rect.x + 5 - self.textOffset, self.rect.y + (self.rect.height - self.fontColor) / 2}
+		draw_rectangle_rec(self.rect, WHITE) # Background box color
+		draw_rectangle_lines_ex(self.rect, 2, LIGHTDARKGREEN if self.is_active else DARKBLUE) # exterior line color
+
+		# CAdjust text with offset to add margin and center text in textBox
+		text_pos_x = self.rect.x + 5 - self.text_offset
+		text_pos_y = self.rect.y + (self.rect.height - self.font_size) / 2
 		
-		# Draw the text with a clipping rectangle
-		begin_scissor_mode(self.rect.x, self.rect.y, self.rect.width, self.rect.height)
+		# Draw the text in a specific rectangle and cut the rest
+		begin_scissor_mode(int(self.rect.x), int(self.rect.y), int(self.rect.width), int(self.rect.height))
 		if (self.text_size > 0):
-			draw_text(self.text, self.rect.x, self.rect.y, self.font_size, self.fontColor)
+			draw_text(self.text, int(text_pos_x), int(text_pos_y), self.font_size, self.font_color)
 		end_scissor_mode()
 		
-		# Draw the cursor
+		# Draw the cursor if textBox is active by clicking on it
 		if (self.is_active):
-			cursor_x: float = pos.x + measure_text(text_subtext(self.text, 0, self.cursorPosition), self.font_size).x
-			if (cursor_x >= self.rect.x and cursor_x <= self.rect.x + self.rect.width):
-				draw_line_ex(Vector2(cursor_x, self.rect.y + 2), 
-						Vector2(cursor_x, self.rect.y + self.rect.height - 2), 
-						2, MAROON)
+			cursor_x = text_pos_x + measure_text(text_subtext(self.text, 0, self.cursor_position), self.font_size)
+			draw_line_ex(
+				Vector2(cursor_x, self.rect.y + 4), 					# Starting point of the line
+				Vector2(cursor_x, self.rect.y + self.rect.height - 4),	# End point of the line
+				2, 														# thick
+				MAROON													# Color
+			)
 
-	def	update_textBox(self, adjust: Rectangle):
+	# update the textBox
+	def	update_textBox(self):
+		mouse_point: Vector2 = get_mouse_position() # Get the mouse position
 
-		mousePoint: Vector2 = get_mouse_position()
-		adjustedRect: Rectangle = {
-			self.rect.x + adjust.x,
-			self.rect.y + adjust.y,
-			self.rect.width,
-			self.rect.height
-		}
-
-		if (check_collision_point_rec(mousePoint, adjustedRect)):
-			set_mouse_cursor(MOUSE_CURSOR_IBEAM)
-			if (is_mouse_button_pressed(MOUSE_LEFT_BUTTON)):
+		# Check collision between textBox and mouse position
+		if (check_collision_point_rec(mouse_point, self.rect)):
+			set_mouse_cursor(MOUSE_CURSOR_IBEAM)				# Change cursor type if mouse is over the textBox
+			if (is_mouse_button_pressed(MOUSE_LEFT_BUTTON)):	# Active textBox if mouse is clicked over the textBox
 				self.is_active = True
-		else:
+		# Reset the cursor to default value		
+		else: 
 			set_mouse_cursor(MOUSE_CURSOR_DEFAULT)
 			if (is_mouse_button_pressed(MOUSE_LEFT_BUTTON)):
 				self.is_active = False
 
+		# if the textBox is active
 		if (self.is_active):
-			key: int = get_char_pressed()
+			key: int = get_char_pressed() # get the key pressed on keyboard
 			while (key > 0):
-				if ((key >= 32) and (key <= 125) and (self.text_size < self.maxLength)):
-					self.text[self.cursorPosition] = chr(key)
-					self.cursorPosition += 1
-				
-				key = get_char_pressed()
+				# if key is printable (between 32 and 125 in ascii table)
+				if ((key >= 32) and (key <= 125)): 
+					# Insert char in the str, convert key int to char
+					self.text = self.text[:self.cursor_position] + chr(key) + self.text[self.cursor_position:]
+					self.text_size += 1			# Text_size increase by 1
+					self.cursor_position += 1	# cursor_position increase by 1
+
+				key: int = get_char_pressed()	# if pressed more than once in a frame
 
 			# Backspace key handling
 			if (is_key_down(KEY_BACKSPACE)):
-				if (not self.isBackspaceHeld):
-					if (self.cursorPosition > 0):
-						self.text_size -= 1
-						self.cursorPosition -= 1
-
-					self.isBackspaceHeld = True
-				else:
-					self.backspaceTimer += get_frame_time()
-					if (self.backspaceTimer > KEY_REPEAT_DELAY):
-						if (self.cursorPosition > 0 and self.backspaceTimer - KEY_REPEAT_DELAY > KEY_REPEAT_RATE):
-							self.text_size -= 1
-							self.cursorPosition -= 1
-			else:
-				self.isBackspaceHeld = False
+				if (self.cursor_position > 0):
+					# Delete character before cursor while key is held
+					self.text = self.text[:self.cursor_position - 1] + self.text[self.cursor_position:]
+					self.text_size -= 1
+					self.cursor_position -= 1
 
 			# Delete key handling
 			if (is_key_down(KEY_DELETE)):
-				if (not self.isDeleteHeld):
-					if (self.cursorPosition < self.text_size):
-						self.text_size -= 1
-					self.isDeleteHeld = True
-				else:
-					if (self.cursorPosition < self.text_size):
-						self.text_size -= 1
-			else:
-				self.isDeleteHeld = False
+				if (self.cursor_position < self.text_size):
+					# Delete character after cursor while key is held
+					self.text = self.text[:self.cursor_position] + self.text[self.cursor_position + 1:]
+					self.text_size -= 1
 
 			# Left arrow key handling
 			if (is_key_down(KEY_LEFT)):
-				if (not self.isLeftArrowHeld):
-					if (self.cursorPosition > 0):
-						self.cursorPosition -= 1
-					self.isLeftArrowHeld = True
-				else:
-					if (self.cursorPosition > 0):
-						self.cursorPosition -= 1
-			else:
-				self.isLeftArrowHeld = False
+				if (self.cursor_position > 0):
+					self.cursor_position -= 1
 
 			# Right arrow key handling
 			if (is_key_down(KEY_RIGHT)):
-				if (not self.isRightArrowHeld):
-					if (self.cursorPosition < self.text_size):
-						self.cursorPosition += 1
-
-					self.isRightArrowHeld = True
-				else:
-					if (self.cursorPosition < self.text_size):
-						self.cursorPosition += 1
-			else:
-				self.isRightArrowHeld = False
+				if (self.cursor_position < self.text_size):
+					self.cursor_position += 1
 
 			# Adjust the text offset
-			visible_width: float = self.rect.width - 10;  # 10 pixels of margin
-			textWidth: float = measure_text(self.text, self.font_size, self.spacing).x
-			cursor_x: float = measure_text(text_subtext(self.text, 0, self.cursorPosition), self.font_size, self.spacing).x
+			visible_width = self.rect.width - 10  # Margin 10 pixels (5 to right and 5 to left of the text)
+			text_width = measure_text(self.text, self.font_size)
+			cursor_x = measure_text(text_subtext(self.text, 0, self.cursor_position), self.font_size)
 
-			# Adjust the text offset so the cursor is always visible
-			if (cursor_x - self.textOffset > visible_width):
-				self.textOffset = cursor_x - visible_width + self.font_size
-			elif (cursor_x - self.textOffset < 0):
-				self.textOffset = cursor_x
+			# if cursor is to far right, adjust offset
+			if cursor_x - self.text_offset > visible_width:
+				self.text_offset = cursor_x - visible_width + 10
 
-			# Ensure the text doesn't go too far to the left
-			if (textWidth - self.textOffset < visible_width and textWidth > visible_width):
-				self.textOffset = textWidth - visible_width
+			# if cursor is to far left, adjust offset
+			elif cursor_x - self.text_offset < 0:
+				self.text_offset = cursor_x - 10
 
-			# Ensure the offset is never negative
-			self.textOffset = fmaxf(0, self.textOffset)
+			# if text is more short than the writing space, reset to 0
+			if text_width <= visible_width:
+				self.text_offset = 0
+			# Block cursor to go to far to left
+			elif text_width - self.text_offset < visible_width:
+				self.text_offset = text_width - visible_width + 10
+
+	# Reset all value and clear text
+	def reset_text_entry(self):
+		self.text: str = ""
+		self.text_size: int = 0
+		self.cursor_position: int = 0
+		self.text_offset: int = 1
+		self.is_active: bool = False
+
+########################################################################
+                                # GET
+########################################################################
+
+	# Get text if enter key is pressed
+	def get_text(self) -> str:
+		if (is_key_pressed(KEY_ENTER)):
+			text_temp: str = self.text
+			self.reset_text_entry()
+			return text_temp
+		
+		return None
+		

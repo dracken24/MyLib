@@ -1,4 +1,7 @@
-from pyray import init_window, set_target_fps, measure_text, DARKGRAY, BLUE, DARKBLUE, DARKGREEN, WHITE, ORANGE, MAROON, RED # Import for Raylib
+from pyray import init_window, set_target_fps, measure_text # Import for Raylib
+from pyray import DARKGRAY, BLUE, DARKBLUE, DARKGREEN, WHITE, ORANGE, MAROON, RED
+
+from text_entry import TextEntry
 
 WINDOW_WIDTH: int = 700
 WINDOW_HEIGHT: int = 660
@@ -9,6 +12,15 @@ TEXT_OFFSET = 20
 # RL = raylib
 FONT_COLOR = DARKGRAY
 BUTTON_HEIGHT = int(30 + 5)
+
+# Text_entry init
+
+text_entry: TextEntry = TextEntry(
+	10,								# x
+	int(BUTTON_HEIGHT * 12) + 20,	# y
+	int(WINDOW_WIDTH - 20),			# width
+	int(BUTTON_HEIGHT - 5)			# height
+)
 
 # Putt all buttons in a dictionary
 dict_button = {
@@ -146,21 +158,21 @@ dict_button = {
 		"text_color": WHITE,
 		"is_clicked": False,
 		"action": 9
-	},
-	"input": {
-		"title": "Input Utilisateur",
-		"text": "Text pour Input",
-		"x": 10,
-		"y": int(BUTTON_HEIGHT * 12) + 20,
-		"width": int(WINDOW_WIDTH - 20),
-		"height": int(BUTTON_HEIGHT - 5),
-		"measure_text": 0,
-		"base_color": BLUE,
-		"hover_color": DARKBLUE,
-		"clicked_color": DARKGREEN,
-		"text_color": WHITE,
-		"is_clicked": False,
-		"action": 10
+	# },
+	# "input": {
+	# 	"title": "Input Utilisateur",
+	# 	"text": "Text pour Input",
+	# 	"x": 10,
+	# 	"y": int(BUTTON_HEIGHT * 12) + 20,
+	# 	"width": int(WINDOW_WIDTH - 20),
+	# 	"height": int(BUTTON_HEIGHT - 5),
+	# 	"measure_text": 0,
+	# 	"base_color": BLUE,
+	# 	"hover_color": DARKBLUE,
+	# 	"clicked_color": DARKGREEN,
+	# 	"text_color": WHITE,
+	# 	"is_clicked": False,
+	# 	"action": 10
 	},
 	"quitter": {
 		"title": "Quitter",
@@ -233,7 +245,7 @@ loans_list_dict = [
 def init():
 	# Window init
 	init_window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE.encode('utf-8'))
-	set_target_fps(60)  # FPS to 60
+	set_target_fps(10)  # FPS to 10 frame sec
 	
 	for b in loans_list_dict:
 		print(b)
