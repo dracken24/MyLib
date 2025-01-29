@@ -42,6 +42,16 @@ class User:
         print("-" * 30)
 
 
+# Mettre à jour `total_books_rented` et `rented_books` à partir de loans_list_dict
+def mettre_a_jour_emprunts_utilisateurs():
+    """Met à jour les emprunts des utilisateurs à partir de la liste des prêts"""
+    for loan in loans_list_dict:  # Itérer directement sur la liste
+        user_id = loan.get("user_id")  # Supposant que chaque prêt est un dictionnaire avec une clé "user_id"
+        if user_id in dict_users:
+            dict_users[user_id].total_books_rented = loan.get("Emprunts", 0)
+            dict_users[user_id].rented_books = loan.get("Livres", [])
+
+
 # Ajouter un utilisateur avec validation
 def add_user():
     # Générer un nouvel ID utilisateur
@@ -200,7 +210,12 @@ def main_menu():
             print("Option invalide. Veuillez réessayer.")
 
 
-if __name__ == "__main__":
-    load_users_csv()  # Charger les utilisateurs au démarrage
+def main():
+    load_users_csv()  # Charger les utilisateurs depuis CSV
+    mettre_a_jour_emprunts_utilisateurs()  # Mise à jour des emprunts depuis loans_list_dict
     main_menu()
     save_users_csv()  # Sauvegarder les utilisateurs avant de quitter
+
+if __name__ == "__main__":
+    main()
+

@@ -1,3 +1,4 @@
 user_id,first_name,last_name,email,phone_number,total_books_rented,rented_books
-U001,Nat,Asha,nat@asha.ca,123-456-7609,0,
-U002,Nad,ia,nad@ia.com,345-453-5464,0,
+U001,Nat,Asha,nat@asha.ca,123-456-7609,5,
+U002,Nad,ia,nad@ia.com,345-453-5464,8,
+U003,Ji,Lefebvre,ji@lef.ca,125-546-3245,0,
