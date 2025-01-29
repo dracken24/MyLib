@@ -6,7 +6,8 @@ class CalculEmpruntBooks:
 
     def update(self):
         print("CalculEmpruntBooks Update")
+        return "CalculEmpruntBooks Update"
 
-# Calculate the average duration of loans by type
-def calcul_emprunt_books(button: str):
-    print(f"{button} button Hit Action 5")
+# # Calculate the average duration of loans by type
+# def calcul_emprunt_books(button: str):
+#     print(f"{button} button Hit Action 5")

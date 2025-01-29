@@ -10,6 +10,7 @@ class EmpruntReturnBooks:
 
     def update(self):
         print("EmpruntReturnBooks Update")
+        return "EmpruntReturnBooks Update"
 
 # Afficher of dicts
 def afficher_users():

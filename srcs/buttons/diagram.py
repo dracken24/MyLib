@@ -6,8 +6,9 @@ class Diagram:
     
     def update(self):
         print("Diagram Update")
+        return "Diagram Update"
 
-# Visualization: Pie chart of borrowings by genre
-def diagram(button: str):
-    print(f"{button} button Hit Action 8")
+# # Visualization: Pie chart of borrowings by genre
+# def diagram(button: str):
+#     print(f"{button} button Hit Action 8")
     

@@ -4,3 +4,4 @@ class Exit:
 
     def update(self):
         print("Exit Update")
+        return "Exit Update"

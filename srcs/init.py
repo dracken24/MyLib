@@ -14,28 +14,9 @@ from buttons.quit import Exit
 from buttons.status import Status
 
 from data_store import dict_books, dict_users, loans_list_dict, dict_button
-
+from data_store import BUTTON_HEIGHT, WINDOW_WIDTH, WINDOW_TITLE, WINDOW_HEIGHT
 
 from text_entry import TextEntry
-
-WINDOW_WIDTH: int = 700
-WINDOW_HEIGHT: int = 660
-WINDOW_TITLE: str = "MyLib"
-
-TEXT_OFFSET = 20
-
-# RL = raylib
-FONT_COLOR = DARKGRAY
-BUTTON_HEIGHT = int(30 + 5)
-
-############################### Text_entry init ###############################
-text_entry: TextEntry = TextEntry(
-	10,								# x
-	int(BUTTON_HEIGHT * 12) + 20,	# y
-	int(WINDOW_WIDTH - 20),			# width
-	int(BUTTON_HEIGHT - 5)			# height
-)
-################################################################################
 
 ######################### Buttons liked to class init ##########################
 
@@ -65,7 +46,7 @@ add_book: MyButton = MyButton(add_rem_books,
 							  DARKBLUE,
 							  WHITE,
 							  "Ajouter ou supprimer un livre dans la bibliotheque",
-							  "Text pour ajouter ou supprimer un livre dans la bibliotheque",
+							#   "Text pour ajouter ou supprimer un livre dans la bibliotheque",
 							  20)
 
 add_user: MyButton = MyButton(add_rem_users,
@@ -79,7 +60,7 @@ add_user: MyButton = MyButton(add_rem_users,
 							  DARKBLUE,
 							  WHITE,
 							  "Ajouter ou supprimer un utilisateur",
-							  "Text pour ajouter ou supprimer un utilisateur",
+							#   "Text pour ajouter ou supprimer un utilisateur",
 							  20)
 
 emprunt: MyButton = MyButton(emprunt_retour,
@@ -93,7 +74,7 @@ emprunt: MyButton = MyButton(emprunt_retour,
 							 DARKBLUE,
 							 WHITE,
 							 "Enregistrer un emprunt ou un retour",
-							 "Text pour enregistrer un emprunt ou un retour",
+							#  "Text pour enregistrer un emprunt ou un retour",
 							 20)
 
 lister: MyButton = MyButton(list_books,
@@ -107,7 +88,7 @@ lister: MyButton = MyButton(list_books,
 							DARKBLUE,
 							WHITE,
 							"Lister les livres les plus empruntes",
-							"Text pour lister les livres les plus empruntes",
+							# "Text pour lister les livres les plus empruntes",
 							20)
 
 calculer: MyButton = MyButton(calcul_emprunt,
@@ -121,7 +102,7 @@ calculer: MyButton = MyButton(calcul_emprunt,
 							  DARKBLUE,
 							  WHITE,
 							  "Calculer la duree moyenne des emprunts par genre",
-							  "Text pour Calculer la duree moyenne des emprunts par genre",
+							#   "Text pour Calculer la duree moyenne des emprunts par genre",
 							  20)
 
 identifier: MyButton = MyButton(ident_actif_users,
@@ -135,7 +116,7 @@ identifier: MyButton = MyButton(ident_actif_users,
 								DARKBLUE,
 								WHITE,
 								"Identifier les utilisateurs les plus actifs",
-								"Text pour identifier les utilisateurs les plus actifs",
+								# "Text pour identifier les utilisateurs les plus actifs",
 								20)
 
 status: MyButton = MyButton(status,
@@ -149,7 +130,7 @@ status: MyButton = MyButton(status,
 							DARKBLUE,
 							WHITE,
 							"Afficher le statut de la bibliotheque sous forme de statistiques",
-							"Text pour afficher le status de la bibliotheque",
+							# "Text pour afficher le status de la bibliotheque",
 							20)
 
 diagramme: MyButton = MyButton(diagram,
@@ -163,7 +144,7 @@ diagramme: MyButton = MyButton(diagram,
 							   DARKBLUE,
 							   WHITE,
 							   "Visualisation: Diagramme circulaire des emprunts par genre",
-							   "Faire apparaitre une box avec un diagramme circulaire detaille",
+							#    "Faire apparaitre une box avec un diagramme circulaire detaille",
 							   20)
 
 evolution: MyButton = MyButton(monthly_evolution,
@@ -177,7 +158,7 @@ evolution: MyButton = MyButton(monthly_evolution,
 							   DARKBLUE,
 							   WHITE,
 							   "Visualisation: Evolution mensuelle des emprunt",
-							   "Text pour voir l'evolution mensuelle des emprunts",
+							#    "Text pour voir l'evolution mensuelle des emprunts",
 							   20)
 
 quitter: MyButton = MyButton(my_exit,
@@ -191,7 +172,7 @@ quitter: MyButton = MyButton(my_exit,
 							 MAROON,
 							 WHITE,
 							 "Quitter",
-							 "Quitter",
+							#  "Quitter",
 							 20)
 
 
@@ -217,13 +198,13 @@ def init():
 	quitter.set_mesure_text(int(measure_text(quitter.get_title().encode('utf-8'), 20) / 2))
 
 	# Putt all buttons in a dictionary
-	dict_button[add_book.get_text()] = add_book
-	dict_button[add_user.get_text()] = add_user
-	dict_button[emprunt.get_text()] = emprunt
-	dict_button[lister.get_text()] = lister
-	dict_button[calculer.get_text()] = calculer
-	dict_button[identifier.get_text()] = identifier
-	dict_button[status.get_text()] = status
-	dict_button[diagramme.get_text()] = diagramme
-	dict_button[evolution.get_text()] = evolution
-	dict_button[quitter.get_text()] = quitter
+	dict_button[add_book.get_title()] = add_book
+	dict_button[add_user.get_title()] = add_user
+	dict_button[emprunt.get_title()] = emprunt
+	dict_button[lister.get_title()] = lister
+	dict_button[calculer.get_title()] = calculer
+	dict_button[identifier.get_title()] = identifier
+	dict_button[status.get_title()] = status
+	dict_button[diagramme.get_title()] = diagramme
+	dict_button[evolution.get_title()] = evolution
+	dict_button[quitter.get_title()] = quitter

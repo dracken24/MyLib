@@ -6,8 +6,5 @@ class MonthlyEvolution:
 
     def update(self):
         print("MonthlyEvolution Update")
-
-# Visualization: Monthly evolution of borrowing
-def monthly_evolution(button: str):
-    print(f"{button} button Hit Action 9")
+        return "MonthlyEvolution Update"
     

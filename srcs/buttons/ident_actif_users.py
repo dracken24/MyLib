@@ -6,7 +6,8 @@ class IdentActifUsers:
 
     def update(self):
         print("IdentActifUsers Update")
+        return "IdentActifUsers Update"
 
-# Identify the most active users
-def ident_actif_users(button: str):
-    print(f"{button} button Hit Action 6")
+# # Identify the most active users
+# def ident_actif_users(button: str):
+#     print(f"{button} button Hit Action 6")

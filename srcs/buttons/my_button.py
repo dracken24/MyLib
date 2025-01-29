@@ -9,14 +9,14 @@ class MyButton:
     # Constructor
     def __init__(self, associate_class, x: float, y: float, width: float, height: float,
                 number: int, bgColor = GRAY, clickColor = WHITE, hoverColor = LIGHTGRAY,
-                    font_color = BLACK, title: str = "", text: str = "", font_size: int = 20):
+                    font_color = BLACK, title: str = "", font_size: int = 20):
         self.__rect = Rectangle(x, y, width, height)
         self.bgColor = bgColor
         self.clickColor = clickColor
         self.hoverColor = hoverColor
         self.is_clicked = False
         self.title = title
-        self.text = text
+        # self.text = text
         self.text_color = font_color
         self.font_size = font_size
         self.measure_text: int = 0
@@ -36,7 +36,7 @@ class MyButton:
                           self.font_size, self.text_color)
                 
                 if not self.is_clicked:
-                    print("Clicked on: ", self.text)
+                    print("Clicked on: ", self.title)
                     self.is_clicked = True
                     # self.associate_class.update() # Lunch function update in class link
                     return self.__number
@@ -66,8 +66,8 @@ class MyButton:
                                 # GET
 ########################################################################
 
-    def get_text(self):
-        return self.text
+    # def get_text(self):
+    #     return self.text
     
     def get_title(self):
         return self.title
@@ -88,8 +88,8 @@ class MyButton:
     def set_bg_color(self, color):
         self.bgColor = color
 
-    def set_text(self, text: str):
-        self.text = text
+    # def set_text(self, text: str):
+    #     self.text = text
 
     def set_mesure_text(self, len: int):
         self.measure_text = len

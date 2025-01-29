@@ -4,25 +4,25 @@ from pyray import get_mouse_wheel_move, is_mouse_button_released, begin_drawing,
 from pyray import Rectangle, draw_rectangle_rec, get_screen_width
 from pyray import LIGHTGRAY, DARKGRAY, WHITE, MOUSE_BUTTON_LEFT
 
-from init import init, text_entry, TEXT_OFFSET, WINDOW_TITLE, WINDOW_HEIGHT, WINDOW_WIDTH, dict_button
+from init import init, dict_button
+from data_store import TEXT_OFFSET, WINDOW_TITLE, WINDOW_HEIGHT, WINDOW_WIDTH, text_entry
 from utility import adjust_text_in_box_and_draw_result
 from buttons.my_button import MyButton
 
 """ Main function for run the programm """
-# lorem is to test the text box
-lorem: str = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. EXIT."
+
 def main():
 
     # comment
     init()
 
-    quit_ct: bool = False       # Counter for the exit button to quit main loop
-    affich_text: str = lorem    # Text visible on the textBox
-    scroll_offset: int = 0      # The offset for the text in the box
-    mouse_wheel_ct = 0          # Mouse wheel counter
-    line_ct: int = 0            # Line counter
-    # button_choice = -1          # For execute update function from good button
-    button_clicked: MyButton = None
+    quit_ct: bool = False               # Counter for the exit button to quit main loop
+    from data_store import affich_text  # imprt affich_text as variable
+    scroll_offset: int = 0              # The offset for the text in the box
+    mouse_wheel_ct = 0                  # Mouse wheel counter
+    line_ct: int = 0                    # Line counter
+
+    button_clicked: MyButton = None # For stock selected button to use update function link to classes
 
     text_box: Rectangle = Rectangle(10, int(WINDOW_HEIGHT / 4 * 3), int(WINDOW_WIDTH - 20), int(WINDOW_HEIGHT / 4 - 10)) # Make rectangle from values
     # Draw title text
@@ -54,7 +54,7 @@ def main():
         for button_key in dict_button:
             button = dict_button[button_key] # Get the value from the key in the button dico
             button_clicked_nbr = button.draw_button()      # Get the return from the button
-            # Get the text from the return of a button and affich it on the textBox if text is not None
+            # if text is not None and not 9(Exit), stock button to use update function from that button
             if button_clicked_nbr is not None and button_clicked_nbr != 9:
                 button_clicked = button
             # For Quit withe the "Quitter" button
@@ -62,7 +62,7 @@ def main():
                 quit_ct = True
 
         if (button_clicked):
-            button_clicked.get_associate_class().update()
+            affich_text = button_clicked.get_associate_class().update()
 
         entry_text: str = text_entry.get_text()
         if (entry_text):

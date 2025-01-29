@@ -10,34 +10,11 @@ class AddRemBooks:
 
     def update(self):
         print("AddRemBooks Update")
-
-def add_remove_books(button: str):
-    text: str = "--- Gestion des livres ---\n1 . Ajouter un livre\n2. Supprimer un livre\n3. Afficher tous les livres\n4. Quitter\n"
-    dict_button[button]["text"] = text
-    # manage_books()
-
-def remove_book_button(button):
-    print(f"{button} button Hit Action 1")
-
-class Book:
-    """Classe représentant un livre dans la bibliothèque."""
-    def __init__(self, book_name, author, genre, number_of_copies_available, total_times_rented=0):
-        self.book_name = book_name
-        self.author = author
-        self.genre = genre
-        self.number_of_copies_available = int(number_of_copies_available)
-        self.total_times_rented = int(total_times_rented)
-
-    def display_info(self):
-        """Afficher les informations du livre."""
-        print("-" * 30)
-        print(f"Titre : {self.book_name}")
-        print(f"Auteur : {self.author}")
-        print(f"Genre : {self.genre}")
-        print(f"Copies disponibles : {self.number_of_copies_available}")
-        print(f"Nombre total d'emprunts : {self.total_times_rented}")
-        print("-" * 30)
-
+        return self.print_prompt()
+        
+    def print_prompt(self):
+        text: str = "--- Gestion des livres ---\n1 . Ajouter un livre\n2. Supprimer un livre\n3. Afficher tous les livres\n4. Quitter\n\nChoisissez une option (1-4) :\n"
+        return text
 
 # Ajouter un livre à la bibliothèque
 def add_book(book_name, author, genre, number_of_copies_available, total_times_rented=0):
@@ -114,40 +91,60 @@ def load_books_csv(file="books.csv"):
 # Menu principal pour gérer les livres
 def menu():
     """Menu interactif pour ajouter, supprimer et afficher des livres."""
-    while True:
-        print("\n--- Gestion des livres ---")
-        print("1. Ajouter un livre")
-        print("2. Supprimer un livre")
-        print("3. Afficher tous les livres")
-        print("4. Quitter")
+    # while True:
+    #     print("\n--- Gestion des livres ---")
+    #     print("1. Ajouter un livre")
+    #     print("2. Supprimer un livre")
+    #     print("3. Afficher tous les livres")
+    #     print("4. Quitter")
 
-        choice = input("Choisissez une option (1-4) : ")
+    choice = input("Choisissez une option (1-4) : ")
 
-        if choice == "1":
-            print("\n\033[94mVous avez choisi: Ajouter un livre\033[0m")
-            book_name = input("\nTitre du livre : ")
-            author = input("Auteur : ")
-            genre = input("Genre : ")
-            number_of_copies = input("Nombre de copies disponibles : ")
+    if choice == "1":
+        print("\n\033[94mVous avez choisi: Ajouter un livre\033[0m")
+        book_name = input("\nTitre du livre : ")
+        author = input("Auteur : ")
+        genre = input("Genre : ")
+        number_of_copies = input("Nombre de copies disponibles : ")
 
-            # Validation de l'entrée
-            if not number_of_copies.isdigit():
-                print("Le nombre de copies doit être un nombre entier.")
-                continue
+        # Validation de l'entrée
+        if not number_of_copies.isdigit():
+            print("Le nombre de copies doit être un nombre entier.")
+            # continue
 
-            add_book(book_name, author, genre, int(number_of_copies))
-        elif choice == "2":
-            print("\n\033[94mVous avez choisi: Supprimer un livre\033[0m")
-            book_name = input("Titre du livre à supprimer : ")
-            remove_book(book_name)
-        elif choice == "3":
-            print("\n\033[94mVous avez choisi: Afficher tous les livres\033[0m")
-            display_books()
-        elif choice == "4":            
-            print("\nMerci d'avoir utilisé le gestionnaire de livres.")
-            break
-        else:
-            print("Option invalide. Veuillez réessayer.")
+        add_book(book_name, author, genre, int(number_of_copies))
+    elif choice == "2":
+        print("\n\033[94mVous avez choisi: Supprimer un livre\033[0m")
+        book_name = input("Titre du livre à supprimer : ")
+        remove_book(book_name)
+    elif choice == "3":
+        print("\n\033[94mVous avez choisi: Afficher tous les livres\033[0m")
+        display_books()
+    elif choice == "4":            
+        print("\nMerci d'avoir utilisé le gestionnaire de livres.")
+        # break
+    else:
+        print("Option invalide. Veuillez réessayer.")
+
+class Book:
+    """Classe représentant un livre dans la bibliothèque."""
+    def __init__(self, book_name, author, genre, number_of_copies_available, total_times_rented=0):
+        self.book_name = book_name
+        self.author = author
+        self.genre = genre
+        self.number_of_copies_available = int(number_of_copies_available)
+        self.total_times_rented = int(total_times_rented)
+
+    def display_info(self):
+        """Afficher les informations du livre."""
+        # text_to_affich: str = "-" * 30 + f"\nTitre : {self.book_name}\nAuteur : {self.author}\nGenre : {self.genre}\nCopies disponibles : {self.number_of_copies_available}\nNombre total d'emprunts : {self.total_times_rented}\n" + "-" * 30
+        print("-" * 30)
+        print(f"Titre : {self.book_name}")
+        print(f"Auteur : {self.author}")
+        print(f"Genre : {self.genre}")
+        print(f"Copies disponibles : {self.number_of_copies_available}")
+        print(f"Nombre total d'emprunts : {self.total_times_rented}")
+        print("-" * 30)
 
 if __name__ == "__main__":
     # Charger les livres au démarrage

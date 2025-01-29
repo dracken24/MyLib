@@ -6,8 +6,4 @@ class Status:
     
     def update(self):
         print("Status Update")
-
-# Show library status as statistics
-def status(button: str):
-    print(f"{button} button Hit Action 7")
-    
+        return "Status Update"

@@ -11,9 +11,10 @@ class AddRemUser:
 
     def update(self):
         print("AddRemUser Update")
+        return "AddRemUser Update"
 
-def add_remove_users(button):
-    main_menu()
+# def add_remove_users(button):
+#     main_menu()
 
 def remove_user_button(button):
     print(f"{button} button Hit Action 2")
