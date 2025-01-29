@@ -4,6 +4,9 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from init import dict_button, dict_books, dict_users, loans_list_dict
 import csv
 
+
+def add_remove_books(button):
+    menu()
 def remove_book_button(button):
     print(f"{button} button Hit Action 1")
 
@@ -100,7 +103,7 @@ def load_books_csv(file="books.csv"):
 
 
 # Menu principal pour gérer les livres
-def manage_books():
+def menu():
     """Menu interactif pour ajouter, supprimer et afficher des livres."""
     while True:
         print("\n--- Gestion des livres ---")
@@ -142,4 +145,4 @@ if __name__ == "__main__":
     load_books_csv()
     
     # Lancer le menu principal
-    manage_books()
+    menu()
