@@ -6,7 +6,7 @@ import csv
 import re  # Pour les validations d'email et de numéro de téléphone
 
 def add_remove_users(button):
-    print("YO") 
+    main_menu()
 
 def remove_user_button(button):
     print(f"{button} button Hit Action 2")
@@ -30,7 +30,7 @@ class User:
     def display_info(self):
         """Afficher les informations d'un utilisateur."""
         print("-" * 30)
-        print(f"\033[92mID : {self.user_id}\033[0m")
+        print(f"ID : {self.user_id}")
         print(f"Nom : {self.first_name} {self.last_name}")
         print(f"Email : {self.email}")
         print(f"Téléphone : {self.phone_number}")
