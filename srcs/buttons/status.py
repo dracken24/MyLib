@@ -13,8 +13,5 @@ class Status:
     def update(self, text_entry: TextEntry):
         print("Status Update")
         return "Status Update"
-    
-    def on_quit(self):
-        print("")
 
 ##########################################################################################

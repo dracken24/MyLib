@@ -18,9 +18,6 @@ class EmpruntReturnBooks:
     def update(self, text_entry: TextEntry):
         print("EmpruntReturnBooks Update")
         return "EmpruntReturnBooks Update"
-    
-    def on_quit(self):
-        print("")
 
 ##########################################################################################
 

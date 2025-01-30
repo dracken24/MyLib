@@ -13,9 +13,6 @@ class ListBooks:
     def update(self, text_entry: TextEntry):
         print("ListBooks Update")
         return "ListBooks Update"
-    
-    def on_quit(self):
-        print("")
 
 ##########################################################################################
 

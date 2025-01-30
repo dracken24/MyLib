@@ -11,6 +11,8 @@ WINDOW_TITLE: str = "MyLib"
 
 TEXT_OFFSET = 20
 
+RESET_STRING = "reset button"
+
 # RL = raylib
 FONT_COLOR = DARKGRAY
 BUTTON_HEIGHT = int(30 + 5)
@@ -33,18 +35,30 @@ affich_text: str = "Veuillez cliquer sur un bouton pour faire un choix"
 dict_button: dict = { }
 
 dict_books: dict = {
-    # "Python Programming": {
-    #     "Auteur": "John Doe",
-    #     "Genre": "Programmation",
-    #     "Exemplaires": 5,
-    #     "Emprunts": 10
-    # },
-    # "The Great Gatsby": {
-    #     "Auteur": "F. Scott Fitzgerald",
-    #     "Genre": "Roman",
-    #     "Exemplaires": 2,
-    #     "Emprunts": 7
-    # }
+    "Python Programming": {
+        "Auteur": "John Doe",
+        "Genre": "Programmation",
+        "Exemplaires": 5,
+        "Emprunts": 10
+    },
+    "The Great Gatsby": {
+        "Auteur": "F. Scott Fitzgerald",
+        "Genre": "Roman",
+        "Exemplaires": 2,
+        "Emprunts": 7
+    },
+    "Harry Potter 1": {
+        "Auteur": "J.K. Rowling",
+        "Genre": "Fantastique",
+        "Exemplaires": 4,
+        "Emprunts": 2,
+    },
+    "Harry Potter 3": {
+        "Auteur": "J.K. Rowling",
+        "Genre": "Fantastique",
+        "Exemplaires": 5,
+        "Emprunts": 1
+    }
 }
 
 dict_users = {
@@ -78,6 +92,18 @@ loans_list_dict = [
         "Utilisateur_ID": 2,
         "Livre": "The Great Gatsby",
         "Date_Emprunt": "2024-11-25",
+        "Date_Retour": None
+    },
+    {
+        "Utilisateur_ID": 2,
+        "Livre": "Harry Potter 1",
+        "Date_Emprunt": "2025-02-13",
+        "Date_Retour": None
+    },
+    {
+        "Utilisateur_ID": 2,
+        "Livre": "Harry Potter 3",
+        "Date_Emprunt": "2025-02-18",
         "Date_Retour": None
     }
 ]

@@ -13,9 +13,6 @@ class IdentActifUsers:
     def update(self, text_entry: TextEntry):
         print("IdentActifUsers Update")
         return "IdentActifUsers Update"
-    
-    def on_quit(self):
-        print("")
 
 ##########################################################################################
 

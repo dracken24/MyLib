@@ -16,7 +16,7 @@ from buttons.status import Status
 from data_store import dict_books, dict_users, loans_list_dict, dict_button
 from data_store import BUTTON_HEIGHT, WINDOW_WIDTH, WINDOW_TITLE, WINDOW_HEIGHT
 
-from text_entry import TextEntry
+# from text_entry import TextEntry
 
 ######################### Buttons liked to class init ##########################
 

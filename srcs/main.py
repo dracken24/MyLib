@@ -5,7 +5,7 @@ from pyray import Rectangle, draw_rectangle_rec, get_screen_width
 from pyray import LIGHTGRAY, DARKGRAY, WHITE, MOUSE_BUTTON_LEFT
 
 from init import init, dict_button
-from data_store import TEXT_OFFSET, WINDOW_TITLE, WINDOW_HEIGHT, WINDOW_WIDTH, text_entry
+from data_store import TEXT_OFFSET, WINDOW_TITLE, WINDOW_HEIGHT, WINDOW_WIDTH, text_entry, RESET_STRING
 from utility import adjust_text_in_box_and_draw_result
 from buttons.my_button import MyButton
 
@@ -18,7 +18,7 @@ def main():
 
 	quit_ct: bool = False               # Counter for the exit button to quit main loop
 	from data_store import affich_text  # imprt affich_text as variable
-	scroll_offset: int = 0              # The offset for the text in the box
+	scroll_offset: int = 0              # The offset for scroll the text in the box
 	mouse_wheel_ct = 0                  # Mouse wheel counter
 	line_ct: int = 0                    # Line counter
 
@@ -30,6 +30,7 @@ def main():
 	x_position = int(get_screen_width() / 2 - text_width / 2)
 	
 	while (not quit_ct and not window_should_close()):    # Detect window close on x corner click, escape key or Quit button
+# ------------------------------------ Scroll the text in the box text ------------------------------------ #		
 		# Get the wheel movement
 		wheel_move = get_mouse_wheel_move()
 		mouse_wheel_ct += wheel_move
@@ -39,6 +40,8 @@ def main():
 		if (scroll_offset > 0):
 			scroll_offset = 0
 
+# ---------------------------------------------------- --------------------------------------------------- #
+
 		# Drawing begin
 		begin_drawing()
 
@@ -47,6 +50,8 @@ def main():
 
 		# Draw the title
 		draw_text(WINDOW_TITLE.encode('utf-8'), x_position, 15, 20, DARKGRAY)
+
+# ------------------------------------------- Draw all Buttons ------------------------------------------- #
 
 		# Draw all buttons
 		for button_key in dict_button:
@@ -61,20 +66,26 @@ def main():
 			if (button_clicked_nbr == 9):
 				quit_ct = True
 
+		# Launch the update function from class associate to button clicked
 		if (button_clicked):
 			affich_text = button_clicked.get_associate_class().update(text_entry)
 
-		entry_text: str = text_entry.get_text()
-		if (entry_text):
-			affich_text = entry_text
+# ---------------------------------------------------- --------------------------------------------------- #
+# -------------------------------------- Check text from text_entry -------------------------------------- #
+		text_entry.get_text()
+		# if (entry_text):
+		# 	affich_text = entry_text
 
-		if (affich_text == "reset button"):
+		if (affich_text == RESET_STRING):
 			# button_clicked.get_associate_class().on_quit() # Quit funct
 			button_clicked = None
 			affich_text = "Veuillez cliquer sur un bouton pour faire un choix"
 
 		text_entry.update_textBox()
 		text_entry.draw_self()
+
+# ---------------------------------------------------- --------------------------------------------------- #
+# ------------------------------- Cut and print the text in the text zone -------------------------------- #
 		
 		# Draw text zone
 		draw_rectangle_rec(text_box, WHITE)
@@ -86,6 +97,8 @@ def main():
 		# For stop scrolling down text
 		if (scroll_offset * -1 / TEXT_OFFSET > line_ct): # * -1 for compare scroll_offset (Is negative) with the number of line (ex: scroll_offset = -13 is = to line_ct = 13)
 			scroll_offset = line_ct * -1 * TEXT_OFFSET
+
+# ---------------------------------------------------- --------------------------------------------------- #
 
 		end_drawing()
 

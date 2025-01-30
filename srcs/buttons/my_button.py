@@ -8,6 +8,7 @@ BORDER_COLOR = DARKGRAY
 ##########################################################################################
 
 class MyButton: 
+#--------------------------------------------------------------------#
     # Constructor
     def __init__(self, associate_class, x: float, y: float, width: float, height: float,
                 number: int, bgColor = GRAY, clickColor = WHITE, hoverColor = LIGHTGRAY,
@@ -24,6 +25,8 @@ class MyButton:
         self.measure_text: int = 0
         self.__associate_class = associate_class
         self.__number = number
+
+#--------------------------------------------------------------------#
 
     # Member Functions
 
@@ -60,6 +63,8 @@ class MyButton:
 
         draw_rectangle_lines_ex(self.__rect, BOARDER_THICK, BORDER_COLOR)
         return None
+
+#--------------------------------------------------------------------#
     
     def __str__(self):
         return f"Button name: {self.title}"
@@ -68,17 +73,20 @@ class MyButton:
                                 # GET
 ########################################################################
 
-    # def get_text(self):
-    #     return self.text
-    
     def get_title(self):
         return self.title
+
+#--------------------------------------------------------------------#
     
     def get_is_clicked(self):
         return self.is_clicked
+
+#--------------------------------------------------------------------#
     
     def get_number(self):
         return self.__number
+
+#--------------------------------------------------------------------#
     
     def get_associate_class(self):
         return self.__associate_class
@@ -90,11 +98,12 @@ class MyButton:
     def set_bg_color(self, color):
         self.bgColor = color
 
-    # def set_text(self, text: str):
-    #     self.text = text
+#--------------------------------------------------------------------#
 
     def set_mesure_text(self, len: int):
         self.measure_text = len
+
+#--------------------------------------------------------------------#
 
     def set_is_clicked(self, is_clicked: bool):
         self.is_clicked = is_clicked

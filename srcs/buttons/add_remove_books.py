@@ -1,7 +1,7 @@
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-from data_store import dict_button, dict_books, dict_users, loans_list_dict
+from data_store import dict_button, dict_books, dict_users, loans_list_dict, RESET_STRING
 import csv
 
 from text_entry import TextEntry
@@ -62,7 +62,7 @@ class AddRemBooks:
             
             if self.number_of_copies == 0:
                 if not text_choice or text_choice.isspace():
-                    return "Veuillez entrer un nombre de livres"
+                    return "Veuillez entrer un nombre de livres plus grand que 0"
                 if text_choice.isdigit():
                     self.number_of_copies = int(text_choice)
                     # Ajout du livre une fois toutes les informations collectées
@@ -70,14 +70,16 @@ class AddRemBooks:
                     # Réinitialisation après l'ajout
                     self.choice = "0"
                     self.did_reset_values("0")
-                    return "reset button"
+                    return RESET_STRING # Return that string to reset button selected on success
                 else:
                     return "Veuillez entrer un nombre valide de livres"
 
-        elif text_choice == "2":
+        elif (text_choice == "2" and self.choice == "0") or self.choice == "2":
+            self.choice = "2"
+            self.did_reset_values("2")
             print("\n\033[94mVous avez choisi: Supprimer un livre\033[0m")
-            book_name = input("Titre du livre à supprimer : ")
-            remove_book(book_name)
+            # book_name = input("Titre du livre à supprimer : ")
+            remove_book(self.book_name)
         elif text_choice == "3":
             print("\n\033[94mVous avez choisi: Afficher tous les livres\033[0m")
             display_books()
@@ -87,12 +89,15 @@ class AddRemBooks:
         else:
             print("Option invalide. Veuillez réessayer.")
         return self.print_prompt()
-    
-    def on_quit(self):
-        self.did_reset_values("0")
         
     def print_prompt(self):
-        text: str = "--- Gestion des livres ---\n1 . Ajouter un livre\n2. Supprimer un livre\n3. Afficher tous les livres\n4. Quitter\n\nChoisissez une option (1-4) :\n"
+        text: str = ("--- Gestion des livres ---\n"
+            "1 . Ajouter un livre\n"
+            "2. Supprimer un livre\n"
+            "3. Afficher tous les livres\n"
+            "4. Quitter\n\n"
+            "Choisissez une option (1-4) :\n"
+        )
         return text
 
 ##########################################################################################

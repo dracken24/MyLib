@@ -9,8 +9,9 @@ python -m pip install --upgrade pip
 
 Then install:
 ```
-python -m pip install setuptools
-python -m pip install raylib==5.5.0.0
+pip install setuptools
+pip install raylib==5.5.0.0
+pip install matplotlib
 ```
 
 Run the program from main.py

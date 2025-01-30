@@ -13,9 +13,6 @@ class MonthlyEvolution:
     def update(self, text_entry: TextEntry):
         print("MonthlyEvolution Update")
         return "MonthlyEvolution Update"
-    
-    def on_quit(self):
-        print("")
         
 ##########################################################################################
     

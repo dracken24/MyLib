@@ -18,9 +18,6 @@ class AddRemUser:
     def update(self, text_entry: TextEntry):
         print("AddRemUser Update")
         return "AddRemUser Update"
-    
-    def on_quit(self):
-        print("")
 
 ##########################################################################################
 

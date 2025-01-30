@@ -12,8 +12,5 @@ class Exit:
     def update(self, text_entry: TextEntry):
         print("Exit Update")
         return "Exit Update"
-    
-    def on_quit(self):
-        print("")
 
 ##########################################################################################
