@@ -20,6 +20,7 @@ class Book:
         self.genre = genre
         self.number_of_copies_available = int(number_of_copies_available)
         self.total_times_rented = int(total_times_rented)
+        self.total_number_of_books_in_library = len(dict_books)
 
     def display_info(self):
         """Afficher les informations du livre."""
@@ -28,8 +29,9 @@ class Book:
         print(f"Auteur : {self.author}")
         print(f"Genre : {self.genre}")
         print(f"Copies disponibles : {self.number_of_copies_available}")
-        print(f"Nombre total d'emprunts : {self.total_times_rented}")
+        print(f"Nombre total d'emprunts : {self.total_times_rented}")        
         print("-" * 30)
+
 
 
 # Ajouter un livre à la bibliothèque
@@ -40,8 +42,9 @@ def add_book(book_name, author, genre, number_of_copies_available, total_times_r
         print(f"\nLe livre '{book_name}' existe déjà. Copies disponibles mises à jour.")
     else:
         dict_books[book_name] = Book(book_name, author, genre, number_of_copies_available, total_times_rented)
-        print(f"\nLe livre '{book_name}' a été ajouté à la bibliothèque.")
+        print(f"\n\033[92mLe livre '{book_name}' a été ajouté à la bibliothèque.\033[0m")
     save_books_csv()
+    load_books_csv()
 
 
 # Supprimer un livre de la bibliothèque
@@ -49,7 +52,7 @@ def remove_book(book_name):
     """Supprime complètement un livre de la bibliothèque."""
     if book_name in dict_books:
         del dict_books[book_name]
-        print(f"\nLe livre '{book_name}' a été supprimé de la bibliothèque.")
+        print(f"\n\033[91mLe livre '{book_name}' a été supprimé de la bibliothèque.\033[0m")
         save_books_csv()
     else:
         print(f"\nLe livre '{book_name}' n'existe pas dans la bibliothèque.")
@@ -64,6 +67,13 @@ def display_books():
             book.display_info()
     else:
         print("\nAucun livre dans la bibliothèque.")
+
+
+def display_total_number_of_books_in_library():
+    """Affiche le nombre total d'exemplaires de livres dans la bibliothèque."""
+    total_books = sum(book.number_of_copies_available for book in dict_books.values())  # Compte les exemplaires
+    print(f"\nNombre total d'exemplaires dans la bibliothèque : {total_books}")
+
 
 
 # Sauvegarder les livres dans un fichier CSV
@@ -112,7 +122,8 @@ def menu():
         print("1. Ajouter un livre")
         print("2. Supprimer un livre")
         print("3. Afficher tous les livres")
-        print("4. Quitter")
+        print("4. Afficher le nombre total de livres dans la bibliothèque")
+        print("5. Quitter")
 
         choice = input("Choisissez une option (1-4) : ")
 
@@ -136,11 +147,15 @@ def menu():
         elif choice == "3":
             print("\n\033[94mVous avez choisi: Afficher tous les livres\033[0m")
             display_books()
-        elif choice == "4":            
+        elif choice == "4":
+            print("\n\033[94mVous avez choisi: Afficher le nombre total de livres dans la bibliothèque\033[0m")
+            display_total_number_of_books_in_library()
+        elif choice == "5":
             print("\nMerci d'avoir utilisé le gestionnaire de livres.")
             break
         else:
             print("Option invalide. Veuillez réessayer.")
+
 
 if __name__ == "__main__":
     # Charger les livres au démarrage

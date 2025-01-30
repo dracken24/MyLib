@@ -213,7 +213,7 @@ dict_users = {
 		"Email": "alice@gmail.com",
 		"Téléphone": "514-888-9696",
 		"Emprunts": 5,
-		"ListeLivreLu":["Python Programming","The Great Gatsby","Marx’s Inferno",
+		"ListeLivreLu":["Python Programming","The Great Gatsby","Marx's Inferno",
 		"Atomic Habits"]
 	},
 	"2": {
@@ -223,6 +223,23 @@ dict_users = {
 		"Téléphone": "430-568-8985",
 		"Emprunts": 2,
 		"ListeLivreLu":["Python Programming","The Great Gatsby"]
+		
+	},
+	"3": {
+		"Nom": "Johnson",
+		"Prénom": "Charlie",
+		"Email": "charlie@gmail.com",
+		"Téléphone": "514-888-9696",
+		"Emprunts": 22,
+		"ListeLivreLu":["Python Programming","The Great Gatsby","Marx's Inferno"]
+	},
+	"4": {
+		"Nom": "Williams",
+		"Prénom": "David",
+		"Email": "david@gmail.com",
+		"Téléphone": "514-888-9696",
+		"Emprunts": 1000000,
+		"ListeLivreLu":["Python Programming","The Great Gatsby","Marx's Inferno","Atomic Habits et +"]
 	}
 }
 
