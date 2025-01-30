@@ -8,6 +8,8 @@ from text_entry import TextEntry
 
 ##########################################################################################
 class AddRemBooks:
+#--------------------------------------------------------------------#
+
     def __init__(self):
         self.book_name = ""
         self.author = ""
@@ -17,6 +19,8 @@ class AddRemBooks:
         self.last_choice = "0"
         print("AddRemBooks class init")
 
+#--------------------------------------------------------------------#
+
     def did_reset_values(self, nbr):
         if (self.last_choice != nbr):
             self.last_choice = nbr
@@ -25,9 +29,13 @@ class AddRemBooks:
             self.genre = ""
             self.number_of_copies = 0
 
+#--------------------------------------------------------------------#
+
     def on_start(self):
         self.choice = "0"
         self.did_reset_values("0")
+
+#--------------------------------------------------------------------#
 
     def update(self, text_entry: TextEntry):
         text_choice = text_entry.get_text()
@@ -89,6 +97,8 @@ class AddRemBooks:
         else:
             print("Option invalide. Veuillez réessayer.")
         return self.print_prompt()
+    
+#--------------------------------------------------------------------#
         
     def print_prompt(self):
         text: str = ("--- Gestion des livres ---\n"

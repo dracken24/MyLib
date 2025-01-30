@@ -23,12 +23,13 @@ def main():
 
 	button_clicked: MyButton = None # For stock selected button to use update function link to classes
 
+	# Box to affich text on screen
 	text_box: Rectangle = Rectangle(10, int(WINDOW_HEIGHT / 4 * 3 - 100), int(WINDOW_WIDTH - 20), int(WINDOW_HEIGHT / 4 + 90)) # Make rectangle from values
 	# Draw title text
 	text_width = measure_text(WINDOW_TITLE.encode('utf-8'), 20) # For center the text in window
 	x_position = int(get_screen_width() / 2 - text_width / 2)
 	
-	while (not quit_ct and not window_should_close()):    # Detect window close on x corner click, escape key or Quit button
+	while (not quit_ct and not window_should_close()):    # Detect window close on x corner click, escape key or Quit button	
 # ------------------------------------ Scroll the text in the box text ------------------------------------ #		
 		# Get the wheel movement
 		wheel_move = get_mouse_wheel_move()
@@ -40,6 +41,7 @@ def main():
 			scroll_offset = 0
 
 # ---------------------------------------------------- --------------------------------------------------- #
+# ----------------------------------------- Raylib draw functions ---------------------------------------- #
 
 		# Drawing begin
 		begin_drawing()
@@ -89,7 +91,7 @@ def main():
 		# Draw text zone
 		draw_rectangle_rec(text_box, WHITE)
 		
-		# Cut the text to fit in Text vieuwer box
+		# Cut the text to fit in Text viewer box
 		if (quit_ct == False):
 			line_ct = adjust_text_in_box_and_draw_result(text_box, affich_text, 0, scroll_offset)
 
