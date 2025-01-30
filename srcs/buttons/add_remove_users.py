@@ -5,13 +5,21 @@ from data_store import dict_button, dict_books, dict_users, loans_list_dict
 import csv
 import re  # Pour les validations d'email et de numéro de téléphone
 
+from text_entry import TextEntry
+
 class AddRemUser:
     def __init__(self):
         print("AddRemUser class init")
+    
+    def on_start(self):
+        print("")
 
-    def update(self):
+    def update(self, text_entry: TextEntry):
         print("AddRemUser Update")
         return "AddRemUser Update"
+    
+    def on_quit(self):
+        print("")
 
 # def add_remove_users(button):
 #     main_menu()

@@ -3,6 +3,7 @@
 from pyray import DARKGRAY
 
 from text_entry import TextEntry
+from buttons.my_button import MyButton
 
 WINDOW_WIDTH: int = 700
 WINDOW_HEIGHT: int = 660
@@ -26,24 +27,24 @@ text_entry: TextEntry = TextEntry(
 
 # lorem is to test the text box
 lorem: str = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. EXIT."
-affich_text: str = lorem
+affich_text: str = "Veuillez cliquer sur un bouton pour faire un choix"
 
 # Putt all buttons in a dictionary
 dict_button: dict = { }
 
 dict_books: dict = {
-    "Python Programming": {
-        "Auteur": "John Doe",
-        "Genre": "Programmation",
-        "Exemplaires": 5,
-        "Emprunts": 10
-    },
-    "The Great Gatsby": {
-        "Auteur": "F. Scott Fitzgerald",
-        "Genre": "Roman",
-        "Exemplaires": 2,
-        "Emprunts": 7
-    }
+    # "Python Programming": {
+    #     "Auteur": "John Doe",
+    #     "Genre": "Programmation",
+    #     "Exemplaires": 5,
+    #     "Emprunts": 10
+    # },
+    # "The Great Gatsby": {
+    #     "Auteur": "F. Scott Fitzgerald",
+    #     "Genre": "Roman",
+    #     "Exemplaires": 2,
+    #     "Emprunts": 7
+    # }
 }
 
 dict_users = {

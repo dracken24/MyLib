@@ -4,13 +4,91 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from data_store import dict_button, dict_books, dict_users, loans_list_dict
 import csv
 
+from text_entry import TextEntry
+
 class AddRemBooks:
     def __init__(self):
+        self.book_name = ""
+        self.author = ""
+        self.genre = ""
+        self.number_of_copies = 0
+        self.choice = "0"
+        self.last_choice = "0"
         print("AddRemBooks class init")
 
-    def update(self):
-        print("AddRemBooks Update")
+    def did_reset_values(self, nbr):
+        if (self.last_choice != nbr):
+            self.last_choice = nbr
+            self.book_name = ""
+            self.author = ""
+            self.genre = ""
+            self.number_of_copies = 0
+
+    def on_start(self):
+        self.choice = "0"
+        self.did_reset_values("0")
+
+    def update(self, text_entry: TextEntry):
+        text_choice = text_entry.get_text()
+        
+        if (text_choice == "1" and self.choice == "0") or self.choice == "1":
+            print(f"\n\033[94mVous avez choisi: Ajouter un livre\033[0m")
+            self.choice = "1"
+            self.did_reset_values("1")
+
+            # Ignore l'entrée initiale "1"
+            if text_choice == "1" and self.book_name == "":
+                return "Veuillez entrer un nom de livre"
+
+            # Gestion séquentielle des entrées
+            if self.book_name == "":
+                if not text_choice or text_choice.isspace():
+                    return "Veuillez entrer un nom de livre"
+                self.book_name = text_choice
+                return "Veuillez entrer un nom d'auteur"
+            
+            if self.author == "":
+                if not text_choice or text_choice.isspace():
+                    return "Veuillez entrer un nom d'auteur"
+                self.author = text_choice
+                return "Veuillez entrer un genre de livre"
+            
+            if self.genre == "":
+                if not text_choice or text_choice.isspace():
+                    return "Veuillez entrer un genre de livre"
+                self.genre = text_choice
+                return "Veuillez entrer un nombre de livres"
+            
+            if self.number_of_copies == 0:
+                if not text_choice or text_choice.isspace():
+                    return "Veuillez entrer un nombre de livres"
+                if text_choice.isdigit():
+                    self.number_of_copies = int(text_choice)
+                    # Ajout du livre une fois toutes les informations collectées
+                    add_book(self.book_name, self.author, self.genre, self.number_of_copies)
+                    # Réinitialisation après l'ajout
+                    self.choice = "0"
+                    self.did_reset_values("0")
+                    return "reset button"
+                else:
+                    return "Veuillez entrer un nombre valide de livres"
+
+        elif text_choice == "2":
+            print("\n\033[94mVous avez choisi: Supprimer un livre\033[0m")
+            book_name = input("Titre du livre à supprimer : ")
+            remove_book(book_name)
+        elif text_choice == "3":
+            print("\n\033[94mVous avez choisi: Afficher tous les livres\033[0m")
+            display_books()
+        elif text_choice == "4":            
+            print("\nMerci d'avoir utilisé le gestionnaire de livres.")
+            # break
+        else:
+            print("Option invalide. Veuillez réessayer.")
         return self.print_prompt()
+    
+    def on_quit(self):
+        self.did_reset_values("0")
         
     def print_prompt(self):
         text: str = "--- Gestion des livres ---\n1 . Ajouter un livre\n2. Supprimer un livre\n3. Afficher tous les livres\n4. Quitter\n\nChoisissez une option (1-4) :\n"
@@ -98,33 +176,33 @@ def menu():
     #     print("3. Afficher tous les livres")
     #     print("4. Quitter")
 
-    choice = input("Choisissez une option (1-4) : ")
+    # choice = input("Choisissez une option (1-4) : ")
 
-    if choice == "1":
-        print("\n\033[94mVous avez choisi: Ajouter un livre\033[0m")
-        book_name = input("\nTitre du livre : ")
-        author = input("Auteur : ")
-        genre = input("Genre : ")
-        number_of_copies = input("Nombre de copies disponibles : ")
+    # if choice == "1":
+    #     print("\n\033[94mVous avez choisi: Ajouter un livre\033[0m")
+    #     book_name = input("\nTitre du livre : ")
+    #     author = input("Auteur : ")
+    #     genre = input("Genre : ")
+    #     number_of_copies = input("Nombre de copies disponibles : ")
 
-        # Validation de l'entrée
-        if not number_of_copies.isdigit():
-            print("Le nombre de copies doit être un nombre entier.")
-            # continue
+    #     # Validation de l'entrée
+    #     if not number_of_copies.isdigit():
+    #         print("Le nombre de copies doit être un nombre entier.")
+    #         # continue
 
-        add_book(book_name, author, genre, int(number_of_copies))
-    elif choice == "2":
-        print("\n\033[94mVous avez choisi: Supprimer un livre\033[0m")
-        book_name = input("Titre du livre à supprimer : ")
-        remove_book(book_name)
-    elif choice == "3":
-        print("\n\033[94mVous avez choisi: Afficher tous les livres\033[0m")
-        display_books()
-    elif choice == "4":            
-        print("\nMerci d'avoir utilisé le gestionnaire de livres.")
-        # break
-    else:
-        print("Option invalide. Veuillez réessayer.")
+    #     add_book(book_name, author, genre, int(number_of_copies))
+    # elif choice == "2":
+    #     print("\n\033[94mVous avez choisi: Supprimer un livre\033[0m")
+    #     book_name = input("Titre du livre à supprimer : ")
+    #     remove_book(book_name)
+    # elif choice == "3":
+    #     print("\n\033[94mVous avez choisi: Afficher tous les livres\033[0m")
+    #     display_books()
+    # elif choice == "4":            
+    #     print("\nMerci d'avoir utilisé le gestionnaire de livres.")
+    #     # break
+    # else:
+    #     print("Option invalide. Veuillez réessayer.")
 
 class Book:
     """Classe représentant un livre dans la bibliothèque."""

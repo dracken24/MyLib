@@ -1,4 +1,6 @@
 from data_store import dict_button, dict_books, dict_users, loans_list_dict
+from text_entry import TextEntry
+
 from time import sleep
 from datetime import datetime, timedelta
 
@@ -8,9 +10,15 @@ class EmpruntReturnBooks:
     def __init__(self):
         print("EmpruntReturnBooks class init")
 
-    def update(self):
+    def on_start(self):
+        print("")
+
+    def update(self, text_entry: TextEntry):
         print("EmpruntReturnBooks Update")
         return "EmpruntReturnBooks Update"
+    
+    def on_quit(self):
+        print("")
 
 # Afficher of dicts
 def afficher_users():
