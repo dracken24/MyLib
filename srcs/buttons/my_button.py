@@ -5,6 +5,8 @@ from pyray import draw_rectangle_rec, draw_text, draw_rectangle_lines_ex, is_mou
 BOARDER_THICK = 2
 BORDER_COLOR = DARKGRAY
 
+##########################################################################################
+
 class MyButton: 
     # Constructor
     def __init__(self, associate_class, x: float, y: float, width: float, height: float,
@@ -96,3 +98,5 @@ class MyButton:
 
     def set_is_clicked(self, is_clicked: bool):
         self.is_clicked = is_clicked
+
+##########################################################################################

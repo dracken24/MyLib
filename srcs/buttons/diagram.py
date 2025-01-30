@@ -1,6 +1,8 @@
 from data_store import dict_button, dict_books, dict_users, loans_list_dict
 from text_entry import TextEntry
 
+##########################################################################################
+
 class Diagram:
     def __init__(self):
         print("Diagram class init")
@@ -14,6 +16,8 @@ class Diagram:
     
     def on_quit(self):
         print("")
+
+##########################################################################################
 
 # # Visualization: Pie chart of borrowings by genre
 # def diagram(button: str):

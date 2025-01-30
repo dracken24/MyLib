@@ -6,6 +6,7 @@ import csv
 
 from text_entry import TextEntry
 
+##########################################################################################
 class AddRemBooks:
     def __init__(self):
         self.book_name = ""
@@ -93,6 +94,8 @@ class AddRemBooks:
     def print_prompt(self):
         text: str = "--- Gestion des livres ---\n1 . Ajouter un livre\n2. Supprimer un livre\n3. Afficher tous les livres\n4. Quitter\n\nChoisissez une option (1-4) :\n"
         return text
+
+##########################################################################################
 
 # Ajouter un livre à la bibliothèque
 def add_book(book_name, author, genre, number_of_copies_available, total_times_rented=0):

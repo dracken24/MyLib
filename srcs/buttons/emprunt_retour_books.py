@@ -6,6 +6,8 @@ from datetime import datetime, timedelta
 
 WIP = "\n\033[93m\033[1mWIP\033[0m"
 
+##########################################################################################
+
 class EmpruntReturnBooks:
     def __init__(self):
         print("EmpruntReturnBooks class init")
@@ -19,6 +21,8 @@ class EmpruntReturnBooks:
     
     def on_quit(self):
         print("")
+
+##########################################################################################
 
 # Afficher of dicts
 def afficher_users():

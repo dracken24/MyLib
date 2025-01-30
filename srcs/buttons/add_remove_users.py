@@ -7,6 +7,7 @@ import re  # Pour les validations d'email et de numéro de téléphone
 
 from text_entry import TextEntry
 
+##########################################################################################
 class AddRemUser:
     def __init__(self):
         print("AddRemUser class init")
@@ -20,6 +21,8 @@ class AddRemUser:
     
     def on_quit(self):
         print("")
+
+##########################################################################################
 
 # def add_remove_users(button):
 #     main_menu()

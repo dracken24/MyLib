@@ -1,6 +1,8 @@
 from data_store import dict_button, dict_books, dict_users, loans_list_dict
 from text_entry import TextEntry
 
+##########################################################################################
+
 class CalculEmpruntBooks:
     def __init__(self):
         print("CalculEmpruntBooks class init")
@@ -14,6 +16,8 @@ class CalculEmpruntBooks:
     
     def on_quit(self):
         print("")
+
+##########################################################################################
 
 # # Calculate the average duration of loans by type
 # def calcul_emprunt_books(button: str):
