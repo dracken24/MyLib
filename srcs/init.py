@@ -1,35 +1,35 @@
-from pyray import init_window, set_target_fps, measure_text # Import for Raylib
 from pyray import DARKGRAY, BLUE, DARKBLUE, DARKGREEN, WHITE, ORANGE, MAROON, RED
+from pyray import init_window, set_target_fps, measure_text # Import for Raylib
 
-from buttons.my_button import MyButton
+from buttons.calcul_emprunt_books import CalculEmpruntBooks
+from buttons.emprunt_retour_books import EmpruntReturnBooks
+from buttons.monthly_evolution import MonthlyEvolution
+from buttons.ident_actif_users import IdentActifUsers
 from buttons.add_remove_books import AddRemBooks
 from buttons.add_remove_users import AddRemUser
-from buttons.calcul_emprunt_books import CalculEmpruntBooks
-from buttons.diagram import Diagram
-from buttons.emprunt_retour_books import EmpruntReturnBooks
-from buttons.ident_actif_users import IdentActifUsers
 from buttons.list_books import ListBooks
-from buttons.monthly_evolution import MonthlyEvolution
-from buttons.quit import Exit
+from buttons.my_button import MyButton
+from buttons.diagram import Diagram
 from buttons.status import Status
+from buttons.quit import Exit
 
-from data_store import dict_books, dict_users, loans_list_dict, dict_button
 from data_store import BUTTON_HEIGHT, WINDOW_WIDTH, WINDOW_TITLE, WINDOW_HEIGHT
+from data_store import dict_books, dict_users, loans_list_dict, dict_button
 
 # from text_entry import TextEntry
 
 ######################### Buttons liked to class init ##########################
 
-add_rem_books: AddRemBooks = AddRemBooks()
-add_rem_users: AddRemUser = AddRemUser()
 calcul_emprunt: CalculEmpruntBooks = CalculEmpruntBooks()
-list_books: ListBooks = ListBooks()
-diagram: Diagram = Diagram()
 emprunt_retour: EmpruntReturnBooks = EmpruntReturnBooks()
 ident_actif_users: IdentActifUsers = IdentActifUsers()
+add_rem_books: AddRemBooks = AddRemBooks()
+add_rem_users: AddRemUser = AddRemUser()
 monthly_evolution = MonthlyEvolution()
-my_exit: Exit = Exit()
+list_books: ListBooks = ListBooks()
+diagram: Diagram = Diagram()
 status: Status = Status()
+my_exit: Exit = Exit()
 
 ################################################################################
 
@@ -186,25 +186,25 @@ def init():
 		print(b)
 
 	# Init each text wide in pixel for center text in button
+	identifier.set_mesure_text(int(measure_text(identifier.get_title().encode('utf-8'), 20) / 2))
+	evolution.set_mesure_text(int(measure_text(evolution.get_title().encode('utf-8'), 20) / 2))
+	diagramme.set_mesure_text(int(measure_text(diagramme.get_title().encode('utf-8'), 20) / 2))
 	add_book.set_mesure_text(int(measure_text(add_book.get_title().encode('utf-8'), 20) / 2))
 	add_user.set_mesure_text(int(measure_text(add_user.get_title().encode('utf-8'), 20) / 2))
-	emprunt.set_mesure_text(int(measure_text(emprunt.get_title().encode('utf-8'), 20) / 2))
-	lister.set_mesure_text(int(measure_text(lister.get_title().encode('utf-8'), 20) / 2))
 	calculer.set_mesure_text(int(measure_text(calculer.get_title().encode('utf-8'), 20) / 2))
-	identifier.set_mesure_text(int(measure_text(identifier.get_title().encode('utf-8'), 20) / 2))
-	status.set_mesure_text(int(measure_text(status.get_title().encode('utf-8'), 20) / 2))
-	diagramme.set_mesure_text(int(measure_text(diagramme.get_title().encode('utf-8'), 20) / 2))
-	evolution.set_mesure_text(int(measure_text(evolution.get_title().encode('utf-8'), 20) / 2))
+	emprunt.set_mesure_text(int(measure_text(emprunt.get_title().encode('utf-8'), 20) / 2))
 	quitter.set_mesure_text(int(measure_text(quitter.get_title().encode('utf-8'), 20) / 2))
+	lister.set_mesure_text(int(measure_text(lister.get_title().encode('utf-8'), 20) / 2))
+	status.set_mesure_text(int(measure_text(status.get_title().encode('utf-8'), 20) / 2))
 
 	# Putt all buttons in a dictionary
-	dict_button[add_book.get_title()] = add_book
-	dict_button[add_user.get_title()] = add_user
-	dict_button[emprunt.get_title()] = emprunt
-	dict_button[lister.get_title()] = lister
-	dict_button[calculer.get_title()] = calculer
 	dict_button[identifier.get_title()] = identifier
-	dict_button[status.get_title()] = status
 	dict_button[diagramme.get_title()] = diagramme
 	dict_button[evolution.get_title()] = evolution
+	dict_button[add_book.get_title()] = add_book
+	dict_button[add_user.get_title()] = add_user
+	dict_button[calculer.get_title()] = calculer
+	dict_button[emprunt.get_title()] = emprunt
 	dict_button[quitter.get_title()] = quitter
+	dict_button[lister.get_title()] = lister
+	dict_button[status.get_title()] = status

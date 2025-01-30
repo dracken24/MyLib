@@ -4,13 +4,12 @@ from pyray import get_mouse_wheel_move, is_mouse_button_released, begin_drawing,
 from pyray import Rectangle, draw_rectangle_rec, get_screen_width
 from pyray import LIGHTGRAY, DARKGRAY, WHITE, MOUSE_BUTTON_LEFT
 
-from init import init, dict_button
 from data_store import TEXT_OFFSET, WINDOW_TITLE, WINDOW_HEIGHT, WINDOW_WIDTH, text_entry, RESET_STRING
 from utility import adjust_text_in_box_and_draw_result
 from buttons.my_button import MyButton
+from init import init, dict_button
 
 """ Main function for run the programm """
-
 def main():
 
 	# comment
@@ -24,7 +23,7 @@ def main():
 
 	button_clicked: MyButton = None # For stock selected button to use update function link to classes
 
-	text_box: Rectangle = Rectangle(10, int(WINDOW_HEIGHT / 4 * 3), int(WINDOW_WIDTH - 20), int(WINDOW_HEIGHT / 4 - 10)) # Make rectangle from values
+	text_box: Rectangle = Rectangle(10, int(WINDOW_HEIGHT / 4 * 3 - 100), int(WINDOW_WIDTH - 20), int(WINDOW_HEIGHT / 4 + 90)) # Make rectangle from values
 	# Draw title text
 	text_width = measure_text(WINDOW_TITLE.encode('utf-8'), 20) # For center the text in window
 	x_position = int(get_screen_width() / 2 - text_width / 2)

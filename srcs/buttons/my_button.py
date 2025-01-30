@@ -1,9 +1,9 @@
-from pyray import Rectangle, Vector2, DARKGRAY, GRAY, LIGHTGRAY, WHITE, BLACK
-from pyray import check_collision_point_rec, get_mouse_position, is_mouse_button_down, MOUSE_BUTTON_LEFT
 from pyray import draw_rectangle_rec, draw_text, draw_rectangle_lines_ex, is_mouse_button_released
+from pyray import check_collision_point_rec, get_mouse_position, is_mouse_button_down, MOUSE_BUTTON_LEFT
+from pyray import Rectangle, Vector2, DARKGRAY, GRAY, LIGHTGRAY, WHITE, BLACK
 
-BOARDER_THICK = 2
 BORDER_COLOR = DARKGRAY
+BOARDER_THICK = 2
 
 ##########################################################################################
 
