@@ -104,7 +104,49 @@ loans_list_dict = [
     {
         "Utilisateur_ID": 2,
         "Livre": "Harry Potter 3",
-        "Date_Emprunt": "2025-02-18",
+        "Date_Emprunt": "2025-03-18",
+        "Date_Retour": None
+    },
+    {
+        "Utilisateur_ID": 2,
+        "Livre": "Harry Potter 3",
+        "Date_Emprunt": "2025-03-18",
+        "Date_Retour": None
+    },
+    {
+        "Utilisateur_ID": 1,
+        "Livre": "Python Programming",
+        "Date_Emprunt": "2024-09-01",
+        "Date_Retour": "2025-04-10"
+    },
+    {
+        "Utilisateur_ID": 2,
+        "Livre": "The Great Gatsby",
+        "Date_Emprunt": "2024-11-25",
+        "Date_Retour": None
+    },
+    {
+        "Utilisateur_ID": 2,
+        "Livre": "Harry Potter 3",
+        "Date_Emprunt": "2025-07-18",
+        "Date_Retour": None
+    },
+    {
+        "Utilisateur_ID": 2,
+        "Livre": "Harry Potter 3",
+        "Date_Emprunt": "2025-03-18",
+        "Date_Retour": None
+    },
+    {
+        "Utilisateur_ID": 1,
+        "Livre": "Python Programming",
+        "Date_Emprunt": "2024-12-01",
+        "Date_Retour": "2025-04-10"
+    },
+    {
+        "Utilisateur_ID": 2,
+        "Livre": "The Great Gatsby",
+        "Date_Emprunt": "2025-05-25",
         "Date_Retour": None
     }
 ]
