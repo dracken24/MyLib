@@ -85,6 +85,10 @@ class Diagram:
 
 		ax.set_title("Nombre d'emprunt de livre par Genre")
 
+		sceen_whide: int = 10
+		sceen_height: int = 7
+		fig.set_size_inches(sceen_whide, sceen_height)
+
 		plt.show()
 
 ##########################################################################################
