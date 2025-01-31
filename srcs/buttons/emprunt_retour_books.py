@@ -1,6 +1,10 @@
 from init import dict_button, dict_books, dict_users, loans_list_dict
+import csv
+import os
 from time import sleep
 from datetime import datetime, timedelta
+from buttons.add_remove_users import load_users_csv, save_users_csv
+from buttons.add_remove_books import load_books_csv, save_books_csv
 
 WIP = "\n\033[93m\033[1mWIP\033[0m"
 
@@ -39,23 +43,6 @@ def afficher_livres_simple():
     print("\n\033[1m\033[4m--List of Books--\033[0m")
     for book in dict_books.keys():
         print(f'- {book}')
-#def afficher_loans_simple(id, titre): #WIP need to show only book input
-    # # l = []
-    # # for loan in loans_list_dict:
-    # #     if int(id) == loan["Utilisateur_ID"] and titre == loan["Livre"]:
-    # #         if loan["Date_Retour"] is None: #RETOUR
-    # #             l.append(loan)
-    # l = [loan for loan in loans_list_dict if int(id) == loan["Utilisateur_ID"] and titre == loan["Livre"] and loan["Date_Retour"] is None]
-    # # l = [loan for loan in loans_list_dict if int(id) == loan["Utilisateur_ID"] and loan["Date_Retour"] is None]
-    # if len(l) == 0:
-    #     print(f"\033[91mPas d'emprunt en cours.\033[0m")
-    #     return False
-    # else:
-    #     print("--Emprunt(s) trouvé(s)--")
-    #     for i in range(1, len(l)+1):
-    #         print(f'{i}. "{l[i-1]["Livre"]}" - Emprunté le {l[i-1]["Date_Emprunt"]}')
-    #     #selection = int(input("Choisissez l'emprunt que vous souhaitez de retourner :"))
-    #     #[l[selection]-1]
 
 # Rechercher of dicts
 def rechercher_user(id):
@@ -70,17 +57,12 @@ def rechercher_livre(titre):
             return livre
     print(f'\033[91mAuncun livre avec le titre "{titre}" retrouvé.\033[0m')
 
-def rechercher_loans(): #WIP - a determiner
-    pass
-
-# NOT DONE - PASSES
 def retour_livre(id, titre):
     print(WIP)
     for loan in loans_list_dict:
-        if int(id) == loan["Utilisateur_ID"] and titre == loan["Livre"] and loan["Date_Retour"] is None:
+        if id == loan["Utilisateur_ID"] and titre == loan["Livre"] and loan["Date_Retour"] is None:
             # Retourner l'exemplaire
             dict_books[titre]["Exemplaires"] += 1
-            #print(f"Exemplaire de retour {dict_books[titre]["Exemplaires"]}")
 
             # Mettre a jour la date de retour
             loan["Date_Retour"] = datetime.now().strftime('%Y-%m-%d')
@@ -98,15 +80,19 @@ def retour_livre(id, titre):
                 jours_retard = (datetime.now() - date_limite).days
                 penalite = jours_retard * 1.25
                 print(f"\033[91m{jours_retard} jour(s) en retard...")
-                print(f"Pénalité: {penalite}$\033[0m")
+                print(f"Pénalité: {penalite:.2f}$\033[0m")
             else:
                 print(f"\033[92mRetour a temps! :)\033[0m")
             return
-    else:
-        print(f"\033[91mPas d'emprunt en cours retrouvé.\033[0m")
+    print(f"\033[91mPas d'emprunt en cours retrouvé.\033[0m")
+
 def emprunter_livre(id, titre):
-    print(WIP)
-    print(f"{id} - {titre}")
+    # Verifier si User a deja le livre sous emprunt en cours
+    for loan in loans_list_dict:
+        if id == loan["Utilisateur_ID"] and titre == loan["Livre"] and loan["Date_Retour"] is None:
+            print("Vous avez deja ce livre sous emprunt")
+            return
+
     # Verifier le nombre d'exemplaire disponibles
     if dict_books[titre]["Exemplaires"] > 0:
         print("Ce livre est disponible à emprunter.")
@@ -114,28 +100,49 @@ def emprunter_livre(id, titre):
 
         # Enlever l'exemplaire
         dict_books[titre]["Exemplaires"] -= 1
-        date_emp = datetime.now().strftime('%Y-%m-%d')
+        #print(f"Exemplaires mise a jour {dict_books[titre]["Exemplaires"]}")
 
-        # Ajouter l'emprunt
+        # Creer Date_Emprunt a jour
+        date_emp = datetime.now().strftime('%Y-%m-%d')
+        #print(f"Date d'emprunt a jour {date_emp}")
+
+        # Ajouter l'emprunt dans dict_books
         dict_books[titre]["Emprunts"] += 1
+        #print(f"Ajouter Emprunts pour livre {dict_books[titre]["Emprunts"]}")
+
+        # Ajouter livre dans listeLu si nouveau
+        ajouter_livreLu(id, titre)
+        #print(f"Ajouter nouveau dans liste (si nouveau)")
+        #print(f"{dict_users[id]["ListeLivreLu"]}")
 
         # Creer un emprunt pour ajouter a la list loans_list_dict
-        creer_emprunt(id,livre,date_emp)
-        print(f'Livre "{livre}" emprunté avec succès par {id} à la date du {date_emp}')
+        loans_list_dict.append({"Utilisateur_ID": id, "Livre": titre, "Date_Emprunt": date_emp, "Date_Retour": None})
+        print(f'Livre "{titre}" emprunté avec succès.')
     else:
         print("Il n'y a plus d'exemplaires disponibles à ce moment.")
+        return
 
-def creer_emprunt(id, livre, date_emp, date_ret=None):
-    loans_list_dict.append({"Utilisateur_ID": id, "Livre": livre, "Date_Emprunt": date_emp, "Date_Retour": date_ret})
-    return
+def ajouter_livreLu(id, livre):
+    dict_users[id]["ListeLivreLu"]
+    if livre in dict_users[id]["ListeLivreLu"]:
+        print("Livre Deja lu")
+    else:
+        dict_users[id]["ListeLivreLu"].append(livre)
+        print("Livre no lu avant")
 
 # Record a loan or return - MAIN FUNCTION!
 def emprunt_retour_books(button: str):
     print(f"{button} button Hit Action 3")
+    dict_button[button]["text"] = "WIP\nCeci est pour un emprunt ou un retour?"
+    dict_button[button]["text"] += "\n1. Emprunt\n2. Retour"
     print(WIP)
-
+    # load_books_csv()
+    # load_users_csv()
+    # load_loans_csv()
     while True:
         print("\033[1mCeci est pour un emprunt ou un retour?\033[0m")
+        #dict_button[button]["text"] = "Ceci est pour un emprunt ou un retour?"
+        #dict_button[button]["text"] += "\n1. Emprunt\n2. Retour"
         print("1. Emprunt")
         print("2. Retour")
         choix = input("\nChoisissez une option : ") # Come back later
@@ -157,8 +164,8 @@ def emprunt_retour_books(button: str):
             return
         else:
             print("\033[91mChoix invalide, réessayez.\033[0m\n")
-
-    while True: # Trouver le client
+    # Trouver le client
+    while True:
         client = input("\nEntrez le code d'identité de l'utilisateur : ")
         client_verifiee = rechercher_user(client)
         if client_verifiee:
@@ -166,9 +173,8 @@ def emprunt_retour_books(button: str):
             break
         elif client.lower() == "stop": # To exit loop
             break
-
+    # Trouver le livre
     if client_verifiee: # Next Step:
-        afficher_livres_simple()
         while True: # Trouver le livre
             livre = input("\nEntrez le titre du livre : ").title()
             livre_verifiee = rechercher_livre(livre)
@@ -180,10 +186,42 @@ def emprunt_retour_books(button: str):
 
     if client_verifiee and livre_verifiee: # Need to make fucntions for both options
         if choix == "1":
-            print("\033[94mIt's a boy! (Emprunt)\033[0m")
+            #print("\033[94mIt's a boy! (Emprunt)\033[0m")  # This line is a joke, should delete later
             emprunter_livre(client_verifiee, livre_verifiee)
+            # save_books_csv()
+            # save_users_csv()
+            # save_loans_csv()
         if choix == "2":
-            print("\033[95mIt's a girl! (Retour)\033[0m")
+            #print("\033[95mIt's a girl! (Retour)\033[0m")  # This line is a joke, should delete later
             retour_livre(client_verifiee, livre_verifiee)
+            # save_books_csv()
+            # save_users_csv()
+            # save_loans_csv()
 
     print(f"{button} button Hit Action 11 input text")
+
+#
+# def save_loans_csv(file="loans.csv"):
+#     with open(file, "w", newline="", encoding="utf-8") as f:
+#         writer = csv.writer(f)
+#         writer.writerow(["Utilisateur_ID", "Livre", "Date_Emprunt", "Date_Retour"])
+#         for loan in loans_list_dict:
+#             writer.writerow([
+#                 loan.Utilisateur_ID,
+#                 loan.Livre,
+#                 loan.Date_Emprunt,
+#                 loan.Date_Retour
+#             ])
+#
+# def load_loans_csv(file="loans.csv"):
+#     global loans_list_dict
+#     if os.path.exists(file):
+#         with open(file, "r", encoding="utf-8") as f:
+#             reader = csv.DictReader(f)
+#             loans_list_dict.clear()
+#             for row in reader:
+#                 dict_users[row["Utilisateur_ID"]] = Loan(
+#                     Utilisateur_ID=row["Utilisateur_ID"],
+#                     Livre=row["Livre"],
+#                     Date_Emprunt=row["Date_Emprunt"],
+#                     Date_Retour=row["Date_Retour"])
