@@ -8,7 +8,7 @@ class IdentActifUsers:
         print("IdentActifUsers class init")
 
     def on_start(self):
-        print("")
+        pass
 
     def update(self, text_entry: TextEntry):
         print("IdentActifUsers Update")

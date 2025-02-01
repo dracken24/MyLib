@@ -1,4 +1,4 @@
-from data_store import dict_button, dict_books, dict_users, loans_list_dict, RESET_STRING
+from data_store import dict_books, loans_list_dict, RESET_STRING
 from text_entry import TextEntry
 
 import matplotlib.pyplot as plt
@@ -15,7 +15,7 @@ class Diagram:
 #--------------------------------------------------------------------#
 
 	def on_start(self):
-		print("")
+		pass
 
 #--------------------------------------------------------------------#
 	

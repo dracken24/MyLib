@@ -25,7 +25,8 @@ def main():
 
 	# Box to affich text on screen
 	text_box: Rectangle = Rectangle(10, int(WINDOW_HEIGHT / 4 * 3 - 100), int(WINDOW_WIDTH - 20), int(WINDOW_HEIGHT / 4 + 90)) # Make rectangle from values
-	# Draw title text
+	
+	# For center text
 	text_width = measure_text(WINDOW_TITLE.encode('utf-8'), 20) # For center the text in window
 	x_position = int(get_screen_width() / 2 - text_width / 2)
 	
@@ -73,9 +74,6 @@ def main():
 
 # ---------------------------------------------------- --------------------------------------------------- #
 # -------------------------------------- Check text from text_entry -------------------------------------- #
-		text_entry.get_text()
-		# if (entry_text):
-		# 	affich_text = entry_text
 
 		if (affich_text == RESET_STRING):
 			# button_clicked.get_associate_class().on_quit() # Quit funct
@@ -83,6 +81,7 @@ def main():
 			affich_text = "Veuillez cliquer sur un bouton pour faire un choix"
 
 		text_entry.update_textBox()
+		text_entry.get_text()
 		text_entry.draw_self()
 
 # ---------------------------------------------------- --------------------------------------------------- #

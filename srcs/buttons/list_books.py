@@ -8,7 +8,7 @@ class ListBooks:
         print("ListBooks class init")
 
     def on_start(self):
-        print("")
+        pass
 
     def update(self, text_entry: TextEntry):
         print("ListBooks Update")

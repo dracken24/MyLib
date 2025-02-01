@@ -8,7 +8,7 @@ class CalculEmpruntBooks:
         print("CalculEmpruntBooks class init")
 
     def on_start(self):
-        print("")
+        pass
 
     def update(self, text_entry: TextEntry):
         print("CalculEmpruntBooks Update")

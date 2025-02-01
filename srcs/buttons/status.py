@@ -8,7 +8,7 @@ class Status:
         print("MonthlyEvolution class init")
 
     def on_start(self):
-        print("")
+        pass
     
     def update(self, text_entry: TextEntry):
         print("Status Update")

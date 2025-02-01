@@ -13,7 +13,7 @@ class EmpruntReturnBooks:
         print("EmpruntReturnBooks class init")
 
     def on_start(self):
-        print("")
+        pass
 
     def update(self, text_entry: TextEntry):
         print("EmpruntReturnBooks Update")

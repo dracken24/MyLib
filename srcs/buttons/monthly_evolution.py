@@ -1,4 +1,4 @@
-from data_store import dict_button, dict_books, dict_users, loans_list_dict, RESET_STRING
+from data_store import loans_list_dict, RESET_STRING
 from text_entry import TextEntry
 
 import matplotlib.pyplot as plt
@@ -23,12 +23,12 @@ class MonthlyEvolution:
         # Calcul emprunt from selected year if year is valid
         if (year != None and not year.isspace() and year.isdigit()):
             # Check if year is valid
-            if int(year) < 1900 or int(year) > 2025:
-                return "Quel an voulez vous voir ? (1900-2025)"
+            if int(year) < 1900 or int(year) > 2055:
+                return "Quel an voulez vous voir ? (1900-2055)"
             emprunt_list: list[str] = self.calcul_emprunt(year)
-            self.Show_graphic(emprunt_list)
+            self.Show_graphic(emprunt_list, year)
         else:
-            return "Quel an voulez vous voir ? (1900-2025)"
+            return "Quel an voulez vous voir ? (1900-2055)"
         
         return RESET_STRING
     
@@ -51,17 +51,17 @@ class MonthlyEvolution:
 
 #--------------------------------------------------------------------#
     
-    def Show_graphic(self, emprunt_list: list[str]):
+    def Show_graphic(self, emprunt_list: list[str], year: str):
         month_names = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet",
                        "Aout", "Septembre", "Octobre", "Novembre", "Decembre"]
         
         # Convert string list to int list for calculation
-        emprunt_list_int = [int(x) for x in emprunt_list]
+        emprunt_list_int: list[int] = [int(x) for x in emprunt_list]
         max_value = max(emprunt_list_int)
 
         fig, ax = plt.subplots()
         bar_container = ax.bar(month_names, emprunt_list_int)  # Use int list
-        ax.set(ylabel='Nombre d\'emprunt', title='Evolution des emprunts par mois', ylim=(0, max_value + 1))
+        ax.set(ylabel = "Nombre d\'emprunt", title = f"Evolution des emprunts par mois pour l\'annee {year}", ylim = (0, max_value + 1))
         ax.bar_label(bar_container, fmt='{:,.0f}')
 
         sceen_whide: int = 14
