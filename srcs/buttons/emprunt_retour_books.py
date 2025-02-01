@@ -133,18 +133,17 @@ def ajouter_livreLu(id, livre):
 # Record a loan or return - MAIN FUNCTION!
 def emprunt_retour_books(button: str):
     print(f"{button} button Hit Action 3")
+    load_books_csv()
+    load_users_csv()
+    load_loans_csv()
+    print(dict_users)
     dict_button[button]["text"] = "WIP\nCeci est pour un emprunt ou un retour?"
-    dict_button[button]["text"] += "\n1. Emprunt\n2. Retour"
-    print(WIP)
-    # load_books_csv()
-    # load_users_csv()
-    # load_loans_csv()
+    dict_button[button]["text"] += "\n1. Emprunt\n2. Retour\n3. Quitter"
     while True:
         print("\033[1mCeci est pour un emprunt ou un retour?\033[0m")
-        #dict_button[button]["text"] = "Ceci est pour un emprunt ou un retour?"
-        #dict_button[button]["text"] += "\n1. Emprunt\n2. Retour"
         print("1. Emprunt")
         print("2. Retour")
+        print("3. Quitter")
         choix = input("\nChoisissez une option : ") # Come back later
 
         if choix == "1":
@@ -153,15 +152,16 @@ def emprunt_retour_books(button: str):
         if choix == "2":
             print("\033[95mVous avez choisi: Retour\033[0m")
             break
-        # DEBUG MODE
-        if choix == "3" or choix.lower() == "loans":
-            afficher_loans()
-        if choix == "4" or choix.lower() == "books":
-            afficher_books()
-        if choix == "5" or choix.lower() == "users":
-            afficher_users()
-        if choix == "0" or choix.lower() == "stop":
+        if choix == "3" or choix.lower() == "stop":
             return
+
+        # DEBUG MODE
+        if choix.lower() == "loans" or choix.lower() == "l":
+            afficher_loans()
+        if choix.lower() == "books" or choix.lower() == "b":
+            afficher_books()
+        if choix.lower() == "users" or choix.lower() == "u":
+            afficher_users()
         else:
             print("\033[91mChoix invalide, réessayez.\033[0m\n")
     # Trouver le client
@@ -188,40 +188,44 @@ def emprunt_retour_books(button: str):
         if choix == "1":
             #print("\033[94mIt's a boy! (Emprunt)\033[0m")  # This line is a joke, should delete later
             emprunter_livre(client_verifiee, livre_verifiee)
-            # save_books_csv()
-            # save_users_csv()
-            # save_loans_csv()
+            save_books_csv()
+            save_users_csv()
+            save_loans_csv()
         if choix == "2":
             #print("\033[95mIt's a girl! (Retour)\033[0m")  # This line is a joke, should delete later
             retour_livre(client_verifiee, livre_verifiee)
-            # save_books_csv()
-            # save_users_csv()
-            # save_loans_csv()
+            save_books_csv()
+            save_users_csv()
+            save_loans_csv()
 
     print(f"{button} button Hit Action 11 input text")
 
-#
-# def save_loans_csv(file="loans.csv"):
-#     with open(file, "w", newline="", encoding="utf-8") as f:
-#         writer = csv.writer(f)
-#         writer.writerow(["Utilisateur_ID", "Livre", "Date_Emprunt", "Date_Retour"])
-#         for loan in loans_list_dict:
-#             writer.writerow([
-#                 loan.Utilisateur_ID,
-#                 loan.Livre,
-#                 loan.Date_Emprunt,
-#                 loan.Date_Retour
-#             ])
-#
-# def load_loans_csv(file="loans.csv"):
-#     global loans_list_dict
-#     if os.path.exists(file):
-#         with open(file, "r", encoding="utf-8") as f:
-#             reader = csv.DictReader(f)
-#             loans_list_dict.clear()
-#             for row in reader:
-#                 dict_users[row["Utilisateur_ID"]] = Loan(
-#                     Utilisateur_ID=row["Utilisateur_ID"],
-#                     Livre=row["Livre"],
-#                     Date_Emprunt=row["Date_Emprunt"],
-#                     Date_Retour=row["Date_Retour"])
+
+def save_loans_csv(file="loans.csv"):
+    with open(file, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Utilisateur_ID", "Livre", "Date_Emprunt", "Date_Retour"])
+        for loan in loans_list_dict:
+            writer.writerow([
+                loan.Utilisateur_ID,
+                loan.Livre,
+                loan.Date_Emprunt,
+                loan.Date_Retour
+            ])
+    print("Les emprunts ont été sauvegardés avec succès.")
+
+def load_loans_csv(file="loans.csv"):
+    global loans_list_dict
+    if os.path.exists(file):
+        with open(file, "r", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            loans_list_dict.clear()
+            for row in reader:
+                dict_users[row["Utilisateur_ID"]] = Loan(
+                    Utilisateur_ID=row["Utilisateur_ID"],
+                    Livre=row["Livre"],
+                    Date_Emprunt=row["Date_Emprunt"],
+                    Date_Retour=row["Date_Retour"])
+        print("Les emprunts ont été chargés depuis le fichier CSV.")
+    else:
+        print("Aucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde.")
