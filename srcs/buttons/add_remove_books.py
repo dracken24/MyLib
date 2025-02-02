@@ -20,10 +20,12 @@ def remove_book_button(button):
 def add_book():
     """Ajoute un nouveau livre à la bibliothèque"""
     print("\n--- Ajouter un nouveau livre ---")
-    titre = input("Titre du livre : ")
+    titre = input("Titre du livre : ").title()
     auteur = input("Auteur : ")
     genre = input("Genre : ")
     copies = int(input("Nombre d'exemplaires disponibles : "))
+
+
 
     dict_books[titre] = {
         'Auteur': auteur,
@@ -112,7 +114,7 @@ def load_books_csv(file="books.csv"):
 
 # Menu principal pour gérer les livres
 def menu():
-    """Menu interactif pour ajouter, supprimer et afficher des livres."""
+    """Menu interactif pour la gestion des livres"""
     while True:
         print("\n--- Gestion des livres ---")
         print("1. Ajouter un livre")
@@ -127,7 +129,7 @@ def menu():
             add_book()
         elif choice == "2":
             print("\n\033[94mVous avez choisi: Supprimer un livre\033[0m")
-            book_name = input("Titre du livre à supprimer : ")
+            book_name = input("Titre du livre à supprimer : ").title()
             remove_book(book_name)
         elif choice == "3":
             print("\n\033[94mVous avez choisi: Afficher tous les livres\033[0m")
