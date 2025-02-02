@@ -136,7 +136,6 @@ def emprunt_retour_books(button: str):
     load_books_csv()
     load_users_csv()
     load_loans_csv()
-    print(dict_users)
     dict_button[button]["text"] = "WIP\nCeci est pour un emprunt ou un retour?"
     dict_button[button]["text"] += "\n1. Emprunt\n2. Retour\n3. Quitter"
     while True:
@@ -200,32 +199,39 @@ def emprunt_retour_books(button: str):
 
     print(f"{button} button Hit Action 11 input text")
 
-
+#_________________________________________________________________________________
+# Sauvegarder les emprunts dans un fichier CSV
 def save_loans_csv(file="loans.csv"):
+    """Sauvegarde les informations des emprunts dans un fichier CSV."""
     with open(file, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["Utilisateur_ID", "Livre", "Date_Emprunt", "Date_Retour"])
-        for loan in loans_list_dict:
+        for loan_data in loans_list_dict:
             writer.writerow([
-                loan.Utilisateur_ID,
-                loan.Livre,
-                loan.Date_Emprunt,
-                loan.Date_Retour
+                loan_data['Utilisateur_ID'],
+                loan_data['Livre'],
+                loan_data['Date_Emprunt'],
+                loan_data['Date_Retour']
             ])
-    print("Les emprunts ont été sauvegardés avec succès.")
+    print("\nLes emprunts ont été sauvegardés avec succès.")
 
+
+# Charger les emprunts depuis un fichier CSV
 def load_loans_csv(file="loans.csv"):
+    """Charge les informations des emprunt depuis un fichier CSV."""
     global loans_list_dict
     if os.path.exists(file):
         with open(file, "r", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
+            reader = csv.reader(f)
+            next(reader)  # Skip header row
             loans_list_dict.clear()
             for row in reader:
-                dict_users[row["Utilisateur_ID"]] = Loan(
-                    Utilisateur_ID=row["Utilisateur_ID"],
-                    Livre=row["Livre"],
-                    Date_Emprunt=row["Date_Emprunt"],
-                    Date_Retour=row["Date_Retour"])
-        print("Les emprunts ont été chargés depuis le fichier CSV.")
+                loans_list_dict = {
+                    'Utilisateur_ID': row['Utilisateur_ID'],
+                    'Livre': row['Livre'],
+                    'Date_Emprunt': row['Date_Emprunt'],
+                    'Date_Retour': row['Date_Retour']
+                }
+        print("\nLes emprunts ont été chargés depuis le fichier CSV.")
     else:
-        print("Aucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde.")
+        print("\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde.")
