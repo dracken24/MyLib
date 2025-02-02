@@ -91,21 +91,24 @@ def load_books_csv(file="books.csv"):
     """Charge les livres depuis un fichier CSV"""
     if os.path.exists(file):
         with open(file, "r", encoding="utf-8") as f:
-            reader = csv.reader(f)
-            headers = next(reader)  # Lire la première ligne pour les en-têtes
-            dict_books.clear()
-            for row in reader:
-                if len(row) >= 5:  # Vérifier qu'on a assez de colonnes
-                    titre = row[0]
-                    dict_books[titre] = {
-                        'Auteur': row[1],
-                        'Genre': row[2],
-                        'Exemplaires': int(row[3]),
-                        'Emprunts': int(row[4])
-                    }
-        print("\nLes livres ont été chargés depuis le fichier CSV.")
+            # Vérifier si le fichier n'est pas vide
+            if os.path.getsize(file) > 0:
+                reader = csv.reader(f)
+                headers = next(reader)  # Lire la première ligne pour les en-têtes
+                dict_books.clear()
+                for row in reader:
+                    if len(row) >= 5:  # Vérifier qu'on a assez de colonnes
+                        titre = row[0]
+                        dict_books[titre] = {
+                            'Auteur': row[1],
+                            'Genre': row[2],
+                            'Exemplaires': int(row[3]),
+                            'Emprunts': int(row[4])
+                        }
+            else:
+                print("\nLe fichier CSV est vide. Un nouveau fichier sera créé lors de la sauvegarde.")
     else:
-        print("\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde.")
+        print("\nAucun fichier CSV trouvé. Un nouveau fichier sera créé lors de la sauvegarde.")
 
 # Menu principal pour gérer les livres
 def menu():
