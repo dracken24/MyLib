@@ -6,7 +6,8 @@ import csv
 
 def add_remove_books(button: str):
     text: str = "--- Gestion des livres ---\n1 . Ajouter un livre\n2. Supprimer un livre\n3. Afficher tous les livres\n4. Quitter\n"
-    dict_button[button]["text"] = text
+    # dict_button[button]["text"] = text
+    menu()
 
 def remove_book_button(button):
     print(f"{button} button Hit Action 1")
@@ -60,13 +61,13 @@ def display_books():
     """Affiche les informations de tous les livres."""
     if dict_books:
         print("\n--- Liste des livres dans la bibliothèque ---")
-        for book in dict_books.values():
+        for book in dict_books:
             print("-" * 30)
-            print(f"Titre : {book['Titre']}")
-            print(f"Auteur : {book['Auteur']}")
-            print(f"Genre : {book['Genre']}")
-            print(f"Copies disponibles : {book['Copies']}")
-            print(f"Nombre total d'emprunts : {book['Emprunts']}")
+            print(f"Titre : {book}")
+            print(f"Auteur : {dict_books[book]['Auteur']}")
+            print(f"Genre : {dict_books[book]['Genre']}")
+            print(f"Copies disponibles : {dict_books[book]['Exemplaires']}")
+            print(f"Nombre total d'emprunts : {dict_books[book]['Emprunts']}")
             print("-" * 30)
     else:
         print("\nAucun livre dans la bibliothèque.")
