@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 genre = []
 
-# Calculate the average duration of loans by genre  - DONE
+# Calculate the average duration of loans by genre  - DONEE
 def calcul_emprunt_books(button: str):
     print(f"{button} button Hit Action 5")
     load_books_csv()
