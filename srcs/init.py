@@ -203,6 +203,30 @@ dict_books: dict = {
 		"Genre": "Roman",
 		"Exemplaires": 2,
 		"Emprunts": 7
+	},
+	"1": {
+		"Auteur": "A",
+		"Genre": "Roman",
+		"Exemplaires": 5,
+		"Emprunts": 10
+	},
+	"2": {
+		"Auteur": "B",
+		"Genre": "Programmation",
+		"Exemplaires": 11,
+		"Emprunts": 20
+	},
+	"3": {
+		"Auteur": "C",
+		"Genre": "Programmation",
+		"Exemplaires": 1,
+		"Emprunts": 5
+	},
+	"4": {
+		"Auteur": "D",
+		"Genre": "Test",
+		"Exemplaires": 2,
+		"Emprunts": 8
 	}
 }
 
@@ -245,15 +269,33 @@ dict_users = {
 
 loans_list_dict = [
 	{
-		"Utilisateur_ID": 1,
+		"Utilisateur_ID": "1",
 		"Livre": "Python Programming",
 		"Date_Emprunt": "2024-12-01",
 		"Date_Retour": "2024-12-10"
 	},
 	{
-		"Utilisateur_ID": 2,
+		"Utilisateur_ID": "2",
 		"Livre": "The Great Gatsby",
 		"Date_Emprunt": "2024-11-25",
+		"Date_Retour": "2024-12-10"
+	},
+	{
+		"Utilisateur_ID": "1",
+		"Livre": "1",
+		"Date_Emprunt": "2024-11-25",
+		"Date_Retour": "2024-11-30"
+	},
+	{
+		"Utilisateur_ID": "2",
+		"Livre": "2",
+		"Date_Emprunt": "2024-02-05",
+		"Date_Retour": "2024-03-15"
+	},
+	{
+		"Utilisateur_ID": "1",
+		"Livre": "3",
+		"Date_Emprunt": "2024-02-05",
 		"Date_Retour": None
 	}
 ]
