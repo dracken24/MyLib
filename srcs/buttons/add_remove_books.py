@@ -111,11 +111,10 @@ def load_books_csv(file="books.csv"):
                 if len(row) >= 5:  # Vérifier qu'on a assez de colonnes
                     book_name, author, genre, copies, times_rented = row
                     dict_books[book_name] = {
-                        'book_name': book_name,
-                        'author': author,
-                        'genre': genre,
-                        'number_of_copies_available': int(copies),
-                        'total_times_rented': int(times_rented)
+                        'Auteur': author,
+                        'Genre': genre,
+                        'Exemplaires': int(copies),
+                        'Emprunts': int(times_rented)
                     }
         print("\nLes livres ont été chargés depuis le fichier CSV.")
     else:
