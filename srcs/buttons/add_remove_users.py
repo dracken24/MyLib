@@ -139,7 +139,7 @@ def save_users_csv(file="users.csv"):
                         "total_books_rented", "rented_books"])
         for user in dict_users.values():
             writer.writerow([
-                user.user_id,
+                user.user_id,  
                 user.first_name,
                 user.last_name,
                 user.email,
