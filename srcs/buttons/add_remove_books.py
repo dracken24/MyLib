@@ -61,13 +61,13 @@ def display_books():
     """Affiche les informations de tous les livres."""
     if dict_books:
         print("\n--- Liste des livres dans la bibliothèque ---")
-        for book in dict_books:
+        for book_name, book in dict_books.items():
             print("-" * 30)
-            print(f"Titre : {book}")
-            print(f"Auteur : {dict_books[book]['Auteur']}")
-            print(f"Genre : {dict_books[book]['Genre']}")
-            print(f"Copies disponibles : {dict_books[book]['Exemplaires']}")
-            print(f"Nombre total d'emprunts : {dict_books[book]['Emprunts']}")
+            print(f"Titre : {book_name}")
+            print(f"Auteur : {book['Auteur']}")
+            print(f"Genre : {book['Genre']}")
+            print(f"Copies disponibles : {book['Copies']}")
+            print(f"Nombre total d'emprunts : {book['Emprunts']}")
             print("-" * 30)
     else:
         print("\nAucun livre dans la bibliothèque.")
