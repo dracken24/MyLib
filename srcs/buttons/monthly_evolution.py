@@ -25,7 +25,9 @@ class MonthlyEvolution:
             # Check if year is valid
             if int(year) < 1900 or int(year) > 2055:
                 return "Quel an voulez vous voir ? (1900-2055)"
+            # calcul all books for this year
             emprunt_list: list[str] = self.calcul_emprunt(year)
+            # Show a graph from those datas
             self.Show_graphic(emprunt_list, year)
         else:
             return "Quel an voulez vous voir ? (1900-2055)"
