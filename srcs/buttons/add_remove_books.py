@@ -5,8 +5,10 @@ from init import dict_button, dict_books, dict_users, loans_list_dict
 import csv
 
 def add_remove_books(button: str):
-    text: str = "--- Gestion des livres ---\n1 . Ajouter un livre\n2. Supprimer un livre\n3. Afficher tous les livres\n4. Quitter\n"
-    # dict_button[button]["text"] = text
+    """Gestion des livres quand le bouton est cliqué"""
+    load_books_csv()  # Charger les livres au début
+    text: str = "--- Gestion des livres ---\n1. Ajouter un livre\n2. Supprimer un livre\n3. Afficher tous les livres\n4. Quitter\n"
+    dict_button[button]["text"] = text
     menu()
 
 def remove_book_button(button):
@@ -34,11 +36,11 @@ def add_book():
 
     # Créer le dictionnaire du livre avec tous les champs nécessaires
     dict_books[book_name] = {
-        'Titre': book_name,
-        'Auteur': author,
-        'Genre': genre,
-        'Copies': copies,
-        'Emprunts': 0  # Initialiser le compteur d'emprunts à 0
+        'book_name': book_name,
+        'author': author,
+        'genre': genre,
+        'number_of_copies_available': copies,
+        'total_times_rented': 0  # Initialiser le compteur d'emprunts à 0
     }
 
     print(f"\n\033[92mLe livre '{book_name}' a été ajouté à la bibliothèque.\033[0m")
@@ -64,10 +66,10 @@ def display_books():
         for book_name, book in dict_books.items():
             print("-" * 30)
             print(f"Titre : {book_name}")
-            print(f"Auteur : {book['Auteur']}")
-            print(f"Genre : {book['Genre']}")
-            print(f"Copies disponibles : {book['Copies']}")
-            print(f"Nombre total d'emprunts : {book['Emprunts']}")
+            print(f"Auteur : {book['author']}")
+            print(f"Genre : {book['genre']}")
+            print(f"Copies disponibles : {book['number_of_copies_available']}")
+            print(f"Nombre total d'emprunts : {book['total_times_rented']}")
             print("-" * 30)
     else:
         print("\nAucun livre dans la bibliothèque.")
@@ -86,13 +88,13 @@ def save_books_csv(file="books.csv"):
     with open(file, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["book_name", "author", "genre", "number_of_copies_available", "total_times_rented"])
-        for book in dict_books.values():
+        for book_data in dict_books.values():
             writer.writerow([
-                book['Titre'],
-                book['Auteur'],
-                book['Genre'],
-                book['Copies'],
-                book['Emprunts']
+                book_data['book_name'],
+                book_data['author'],
+                book_data['genre'],
+                book_data['number_of_copies_available'],
+                book_data['total_times_rented']
             ])
     print("\nLes livres ont été sauvegardés avec succès.")
 
@@ -108,13 +110,13 @@ def load_books_csv(file="books.csv"):
             dict_books.clear()
             for row in reader:
                 if len(row) >= 5:  # Vérifier qu'on a assez de colonnes
-                    titre, auteur, genre, copies, emprunts = row
-                    dict_books[titre] = {
-                        'Titre': titre,
-                        'Auteur': auteur,
-                        'Genre': genre,
-                        'Copies': int(copies),
-                        'Emprunts': int(emprunts)
+                    book_name, author, genre, copies, times_rented = row
+                    dict_books[book_name] = {
+                        'book_name': book_name,
+                        'author': author,
+                        'genre': genre,
+                        'number_of_copies_available': int(copies),
+                        'total_times_rented': int(times_rented)
                     }
         print("\nLes livres ont été chargés depuis le fichier CSV.")
     else:
@@ -128,8 +130,7 @@ def menu():
         print("1. Ajouter un livre")
         print("2. Supprimer un livre")
         print("3. Afficher tous les livres")
-        print("4. Afficher le nombre total de livres dans la bibliothèque")
-        print("5. Quitter")
+        print("4. Quitter")
 
         choice = input("Choisissez une option (1-4) : ")
 
@@ -144,9 +145,6 @@ def menu():
             print("\n\033[94mVous avez choisi: Afficher tous les livres\033[0m")
             display_books()
         elif choice == "4":
-            print("\n\033[94mVous avez choisi: Afficher le nombre total de livres dans la bibliothèque\033[0m")
-            display_total_number_of_books_in_library()
-        elif choice == "5":
             print("\nMerci d'avoir utilisé le gestionnaire de livres.")
             break
         else:
