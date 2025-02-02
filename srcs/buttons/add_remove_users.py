@@ -56,14 +56,16 @@ def mettre_a_jour_emprunts_utilisateurs():
 def add_user():
     # Générer un nouvel ID utilisateur
     if not dict_users:
-        new_id = "U001"  # Premier utilisateur
+        new_id = 1  # Premier utilisateur
     else:
         # Trouver le plus grand ID et l'incrémenter
         last_id = max(int(user_id.replace('U', '')) for user_id in dict_users.keys())
-        new_id = f"U{(last_id + 1):03d}"  # Format U001, U002, etc.
+        new_id = last_id + 1  # Format U001, U002, etc.
+
 
     first_name = input("Entrez le prénom : ")
     last_name = input("Entrez le nom : ")
+    
     while True:
         email = input("Entrez l'email (format obligatoire: exemple@gmail.com) : ")
         if re.match(r"[^@]+@[^@]+\.[^@]+", email):
@@ -82,6 +84,7 @@ def add_user():
     print("\n" + "-" * 30)
     print(f"\033[92mL'utilisateur {first_name} {last_name} a été ajouté avec succès (ID: {new_id}).\033[0m")
     print("-" * 30)
+   
     save_users_csv()
 
 
@@ -112,8 +115,18 @@ def remove_user():
 def display_users():
     if dict_users:
         print("\n--- Liste des utilisateurs ---")
-        for user in dict_users.values():
-            user.display_info()
+        for user_id, user in dict_users.items():
+            print("-" * 30)
+            print(f"ID : {user_id}")
+            print(f"Nom : {user['Prénom']} {user['Nom']}")
+            print(f"Email : {user['Email']}")
+            print(f"Téléphone : {user['Téléphone']}")
+            print(f"Nombre total d'emprunts : {user['Emprunts']}")
+            if user.get('Livres'):
+                print("Livres empruntés :")
+                for book in user['Livres']:
+                    print(f"- {book}")
+            print("-" * 30)
     else:
         print("Aucun utilisateur enregistré.")
 

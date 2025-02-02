@@ -7,44 +7,41 @@ import csv
 def add_remove_books(button: str):
     text: str = "--- Gestion des livres ---\n1 . Ajouter un livre\n2. Supprimer un livre\n3. Afficher tous les livres\n4. Quitter\n"
     dict_button[button]["text"] = text
-    # manage_books()
 
 def remove_book_button(button):
     print(f"{button} button Hit Action 1")
 
-class Book:
-    """Classe représentant un livre dans la bibliothèque."""
-    def __init__(self, book_name, author, genre, number_of_copies_available, total_times_rented=0):
-        self.book_name = book_name
-        self.author = author
-        self.genre = genre
-        self.number_of_copies_available = int(number_of_copies_available)
-        self.total_times_rented = int(total_times_rented)
-        self.total_number_of_books_in_library = len(dict_books)
-
-    def display_info(self):
-        """Afficher les informations du livre."""
-        print("-" * 30)
-        print(f"Titre : {self.book_name}")
-        print(f"Auteur : {self.author}")
-        print(f"Genre : {self.genre}")
-        print(f"Copies disponibles : {self.number_of_copies_available}")
-        print(f"Nombre total d'emprunts : {self.total_times_rented}")        
-        print("-" * 30)
 
 
 
 # Ajouter un livre à la bibliothèque
-def add_book(book_name, author, genre, number_of_copies_available, total_times_rented=0):
-    """Ajoute un livre ou met à jour les copies disponibles s'il existe déjà."""
-    if book_name in dict_books:
-        dict_books[book_name].number_of_copies_available += int(number_of_copies_available)
-        print(f"\nLe livre '{book_name}' existe déjà. Copies disponibles mises à jour.")
-    else:
-        dict_books[book_name] = Book(book_name, author, genre, number_of_copies_available, total_times_rented)
-        print(f"\n\033[92mLe livre '{book_name}' a été ajouté à la bibliothèque.\033[0m")
+def add_book():
+    """Ajoute un nouveau livre à la bibliothèque"""
+    print("\n--- Ajouter un nouveau livre ---")
+    book_name = input("Titre du livre : ")
+    author = input("Auteur : ")
+    genre = input("Genre : ")
+    
+    while True:
+        try:
+            copies = int(input("Nombre de copies disponibles : "))
+            if copies > 0:
+                break
+            print("Le nombre de copies doit être positif.")
+        except ValueError:
+            print("Veuillez entrer un nombre valide.")
+
+    # Créer le dictionnaire du livre avec tous les champs nécessaires
+    dict_books[book_name] = {
+        'Titre': book_name,
+        'Auteur': author,
+        'Genre': genre,
+        'Copies': copies,
+        'Emprunts': 0  # Initialiser le compteur d'emprunts à 0
+    }
+
+    print(f"\n\033[92mLe livre '{book_name}' a été ajouté à la bibliothèque.\033[0m")
     save_books_csv()
-    load_books_csv()
 
 
 # Supprimer un livre de la bibliothèque
@@ -64,14 +61,20 @@ def display_books():
     if dict_books:
         print("\n--- Liste des livres dans la bibliothèque ---")
         for book in dict_books.values():
-            book.display_info()
+            print("-" * 30)
+            print(f"Titre : {book['Titre']}")
+            print(f"Auteur : {book['Auteur']}")
+            print(f"Genre : {book['Genre']}")
+            print(f"Copies disponibles : {book['Copies']}")
+            print(f"Nombre total d'emprunts : {book['Emprunts']}")
+            print("-" * 30)
     else:
         print("\nAucun livre dans la bibliothèque.")
 
 
 def display_total_number_of_books_in_library():
     """Affiche le nombre total d'exemplaires de livres dans la bibliothèque."""
-    total_books = sum(book.number_of_copies_available for book in dict_books.values())  # Compte les exemplaires
+    total_books = sum(book['Copies'] for book in dict_books.values())  # Compte les exemplaires
     print(f"\nNombre total d'exemplaires dans la bibliothèque : {total_books}")
 
 
@@ -84,11 +87,11 @@ def save_books_csv(file="books.csv"):
         writer.writerow(["book_name", "author", "genre", "number_of_copies_available", "total_times_rented"])
         for book in dict_books.values():
             writer.writerow([
-                book.book_name,
-                book.author,
-                book.genre,
-                book.number_of_copies_available,
-                book.total_times_rented
+                book['Titre'],
+                book['Auteur'],
+                book['Genre'],
+                book['Copies'],
+                book['Emprunts']
             ])
     print("\nLes livres ont été sauvegardés avec succès.")
 
@@ -99,20 +102,22 @@ def load_books_csv(file="books.csv"):
     global dict_books
     if os.path.exists(file):
         with open(file, "r", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
+            reader = csv.reader(f)
+            next(reader)  # Skip header row
             dict_books.clear()
             for row in reader:
-                dict_books[row["book_name"]] = Book(
-                    book_name=row["book_name"],
-                    author=row["author"],
-                    genre=row["genre"],
-                    number_of_copies_available=int(row["number_of_copies_available"]),
-                    total_times_rented=int(row["total_times_rented"])
-                )
+                if len(row) >= 5:  # Vérifier qu'on a assez de colonnes
+                    titre, auteur, genre, copies, emprunts = row
+                    dict_books[titre] = {
+                        'Titre': titre,
+                        'Auteur': auteur,
+                        'Genre': genre,
+                        'Copies': int(copies),
+                        'Emprunts': int(emprunts)
+                    }
         print("\nLes livres ont été chargés depuis le fichier CSV.")
     else:
         print("\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde.")
-
 
 # Menu principal pour gérer les livres
 def menu():
@@ -129,17 +134,7 @@ def menu():
 
         if choice == "1":
             print("\n\033[94mVous avez choisi: Ajouter un livre\033[0m")
-            book_name = input("\nTitre du livre : ")
-            author = input("Auteur : ")
-            genre = input("Genre : ")
-            number_of_copies = input("Nombre de copies disponibles : ")
-
-            # Validation de l'entrée
-            if not number_of_copies.isdigit():
-                print("Le nombre de copies doit être un nombre entier.")
-                continue
-
-            add_book(book_name, author, genre, int(number_of_copies))
+            add_book()
         elif choice == "2":
             print("\n\033[94mVous avez choisi: Supprimer un livre\033[0m")
             book_name = input("Titre du livre à supprimer : ")
@@ -163,3 +158,4 @@ if __name__ == "__main__":
     
     # Lancer le menu principal
     menu()
+
