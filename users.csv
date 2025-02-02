@@ -1,4 +1,6 @@
-user_id,first_name,last_name,email,phone_number,total_books_rented,rented_books
-1,Nat,Asha,nat@asha.ca,123-456-7609,5,
-2,Nad,ia,nad@ia.com,345-453-5464,8,
-3,Ji,Lefebvre,ji@lef.ca,125-546-3245,1,
+ID,Nom,Prénom,Email,Téléphone,Emprunts,ListeLivreLu
+1,ia,Nad,nad@ia.ca,123-234-2345,0,Jo va chez son chum Tom
+2,Lefebvre,Ji,ji@lef.ca,123-234-2345,0,La patate mange son ami la carotte
+3,Y,Bill,bill@y.ca,123-234-2345,0,Vrai ou faux
+4,Asha,Nat,nat@asha.ca,123-234-2345,0,Pourquoi papa mange les pissenlits par la racine?;Regarde la lune
+

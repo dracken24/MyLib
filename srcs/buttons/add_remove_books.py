@@ -16,7 +16,6 @@ def remove_book_button(button):
 
 
 
-
 # Ajouter un livre à la bibliothèque
 def add_book():
     """Ajoute un nouveau livre à la bibliothèque"""
