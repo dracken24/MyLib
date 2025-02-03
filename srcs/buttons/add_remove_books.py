@@ -4,16 +4,25 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from init import dict_button, dict_books, dict_users, loans_list_dict
 import csv
 
-from utility import our_input, EXIT_CODE
+from utility import our_input, EXIT_CODE, BASE_CHOICE_STR
 
 def add_remove_books(button: str):
 	"""Gestion des livres quand le bouton est cliqué"""
-	load_books_csv()  # Charger les livres au début
-	text: str = "--- Gestion des livres ---\n1. Ajouter un livre\n2. Supprimer un livre\n3. Afficher tous les livres\n4. Quitter\n"
+	text: str = load_books_csv()
+	if (text):  # Charger les livres au début
+		our_input(f"--- Gestion des livres ---\n{text}\n\n{BASE_CHOICE_STR}")
+		return BASE_CHOICE_STR
+	
+	text = (
+		"--- Gestion des livres ---\n"
+		"1. Ajouter un livre\n2. Supprimer un livre\n"
+		"3. Afficher tous les livres\n"
+		"4. Quitter\n"
+	)
 	dict_button[button]["text"] = text
 	menu(text)
 
-	return "Veuillez cliquer sur un boutton pour faire un choix"
+	return BASE_CHOICE_STR
 
 def remove_book_button(button):
 	print(f"{button} button Hit Action 1")
@@ -101,9 +110,9 @@ def display_books():
 			text_affich += "-" * 30 + "\n"
 	else:
 		# print("\nAucun livre dans la bibliothèque.")
-		text_affich += "\n\nAucun livre dans la bibliothèque."
+		text_affich += "\nAucun livre dans la bibliothèque.\n"
 	
-	our_input(text_affich + "\nVeuillez cliquer sur un boutton pour faire un choix" )
+	our_input(text_affich + "\n" + BASE_CHOICE_STR)
 
 
 def display_total_number_of_books_in_library():
@@ -149,21 +158,18 @@ def load_books_csv(file="books.csv"):
 							'Exemplaires': int(row[3]),
 							'Emprunts': int(row[4])
 						}
+				return None
 			else:
-				print("\nLe fichier CSV est vide. Un nouveau fichier sera créé lors de la sauvegarde.")
+				# print("\nLe fichier CSV est vide. Un nouveau fichier sera créé lors de la sauvegarde.")
+				return "\nLe fichier CSV est vide. Un nouveau fichier sera créé lors de la sauvegarde."
 	else:
-		print("\nAucun fichier CSV trouvé. Un nouveau fichier sera créé lors de la sauvegarde.")
+		# print("\nAucun fichier CSV trouvé. Un nouveau fichier sera créé lors de la sauvegarde.")
+		return "\nAucun fichier CSV trouvé. Un nouveau fichier sera créé lors de la sauvegarde."
 
 # Menu principal pour gérer les livres
 def menu(text: str):
 	"""Menu interactif pour ajouter, supprimer et afficher des livres."""
 	while True:
-		print("\n--- Gestion des livres ---")
-		print("1. Ajouter un livre")
-		print("2. Supprimer un livre")
-		print("3. Afficher tous les livres")
-		print("4. Quitter")
-
 		# choice = input("Choisissez une option (1-4) : ")
 		choice = our_input(text + "\nChoisissez une option (1-4) :")
 		if (choice == EXIT_CODE):
@@ -175,19 +181,21 @@ def menu(text: str):
 			return
 		elif choice == "2":
 			print("\n\033[94mVous avez choisi: Supprimer un livre\033[0m")
-			our_input("--- Gestion des livres ---\nVous avez choisi: Supprimer un livre\n\nTitre du livre à supprimer :")
-			return
+			book_name = our_input("--- Gestion des livres ---\nVous avez choisi: Supprimer un livre\n\nTitre du livre à supprimer :")
+			if (book_name == EXIT_CODE):
+				return
 			# book_name = input("Titre du livre à supprimer : ")
 			return_remove = remove_book(book_name)
-			if (our_input(f"--- Gestion des livres ---\n\n{return_remove}\n\nVeuillez cliquer sur un boutton pour faire un choix") == EXIT_CODE):
-				return
-
+			our_input(f"--- Gestion des livres ---\n\n{return_remove}\n\nVeuillez cliquer sur un boutton pour faire un choix")
+			return
 		elif choice == "3":
 			print("\n\033[94mVous avez choisi: Afficher tous les livres\033[0m")
 			display_books()
 			return
+		
 		elif choice == "4":
 			print("\nMerci d'avoir utilisé le gestionnaire de livres.")
+			our_input(f"--- Gestion des livres ---\n\nMerci d'avoir utilisé le gestionnaire de livres.\n\n" + BASE_CHOICE_STR)
 			break
 		else:
 			print("Option invalide. Veuillez réessayer.")

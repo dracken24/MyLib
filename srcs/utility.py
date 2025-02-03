@@ -10,6 +10,8 @@ EXIT_CODE = "!@#$%^&*&^%$#@!"
 BORDER_COLOR = DARKGRAY
 BOARDER_THICK = 2
 
+BASE_CHOICE_STR = "Veuillez cliquer sur un boutton pour faire un choix\n"
+
 """Recursive function for draw and scroll text inside a box (rectangle)
     Args:
         box (Rectangle): Rectangle for draw text
