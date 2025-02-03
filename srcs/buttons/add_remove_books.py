@@ -13,13 +13,7 @@ def add_remove_books(button: str):
 		our_input(f"--- Gestion des livres ---\n{text}\n\n{BASE_CHOICE_STR}")
 		return BASE_CHOICE_STR
 	
-	text = (
-		"--- Gestion des livres ---\n"
-		"1. Ajouter un livre\n2. Supprimer un livre\n"
-		"3. Afficher tous les livres\n"
-		"4. Quitter\n"
-	)
-	menu(text)
+	menu()
 
 	return BASE_CHOICE_STR
 
@@ -77,20 +71,19 @@ def remove_book(book_name):
 	"""Supprime complètement un livre de la bibliothèque."""
 	if book_name in dict_books:
 		del dict_books[book_name]
-		print(f"\n\033[91mLe livre '{book_name}' a été supprimé de la bibliothèque.\033[0m")
+		# print(f"\n\033[91mLe livre '{book_name}' a été supprimé de la bibliothèque.\033[0m")
 		save_books_csv()
 		return f"Le livre '{book_name}' a été supprimé de la bibliothèque."
 	else:
-		print(f"\nLe livre '{book_name}' n'existe pas dans la bibliothèque.")
+		# print(f"\nLe livre '{book_name}' n'existe pas dans la bibliothèque.")
 		return f"Le livre '{book_name}' n'existe pas dans la bibliothèque."
-
 
 # Afficher tous les livres
 def display_books():
 	"""Affiche les informations de tous les livres."""
 	text_affich: str = "--- Gestion des livres ---\n"
 	if dict_books:
-		print("\n--- Liste des livres dans la bibliothèque ---")
+		# print("\n--- Liste des livres dans la bibliothèque ---")
 		text_affich += "--- Liste des livres dans la bibliothèque ---\n\n"
 		for book_name, book in dict_books.items():
 			# print("-" * 30)
@@ -114,12 +107,10 @@ def display_books():
 	our_input(text_affich + "\n" + BASE_CHOICE_STR)
 
 
-def display_total_number_of_books_in_library():
-	"""Affiche le nombre total d'exemplaires de livres dans la bibliothèque."""
-	total_books = sum(book['Copies'] for book in dict_books.values())  # Compte les exemplaires
-	print(f"\nNombre total d'exemplaires dans la bibliothèque : {total_books}")
-
-
+# def display_total_number_of_books_in_library():
+# 	"""Affiche le nombre total d'exemplaires de livres dans la bibliothèque."""
+# 	total_books = sum(book['Copies'] for book in dict_books.values())  # Compte les exemplaires
+# 	print(f"\nNombre total d'exemplaires dans la bibliothèque : {total_books}")
 
 # Sauvegarder les livres dans un fichier CSV
 def save_books_csv(file="books.csv"):
@@ -166,9 +157,16 @@ def load_books_csv(file="books.csv"):
 		return "\nAucun fichier CSV trouvé. Un nouveau fichier sera créé lors de la sauvegarde."
 
 # Menu principal pour gérer les livres
-def menu(text: str):
+def menu():
 	"""Menu interactif pour ajouter, supprimer et afficher des livres."""
+	text = (
+		"--- Gestion des livres ---\n"
+		"1. Ajouter un livre\n2. Supprimer un livre\n"
+		"3. Afficher tous les livres\n"
+		"4. Quitter\n"
+	)
 	invalid = ""
+
 	while True:
 		# choice = input("Choisissez une option (1-4) : ")
 		choice = our_input(invalid + text + "\nChoisissez une option (1-4) :")
