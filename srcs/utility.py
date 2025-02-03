@@ -2,9 +2,9 @@ from pyray import is_mouse_button_pressed, get_mouse_position, MOUSE_BUTTON_LEFT
 from pyray import begin_scissor_mode, end_scissor_mode, draw_text, measure_text, Rectangle, BLACK
 from pyray import draw_rectangle_rec, draw_rectangle_lines_ex, draw_text, check_collision_point_rec
 from pyray import begin_drawing, end_drawing, clear_background, get_screen_width, draw_text
-from pyray import LIGHTGRAY, DARKGRAY, WHITE, measure_text, draw_rectangle_rec
+from pyray import LIGHTGRAY, DARKGRAY, WHITE, measure_text, draw_rectangle_rec, get_mouse_wheel_move
 
-from init import WINDOW_TITLE, TEXT_BOX, text_entry, dict_button
+from init import WINDOW_TITLE, TEXT_BOX, text_entry, dict_button, TEXT_OFFSET
 
 EXIT_CODE = "!@#$%^&*&^%$#@!"
 BORDER_COLOR = DARKGRAY
@@ -66,7 +66,11 @@ def adjust_text_in_box_and_draw_result(box: Rectangle, text: str, line_position:
 
     # Return the number of line
     return line_ct
-        
+
+# *************************************************************************************************** 
+# Function neded for our Input
+# *************************************************************************************************** 
+
 def draw_clicked_button(button: str, rect: Rectangle):
     draw_rectangle_rec(rect, dict_button[button]["clicked_color"])                     # Draw Button
     draw_text(dict_button[button]["title"].encode('utf-8'), int(rect.x + rect.width / 2 - dict_button[button]["measure_text"]),    # Draw Text
@@ -74,6 +78,9 @@ def draw_clicked_button(button: str, rect: Rectangle):
     
     # Draw a button border
     draw_rectangle_lines_ex(rect, BOARDER_THICK, BORDER_COLOR)
+
+# *************************************************************************************************** 
+# Draw buttons without function association
 
 # Draw a button with a text and return if the mouse is over the button (Return True for close program)
 def draw_button_in_function(button: str) -> bool:
@@ -113,8 +120,19 @@ def draw_button_in_function(button: str) -> bool:
 
 def our_input(text_affichable: str) -> str:
     first_pass: bool = True
+    scroll_offset: int = 0      # The offset for the text in the box
+    mouse_wheel_ct = 0          # Mouse wheel counter
 
     while True:
+        # Get the wheel movement
+        wheel_move = get_mouse_wheel_move()
+        mouse_wheel_ct += wheel_move
+
+        scroll_offset += int(wheel_move * TEXT_OFFSET)  # Ajuste with TEXT_OFFSET in pixel
+        # Prevents text from scrolling higher than the 1st line
+        if (scroll_offset > 0):
+            scroll_offset = 0
+
         # Drawing begin
         begin_drawing()
 
@@ -126,7 +144,7 @@ def our_input(text_affichable: str) -> str:
         # Draw all buttons
         for button in dict_button:
             action = draw_button_in_function(button)
-            if (action and first_pass == False):
+            if (action == True and first_pass == False):
                 return EXIT_CODE
         first_pass = False
     
@@ -136,8 +154,12 @@ def our_input(text_affichable: str) -> str:
 
         # Draw text zone
         draw_rectangle_rec(TEXT_BOX, WHITE)
-        if (text_affichable):
-            adjust_text_in_box_and_draw_result(TEXT_BOX, text_affichable, 0, 0)
+        # if (text_affichable):
+        line_ct = adjust_text_in_box_and_draw_result(TEXT_BOX, text_affichable, 0, scroll_offset)
+
+        # For stop scrolling down text
+        if (scroll_offset * -1 / TEXT_OFFSET > line_ct): # * -1 for compare scroll_offset (Is negative) with the number of line (ex: scroll_offset = -13 is = to line_ct = 13)
+            scroll_offset = line_ct * -1 * TEXT_OFFSET
 
         end_drawing()
 

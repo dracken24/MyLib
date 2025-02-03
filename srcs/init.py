@@ -4,7 +4,7 @@ from pyray import DARKGRAY, BLUE, DARKBLUE, DARKGREEN, WHITE, ORANGE, MAROON, RE
 from text_entry import TextEntry
 
 WINDOW_WIDTH: int = 700
-WINDOW_HEIGHT: int = 660
+WINDOW_HEIGHT: int = 760
 WINDOW_TITLE: str = "MyLib"
 
 TEXT_OFFSET = 20
@@ -13,7 +13,7 @@ TEXT_OFFSET = 20
 FONT_COLOR = DARKGRAY
 BUTTON_HEIGHT = int(30 + 5)
 
-TEXT_BOX: Rectangle = Rectangle(10, int(WINDOW_HEIGHT / 4 * 3), int(WINDOW_WIDTH - 20), int(WINDOW_HEIGHT / 4 - 10)) # Make rectangle from values
+TEXT_BOX: Rectangle = Rectangle(10, int(WINDOW_HEIGHT / 4 * 3) - 90, int(WINDOW_WIDTH - 20), int(WINDOW_HEIGHT / 4 - 10) + 89) # Make rectangle from values
 
 # Text_entry init
 
