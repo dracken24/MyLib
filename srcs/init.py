@@ -1,4 +1,4 @@
-from pyray import init_window, set_target_fps, measure_text # Import for Raylib
+from pyray import init_window, set_target_fps, measure_text, Rectangle # Import for Raylib
 from pyray import DARKGRAY, BLUE, DARKBLUE, DARKGREEN, WHITE, ORANGE, MAROON, RED
 
 from text_entry import TextEntry
@@ -12,6 +12,8 @@ TEXT_OFFSET = 20
 # RL = raylib
 FONT_COLOR = DARKGRAY
 BUTTON_HEIGHT = int(30 + 5)
+
+TEXT_BOX: Rectangle = Rectangle(10, int(WINDOW_HEIGHT / 4 * 3), int(WINDOW_WIDTH - 20), int(WINDOW_HEIGHT / 4 - 10)) # Make rectangle from values
 
 # Text_entry init
 

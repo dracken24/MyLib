@@ -1,4 +1,1 @@
-book_name,author,genre,number_of_copies_available,total_times_rented
-Kiki et les esprits,Killiun,Manga,42,0
-Koko et les patate,Jimmy Bot,Cool,2,0
-Python Programming,John Doe,Programmation,5,10
+Titre,Auteur,Genre,Exemplaires,Emprunts

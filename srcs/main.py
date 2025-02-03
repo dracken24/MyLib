@@ -4,7 +4,7 @@ from pyray import get_mouse_wheel_move, is_mouse_button_released, begin_drawing,
 from pyray import Rectangle, draw_rectangle_rec, get_screen_width
 from pyray import LIGHTGRAY, DARKGRAY, WHITE, MOUSE_BUTTON_LEFT
 
-from init import init, text_entry, TEXT_OFFSET, WINDOW_TITLE, WINDOW_HEIGHT, WINDOW_WIDTH, dict_button
+from init import init, text_entry, TEXT_OFFSET, WINDOW_TITLE, WINDOW_HEIGHT, WINDOW_WIDTH, dict_button, TEXT_BOX
 from utility import adjust_text_in_box_and_draw_result
 from buttons.button import draw_button
 # from text_entry import TextEntry
@@ -19,11 +19,12 @@ def main():
 
     quit_ct: bool = False       # Counter for the exit button to quit main loop
     affich_text: str = lorem    # Text visible on the textBox
+    affich_text: str = "Veuillez cliquer sur un boutton pour faire un choix"    # Text visible on the textBox
     scroll_offset: int = 0      # The offset for the text in the box
     mouse_wheel_ct = 0          # Mouse wheel counter
     line_ct: int = 0            # Line counter
 
-    text_box: Rectangle = Rectangle(10, int(WINDOW_HEIGHT / 4 * 3), int(WINDOW_WIDTH - 20), int(WINDOW_HEIGHT / 4 - 10)) # Make rectangle from values
+    
     # Draw title text
     text_width = measure_text(WINDOW_TITLE.encode('utf-8'), 20) # For center the text in window
     x_position = int(get_screen_width() / 2 - text_width / 2)
@@ -62,10 +63,10 @@ def main():
         text_entry.draw_self()
         
         # Draw text zone
-        draw_rectangle_rec(text_box, WHITE)
+        draw_rectangle_rec(TEXT_BOX, WHITE)
         
         # Passage explicite du scroll_offset
-        line_ct = adjust_text_in_box_and_draw_result(text_box, affich_text, 0, scroll_offset)
+        line_ct = adjust_text_in_box_and_draw_result(TEXT_BOX, affich_text, 0, scroll_offset)
 
         # For stop scrolling down text
         if (scroll_offset * -1 / TEXT_OFFSET > line_ct): # * -1 for compare scroll_offset (Is negative) with the number of line (ex: scroll_offset = -13 is = to line_ct = 13)

@@ -127,7 +127,7 @@ class TextEntry:
 		self.text_size: int = 0
 		self.cursor_position: int = 0
 		self.text_offset: int = 1
-		self.is_active: bool = False
+		# self.is_active: bool = False
 
 ########################################################################
                                 # GET
