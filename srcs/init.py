@@ -194,42 +194,42 @@ dict_button = {
 }
 
 dict_books: dict = {
-	"Python Programming": {
-		"Auteur": "John Doe",
-		"Genre": "Programmation",
-		"Exemplaires": 5,
-		"Emprunts": 10
-	},
-	"The Great Gatsby": {
-		"Auteur": "F. Scott Fitzgerald",
-		"Genre": "Roman",
-		"Exemplaires": 2,
-		"Emprunts": 7
-	},
-	"1": {
-		"Auteur": "A",
-		"Genre": "Roman",
-		"Exemplaires": 5,
-		"Emprunts": 10
-	},
-	"2": {
-		"Auteur": "B",
-		"Genre": "Programmation",
-		"Exemplaires": 11,
-		"Emprunts": 20
-	},
-	"3": {
-		"Auteur": "C",
-		"Genre": "Programmation",
-		"Exemplaires": 1,
-		"Emprunts": 5
-	},
-	"4": {
-		"Auteur": "D",
-		"Genre": "Test",
-		"Exemplaires": 2,
-		"Emprunts": 8
-	}
+	# "Python Programming": {
+	# 	"Auteur": "John Doe",
+	# 	"Genre": "Programmation",
+	# 	"Exemplaires": 5,
+	# 	"Emprunts": 10
+	# },
+	# "The Great Gatsby": {
+	# 	"Auteur": "F. Scott Fitzgerald",
+	# 	"Genre": "Roman",
+	# 	"Exemplaires": 2,
+	# 	"Emprunts": 7
+	# },
+	# "1": {
+	# 	"Auteur": "A",
+	# 	"Genre": "Roman",
+	# 	"Exemplaires": 5,
+	# 	"Emprunts": 10
+	# },
+	# "2": {
+	# 	"Auteur": "B",
+	# 	"Genre": "Programmation",
+	# 	"Exemplaires": 11,
+	# 	"Emprunts": 20
+	# },
+	# "3": {
+	# 	"Auteur": "C",
+	# 	"Genre": "Programmation",
+	# 	"Exemplaires": 1,
+	# 	"Emprunts": 5
+	# },
+	# "4": {
+	# 	"Auteur": "D",
+	# 	"Genre": "Test",
+	# 	"Exemplaires": 2,
+	# 	"Emprunts": 8
+	# }
 }
 
 dict_users = {

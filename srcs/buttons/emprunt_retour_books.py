@@ -226,12 +226,15 @@ def load_loans_csv(file="loans.csv"):
             next(reader)  # Skip header row
             loans_list_dict.clear()
             for row in reader:
-                loans_list_dict = {
-                    'Utilisateur_ID': row['Utilisateur_ID'],
-                    'Livre': row['Livre'],
-                    'Date_Emprunt': row['Date_Emprunt'],
-                    'Date_Retour': row['Date_Retour']
-                }
+                loans_list_dict.append({
+                    'Utilisateur_ID': row[0],
+                    'Livre': row[1],
+                    'Date_Emprunt': row[2],
+                    'Date_Retour': row[3]
+                })
+        #     print("****")
+        # for ele in loans_list_dict:
+        #     print("Ele: ", ele)
         print("\nLes emprunts ont été chargés depuis le fichier CSV.")
     else:
         print("\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde.")
