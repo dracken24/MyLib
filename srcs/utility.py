@@ -6,7 +6,7 @@ from pyray import LIGHTGRAY, DARKGRAY, WHITE, measure_text, draw_rectangle_rec, 
 
 from init import WINDOW_TITLE, TEXT_BOX, text_entry, dict_button, TEXT_OFFSET
 
-EXIT_CODE = "!@#$%^&*&^%$#@!"
+EXIT_CODE = "!B@A#B$Y%S^H&A*R&K^Y%O$L#O@O!"
 BORDER_COLOR = DARKGRAY
 BOARDER_THICK = 2
 

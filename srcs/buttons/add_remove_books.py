@@ -19,7 +19,6 @@ def add_remove_books(button: str):
 		"3. Afficher tous les livres\n"
 		"4. Quitter\n"
 	)
-	dict_button[button]["text"] = text
 	menu(text)
 
 	return BASE_CHOICE_STR
@@ -169,18 +168,19 @@ def load_books_csv(file="books.csv"):
 # Menu principal pour gérer les livres
 def menu(text: str):
 	"""Menu interactif pour ajouter, supprimer et afficher des livres."""
+	invalid = ""
 	while True:
 		# choice = input("Choisissez une option (1-4) : ")
-		choice = our_input(text + "\nChoisissez une option (1-4) :")
+		choice = our_input(invalid + text + "\nChoisissez une option (1-4) :")
 		if (choice == EXIT_CODE):
 			return
 		
 		if choice == "1":
-			print("\n\033[94mVous avez choisi: Ajouter un livre\033[0m")
+			# print("\n\033[94mVous avez choisi: Ajouter un livre\033[0m")
 			add_book()
 			return
 		elif choice == "2":
-			print("\n\033[94mVous avez choisi: Supprimer un livre\033[0m")
+			# print("\n\033[94mVous avez choisi: Supprimer un livre\033[0m")
 			book_name = our_input("--- Gestion des livres ---\nVous avez choisi: Supprimer un livre\n\nTitre du livre à supprimer :")
 			if (book_name == EXIT_CODE):
 				return
@@ -189,16 +189,17 @@ def menu(text: str):
 			our_input(f"--- Gestion des livres ---\n\n{return_remove}\n\nVeuillez cliquer sur un boutton pour faire un choix")
 			return
 		elif choice == "3":
-			print("\n\033[94mVous avez choisi: Afficher tous les livres\033[0m")
+			# print("\n\033[94mVous avez choisi: Afficher tous les livres\033[0m")
 			display_books()
 			return
 		
 		elif choice == "4":
-			print("\nMerci d'avoir utilisé le gestionnaire de livres.")
+			# print("\nMerci d'avoir utilisé le gestionnaire de livres.")
 			our_input(f"--- Gestion des livres ---\n\nMerci d'avoir utilisé le gestionnaire de livres.\n\n" + BASE_CHOICE_STR)
 			break
 		else:
-			print("Option invalide. Veuillez réessayer.")
+			# print("Option invalide. Veuillez réessayer.")
+			invalid = "Option invalide. Veuillez réessayer."
 
 
 if __name__ == "__main__":
