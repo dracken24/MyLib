@@ -60,10 +60,11 @@ def remove_user():
         confirmation = input("Confirmer la suppression ? (oui/non) : ").lower()
         if confirmation == "oui":
             del dict_users[user_id]
-            print(f"\nUtilisateur {user_id} supprimé.")
+            print(f"\033[91mUtilisateur {user_id} supprimé.\033[0m")
             save_users_csv()
     else:
         print(f"\nUtilisateur {user_id} non trouvé.")
+
 
 def display_users():
     """Affiche tous les utilisateurs"""

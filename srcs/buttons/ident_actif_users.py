@@ -16,11 +16,13 @@ def load_users_with_loans():
             reader = csv.DictReader(f)
             dict_users.clear()
             for row in reader:
-                dict_users[row["user_id"]] = {
-                    "Prénom": row["first_name"],
-                    "Nom": row["last_name"],
-                    "Emprunts": int(row["total_books_rented"])  # Nombre total d'emprunts
+                dict_users[row["ID"]] = {
+                    "Prénom": row["Prénom"],
+                    "Nom": row["Nom"],
+                    "Emprunts": int(row["Emprunts"])  # Nombre total d'emprunts
                 }
+
+
     else:
         print("\nAucun fichier `users.csv` trouvé. Création d'un nouveau fichier lors de la sauvegarde.")
 

@@ -1,6 +1,10 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from init import dict_button, dict_books, dict_users, loans_list_dict
 import csv
 import os
+
 from time import sleep
 from datetime import datetime, timedelta
 from buttons.add_remove_users import load_users_csv, save_users_csv
@@ -219,19 +223,19 @@ def save_loans_csv(file="loans.csv"):
 # Charger les emprunts depuis un fichier CSV
 def load_loans_csv(file="loans.csv"):
     """Charge les informations des emprunt depuis un fichier CSV."""
-    global loans_list_dict
     if os.path.exists(file):
         with open(file, "r", encoding="utf-8") as f:
             reader = csv.reader(f)
             next(reader)  # Skip header row
             loans_list_dict.clear()
             for row in reader:
-                loans_list_dict = {
-                    'Utilisateur_ID': row['Utilisateur_ID'],
-                    'Livre': row['Livre'],
-                    'Date_Emprunt': row['Date_Emprunt'],
-                    'Date_Retour': row['Date_Retour']
-                }
+                if len(row) >= 4:  # Vérifier qu'on a assez de colonnes
+                    loans_list_dict.append({
+                        'Utilisateur_ID': row[0],
+                        'Livre': row[1],
+                        'Date_Emprunt': row[2],
+                        'Date_Retour': row[3]
+                    })
         print("\nLes emprunts ont été chargés depuis le fichier CSV.")
     else:
         print("\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde.")
