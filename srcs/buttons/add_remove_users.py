@@ -103,6 +103,7 @@ def remove_user():
 		# print(f"\nUtilisateur {user_id} non trouvé.")
 		return f"Utilisateur {user_id} non trouvé.\n\n"
 
+
 def display_users():
 	"""Affiche tous les utilisateurs"""
 	return_text = "--- Gestion des utilisateurs ---\nVous avez choisi: Afficher tous les utilisateurs\n\n"

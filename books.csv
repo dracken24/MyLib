@@ -1,10 +1,8 @@
 Titre,Auteur,Genre,Exemplaires,Emprunts
-1,A,Roman,4,11
-2,B,Manga,7,24
+Python Programming,John Doe,Programmation,5,10
+The Great Gatsby,F. Scott Fitzgerald,Roman,2,7
+1,A,Roman,5,10
+2,B,Programmation,11,20
 3,C,Programmation,1,5
 4,D,Test,2,8
-Natacha code,Nadia,indéfini,24,0
-banane,molle,fruits,756,0
-banane Code,boboly,banania,5,3
-gfgghtggr,ggg,hh,5,0
 Natacha Code,Nadia,indéfini,20,4

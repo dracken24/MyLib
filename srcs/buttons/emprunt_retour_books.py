@@ -1,6 +1,10 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from init import dict_button, dict_books, dict_users, loans_list_dict
 import csv
 import os
+
 from time import sleep
 from datetime import datetime, timedelta
 from buttons.add_remove_users import load_users_csv, save_users_csv
