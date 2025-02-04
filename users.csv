@@ -1,7 +1,7 @@
 ID,Nom,Prénom,Email,Téléphone,Emprunts,ListeLivreLu
 1,ia,Nad,nad@ia.ca,123-234-2345,0,Natacha Code;The Great Gatsby
-2,François,Jean,ji@lef.ca,123-234-2345,0,Natacha Code;Gaetan N'Aime Pas Les Mouettes
+2,François,Jean,ji@lef.ca,123-234-2345,0,Natacha Code;
 3,Asha,Nat,nat@asha.ca,123-234-2345,0,
-4,Dine,Ed,ed@dine.ca,543-342-2356,0,
-5,binette,bob,non@ouo.peutetre,555-666-7777,0,
+4,Dine,Ed,ed@dine.ca,543-342-2356,0,Natacha Code
+5,binette,bob,non@ouo.peutetre,555-666-7777,0,3
 6,rggrg,fff,hthtth@ggfefe.com,666-666-6777,0,

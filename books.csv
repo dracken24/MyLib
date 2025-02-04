@@ -1,8 +1,8 @@
 Titre,Auteur,Genre,Exemplaires,Emprunts
 Python Programming,John Doe,Programmation,5,10
 The Great Gatsby,F. Scott Fitzgerald,Roman,2,7
-1,A,Roman,5,10
-2,B,Programmation,11,20
-3,C,Programmation,1,5
-4,D,Test,2,8
-Natacha Code,Nadia,indéfini,20,4
+1,A,Roman,6,10
+2,B,Programmation,12,20
+3,C,Programmation,1,6
+4,D,indéfini,2,8
+Natacha Code,Nadia,indéfini,21,5

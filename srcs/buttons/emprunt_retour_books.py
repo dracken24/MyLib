@@ -229,7 +229,7 @@ def emprunt_retour_books(button: str):
 	# Trouver le livre
 	if client_verifiee: # Next Step:
 		while True: # Trouver le livre
-			livre = our_input(affich_text + catch_return + "\nEntrez le titre du livre : ")
+			livre = our_input(affich_text + catch_return + "\nEntrez le titre du livre : ").title()
 			catch_return = ""
 			if (livre == EXIT_CODE):
 				return
