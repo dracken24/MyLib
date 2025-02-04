@@ -73,8 +73,6 @@ def menu_stats():
 
 def stats(button: str):
     """Affiche les statistiques quand le bouton est cliqué"""
-    load_books_csv()  # Charger les données des livres à jour
-    load_users_csv()  # Charger les données des utilisateurs à jour
     
     text: str = "--- Statistiques de la bibliothèque ---\n"
     text += f"Nombre total de livres : {len(dict_books)}\n"

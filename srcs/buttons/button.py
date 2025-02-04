@@ -10,7 +10,6 @@ from buttons.ident_actif_users import ident_actif_users
 from buttons.status import status
 from buttons.diagram import diagram
 from buttons.monthly_evolution import monthly_evolution
-from buttons.input import input_text
 
 BOARDER_THICK = 2
 BORDER_COLOR = DARKGRAY
@@ -72,11 +71,6 @@ def draw_button(button: str) -> tuple:
                 monthly_evolution(button)           # Action for the button monthly_evolution clicked
                 draw_clicked_button(button, rect)
                 return False, dict_button[button]["text"], True
-            elif dict_button[button]["action"] == 10:
-                input_text(button)           # Action for the button input_text clicked
-                draw_clicked_button(button, rect)
-                return False, dict_button[button]["text"], True
-                # return False, "skip", True
             elif dict_button[button]["action"] == 11:
                 print(f"{button} button Hit Action 10") # EXIT
                 return True, "Exit", True
