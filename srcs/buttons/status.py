@@ -9,7 +9,7 @@ from init import dict_button, dict_books, dict_users, loans_list_dict
 
 def status(button: str):
     print(f"{button} button Hit Action 7")
-    stats = Stats()
+    stats = Stats(button)
     stats.afficher_stats()
 
 
@@ -27,8 +27,9 @@ def charger_nombre_total_exemplaires(fichier=BOOKS_FILE):
 
 
 class Stats:
-    def __init__(self):
+    def __init__(self, button=None):
         """Initialisation des statistiques"""
+        self.button = button
         
         # load_books_csv()
         # load_loans_csv()
@@ -55,17 +56,33 @@ class Stats:
 
     def afficher_stats(self):
         """Affiche les statistiques de la bibliothèque"""
+        text =""
         print("-" * 40)
+        text += "-" * 40 + "\n"
         print("\U0001F4CA Statistiques de la bibliothèque")
+        text += "\U0001F4CA Statistiques de la bibliothèque\n"
         print("-" * 40)
-        print(f"\U0001F4DA Nombre total de titres (livres différents) : {self.nombre_total_livre}")
-        print(f"\U0001F4E6 Nombre total d'exemplaires (tous livres confondus) : {self.nombre_total_exemplaires}")
-        print(f"\U0001F4D6 Nombre total d'exemplaires empruntés : {self.nombre_total_exemplaire_emprunt}")
-        print(f"\u2705 Nombre d'exemplaires disponibles : {self.nombre_livres_disponibles}")
-        print(f"\U0001F4CA Pourcentage de livres disponibles : {self.pourcentage_livre_disponible:.2f}%")
-        print(f"\U0001F465 Nombre d'utilisateurs : {self.nombre_utilisateurs}")
-        print(f"\U0001F4DA Moyenne de livres empruntés par utilisateur : {self.nombre_de_livre_moyen_par_utilisateur:.2f}")
+        text += "-" * 40 + "\n"
+        print(f"* Nombre total de titres (livres différents) : {self.nombre_total_livre}")
+        text += f"* Nombre total de titres (livres différents) : {self.nombre_total_livre}\n"
+        print(f"* Nombre total d'exemplaires (tous livres confondus) : {self.nombre_total_exemplaires}")
+        text += f"* Nombre total d'exemplaires (tous livres confondus) : {self.nombre_total_exemplaires}\n"
+        print(f"* Nombre total d'exemplaires empruntés : {self.nombre_total_exemplaire_emprunt}")
+        text += f"* Nombre total d'exemplaires empruntés : {self.nombre_total_exemplaire_emprunt}\n"
+        print(f"* Nombre d'exemplaires disponibles : {self.nombre_livres_disponibles}")
+        text += f"* Nombre d'exemplaires disponibles : {self.nombre_livres_disponibles}\n"
+        print(f"* Pourcentage de livres disponibles : {self.pourcentage_livre_disponible:.2f}%")
+        text += f"* Pourcentage de livres disponibles : {self.pourcentage_livre_disponible:.2f}%\n"
+        print(f"* Nombre d'utilisateurs : {self.nombre_utilisateurs}")
+        text += f"* Nombre d'utilisateurs : {self.nombre_utilisateurs}\n"
+        print(f"* Moyenne de livres empruntés par utilisateur : {self.nombre_de_livre_moyen_par_utilisateur:.2f}")
+        text += f"* Moyenne de livres empruntés par utilisateur : {self.nombre_de_livre_moyen_par_utilisateur:.2f}\n"
         print("-" * 40)
+        text += "-" * 40 + "\n"
+        if self.button:
+            dict_button[self.button]["text"] = text
+
+
 
 def menu_stats():
     """Menu interactif pour afficher les statistiques"""

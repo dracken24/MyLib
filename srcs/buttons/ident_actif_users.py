@@ -5,6 +5,7 @@ import csv
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from init import dict_button, dict_books, dict_users, loans_list_dict
 from utility import our_input, BASE_CHOICE_STR
+from csv_control import load_users_csv  # Add this import
 # from buttons.add_remove_users import load_users_csv  # On supprime `User` qui n'est pas utilisé ici
 
 USERS_FILE = "users.csv"  # Nom du fichier contenant les utilisateurs et leurs emprunts
