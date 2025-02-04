@@ -189,7 +189,7 @@ def menu():
 	invalid = ""
 	
 	text: str = (
-		"--- Gestion des utilisateurs ---\n"
+		"--- Gestion des utilisateurs ---\n\n"
 		"1. Ajouter un utilisateur\n"
 		"2. Supprimer un utilisateur\n"
 		"3. Afficher tous les utilisateurs\n"

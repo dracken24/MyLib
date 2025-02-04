@@ -10,7 +10,7 @@ def add_remove_books(button: str):
 	"""Gestion des livres quand le bouton est cliqué"""
 	text: str = load_books_csv()
 	if (text):  # Charger les livres au début
-		our_input(f"--- Gestion des livres ---\n{text}\n\n{BASE_CHOICE_STR}")
+		our_input(f"--- Gestion des livres ---\n\n{text}\n\n{BASE_CHOICE_STR}")
 		return BASE_CHOICE_STR
 	
 	menu()
@@ -160,7 +160,7 @@ def load_books_csv(file="books.csv"):
 def menu():
 	"""Menu interactif pour ajouter, supprimer et afficher des livres."""
 	text = (
-		"--- Gestion des livres ---\n"
+		"--- Gestion des livres ---\n\n"
 		"1. Ajouter un livre\n2. Supprimer un livre\n"
 		"3. Afficher tous les livres\n"
 		"4. Quitter\n"

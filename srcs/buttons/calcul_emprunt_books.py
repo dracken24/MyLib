@@ -1,4 +1,5 @@
 from init import dict_button, loans_list_dict, dict_books
+from utility import our_input, BASE_CHOICE_STR
 from buttons.add_remove_books import load_books_csv
 from datetime import datetime, timedelta
 
@@ -8,10 +9,13 @@ genre = []
 def calcul_emprunt_books(button: str):
     print(f"{button} button Hit Action 5")
     load_books_csv()
-    print("\n\033[1m\033[4m--La durée moyenne des emprunts, par genre--\033[0m")
-    dict_button[button]["text"] = "- - La durée moyenne des emprunts, par genre - -"
+    print("\n\033[1m\033[4m--- La durée moyenne des emprunts, par genre ---\033[0m")
+    affich_text = "--- La durée moyenne des emprunts, par genre ---\n"
+    dict_button[button]["text"] = "--- La durée moyenne des emprunts, par genre ---"
     trier_genre()
-    calculer_moyenne(button)
+    affich_text += calculer_moyenne(button)
+
+    our_input(affich_text + BASE_CHOICE_STR)
     return
 
 def afficher_books():
@@ -27,6 +31,8 @@ def trier_genre():
             genre.append(dict_books[book]["Genre"])
 
 def calculer_moyenne(button: str):
+    return_text = ""
+
     for gen in genre:
         days = []
 
@@ -49,5 +55,8 @@ def calculer_moyenne(button: str):
             continue
         else:
             #print(f"{sum(days)} / {len(days)} = {sum(days)/len(days)}")
-            print(f"{gen}: {sum(days)/len(days):.0f} jours")
+            # print(f"{gen}: {sum(days)/len(days):.0f} jours")
             dict_button[button]["text"] += f"\n{gen}: {sum(days)/len(days):.0f} jours"
+            return_text += f"\n{gen}: {sum(days)/len(days):.0f} jours"
+
+    return return_text + "\n\n"
