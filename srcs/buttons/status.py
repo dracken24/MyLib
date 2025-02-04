@@ -47,8 +47,10 @@ class Stats:
         # Pourcentage de livres disponibles
         self.pourcentage_livre_disponible = (self.nombre_livres_disponibles / self.nombre_total_exemplaires * 100) if self.nombre_total_exemplaires > 0 else 0
 
-        # Nombre moyen de livres empruntés par utilisateur
+        # Nombre total d'utilisateurs
         self.nombre_utilisateurs = len(dict_users)
+
+        # Nombre moyen de livres empruntés par utilisateur
         self.nombre_de_livre_moyen_par_utilisateur = (self.nombre_total_exemplaire_emprunt / self.nombre_utilisateurs) if self.nombre_utilisateurs > 0 else 0
 
     def afficher_stats(self):
