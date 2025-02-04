@@ -4,9 +4,8 @@ from utility import our_input, EXIT_CODE, BASE_CHOICE_STR
 
 def add_remove_books(button: str):
 	"""Gestion des livres quand le bouton est cliqué"""
-	return_text = menu()
-
-	return return_text
+	menu()
+	return
 
 def remove_book_button(button):
 	print(f"{button} button Hit Action 1")

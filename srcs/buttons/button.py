@@ -38,42 +38,34 @@ def draw_button(button: str) -> tuple:
             if dict_button[button]["action"] == 1:
                 text = add_remove_books(button)            # Action for the button add_remove_books clicked
                 draw_clicked_button(button, rect)
-                return False, text, True
             elif dict_button[button]["action"] == 2:
                 add_remove_users(button)            # Action for the button add_remove_users clicked
                 draw_clicked_button(button, rect)
-                return False, BASE_CHOICE_STR, True
             elif dict_button[button]["action"] == 3:
                 emprunt_retour_books(button)        # Action for the button emprunt_retour_books clicked
                 draw_clicked_button(button, rect)
-                return False, BASE_CHOICE_STR, True
             elif dict_button[button]["action"] == 4:
                 list_books(button)                  # Action for the button list_books clicked
                 draw_clicked_button(button, rect)
-                return False, BASE_CHOICE_STR, True
             elif dict_button[button]["action"] == 5:
                 calcul_emprunt_books(button)        # Action for the button calcul_emprunt_books clicked
                 draw_clicked_button(button, rect)
-                return False, BASE_CHOICE_STR, True
             elif dict_button[button]["action"] == 6:
                 ident_actif_users(button)           # Action for the button ident_actif_users clicked
                 draw_clicked_button(button, rect)
-                return False, BASE_CHOICE_STR, True
             elif dict_button[button]["action"] == 7:
                 status(button)                      # Action for the button status clicked
                 draw_clicked_button(button, rect)
-                return False, BASE_CHOICE_STR, True
             elif dict_button[button]["action"] == 8:
                 diagram(button)                     # Action for the button diagram clicked
                 draw_clicked_button(button, rect)
-                return False, BASE_CHOICE_STR, True
             elif dict_button[button]["action"] == 9:
                 monthly_evolution(button)           # Action for the button monthly_evolution clicked
                 draw_clicked_button(button, rect)
-                return False, BASE_CHOICE_STR, True
             elif dict_button[button]["action"] == 11:
                 print(f"{button} button Hit Action 10") # EXIT
                 return True, "Exit", True
+            return False, BASE_CHOICE_STR, True
             # *************************************************************************************************** 
 
         # If Mouse is over button but not clicked, Use this color of button (dict_button[button]["hover_color"])
