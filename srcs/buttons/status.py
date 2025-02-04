@@ -4,6 +4,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from init import dict_button, dict_books, dict_users, loans_list_dict
 from buttons.add_remove_books import load_books_csv
+from buttons.emprunt_retour_books import load_loans_csv
 
 
 
@@ -22,23 +23,24 @@ def charger_nombre_total_exemplaires(fichier=BOOKS_FILE):
         with open(fichier, "r", encoding="utf-8") as f:
             reader = csv.DictReader(f)
             for row in reader:
-                total_exemplaires += int(row["number_of_copies_available"])  # Additionne les exemplaires disponibles
+                total_exemplaires += int(row["Exemplaires"])  # Additionne les exemplaires disponibles
     return total_exemplaires
+
 
 class Stats:
     def __init__(self):
         """Initialisation des statistiques"""
         
         load_books_csv()
+        load_loans_csv()
 
         self.nombre_total_livre = len(dict_books)  # Nombre total de livres (différents titres)
         
         # Charger le nombre total d'exemplaires de livres disponibles depuis books.csv
-        self.nombre_total_exemplaires = charger_nombre_total_exemplaires()
+        self.nombre_total_exemplaires = sum(book['Exemplaires'] for book in dict_books.values())
 
         # Nombre total d'exemplaires empruntés
-        self.nombre_total_exemplaire_emprunt = sum(loan.get("Emprunts", 0) for loan in loans_list_dict)
-
+        self.nombre_total_exemplaire_emprunt = len(loans_list_dict)
 
         # Nombre total d'exemplaires restants
         self.nombre_livres_disponibles = self.nombre_total_exemplaires - self.nombre_total_exemplaire_emprunt
