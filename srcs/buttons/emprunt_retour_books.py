@@ -7,8 +7,9 @@ import os
 
 from time import sleep
 from datetime import datetime, timedelta
-from buttons.add_remove_users import load_users_csv, save_users_csv
-from buttons.add_remove_books import load_books_csv, save_books_csv
+# from buttons.add_remove_users import load_users_csv
+# from buttons.add_remove_books import load_books_csv
+from csv_control import save_loans_csv, save_books_csv, save_users_csv
 from utility import our_input, EXIT_CODE, BASE_CHOICE_STR
 
 WIP = "\n\033[93m\033[1mWIP\033[0m"
@@ -169,9 +170,9 @@ def emprunt_retour_books(button: str):
 	affich_text = "--- Emprunt ou Retour de Livres ---\n"
 	catch_return = ""
 
-	load_books_csv()
-	load_users_csv()
-	load_loans_csv()
+	# load_books_csv()
+	# load_users_csv()
+	# load_loans_csv()
 
 	text = (
 		"\nCeci est pour un emprunt ou un retour?"
@@ -258,45 +259,45 @@ def emprunt_retour_books(button: str):
 
 #_________________________________________________________________________________
 # Sauvegarder les emprunts dans un fichier CSV
-def save_loans_csv(file="loans.csv"):
-	"""Sauvegarde les informations des emprunts dans un fichier CSV."""
-	with open(file, "w", newline="", encoding="utf-8") as f:
-		writer = csv.writer(f)
-		writer.writerow(["Utilisateur_ID", "Livre", "Date_Emprunt", "Date_Retour"])
-		for loan_data in loans_list_dict:
-			writer.writerow([
-				loan_data['Utilisateur_ID'],
-				loan_data['Livre'],
-				loan_data['Date_Emprunt'],
-				loan_data['Date_Retour']
-			])
-	print("\nLes emprunts ont été sauvegardés avec succès.")
+# def save_loans_csv(file="loans.csv"):
+# 	"""Sauvegarde les informations des emprunts dans un fichier CSV."""
+# 	with open(file, "w", newline="", encoding="utf-8") as f:
+# 		writer = csv.writer(f)
+# 		writer.writerow(["Utilisateur_ID", "Livre", "Date_Emprunt", "Date_Retour"])
+# 		for loan_data in loans_list_dict:
+# 			writer.writerow([
+# 				loan_data['Utilisateur_ID'],
+# 				loan_data['Livre'],
+# 				loan_data['Date_Emprunt'],
+# 				loan_data['Date_Retour']
+# 			])
+# 	print("\nLes emprunts ont été sauvegardés avec succès.")
 
 
-# Charger les emprunts depuis un fichier CSV
-def load_loans_csv(file="loans.csv"):
-	"""Charge les informations des emprunt depuis un fichier CSV."""
-	if os.path.exists(file):
-		with open(file, "r", encoding="utf-8") as f:
-			reader = csv.reader(f)
-			next(reader)  # Skip header row
-			loans_list_dict.clear()
-			for row in reader:
-				if len(row) >= 4:  # Vérifier qu'on a assez de colonnes
-					if row[3] == "":
-						loans_list_dict.append({
-						'Utilisateur_ID': row[0],
-						'Livre': row[1],
-						'Date_Emprunt': row[2],
-						'Date_Retour': None})
-					else:
-						loans_list_dict.append({
-						'Utilisateur_ID': row[0],
-						'Livre': row[1],
-						'Date_Emprunt': row[2],
-						'Date_Retour': row[3]})
-		print("\nLes emprunts ont été chargés depuis le fichier CSV.")
-		return None
-	else:
-		# print("\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde.")
-		return "\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde."
+# # Charger les emprunts depuis un fichier CSV
+# def load_loans_csv(file="loans.csv"):
+# 	"""Charge les informations des emprunt depuis un fichier CSV."""
+# 	if os.path.exists(file):
+# 		with open(file, "r", encoding="utf-8") as f:
+# 			reader = csv.reader(f)
+# 			next(reader)  # Skip header row
+# 			loans_list_dict.clear()
+# 			for row in reader:
+# 				if len(row) >= 4:  # Vérifier qu'on a assez de colonnes
+# 					if row[3] == "":
+# 						loans_list_dict.append({
+# 						'Utilisateur_ID': row[0],
+# 						'Livre': row[1],
+# 						'Date_Emprunt': row[2],
+# 						'Date_Retour': None})
+# 					else:
+# 						loans_list_dict.append({
+# 						'Utilisateur_ID': row[0],
+# 						'Livre': row[1],
+# 						'Date_Emprunt': row[2],
+# 						'Date_Retour': row[3]})
+# 		print("\nLes emprunts ont été chargés depuis le fichier CSV.")
+# 		return None
+# 	else:
+# 		# print("\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde.")
+# 		return "\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde."

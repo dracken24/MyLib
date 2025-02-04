@@ -3,9 +3,8 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from init import dict_button, dict_books, dict_users, loans_list_dict
-from buttons.add_remove_books import load_books_csv
-from buttons.emprunt_retour_books import load_loans_csv
-
+# from buttons.add_remove_books import load_books_csv
+# from buttons.emprunt_retour_books import load_loans_csv
 
 
 def status(button: str):
@@ -31,8 +30,8 @@ class Stats:
     def __init__(self):
         """Initialisation des statistiques"""
         
-        load_books_csv()
-        load_loans_csv()
+        # load_books_csv()
+        # load_loans_csv()
 
         self.nombre_total_livre = len(dict_books)  # Nombre total de livres (différents titres)
         

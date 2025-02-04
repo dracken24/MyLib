@@ -3,10 +3,6 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from init import dict_button, dict_books, dict_users, loans_list_dict
-from buttons.add_remove_books import load_books_csv
-from buttons.add_remove_users import load_users_csv
-
-
 
 BOOKS_FILE = "books.csv"  # Nom du fichier contenant les livres
 
@@ -23,9 +19,6 @@ def charger_nombre_total_exemplaires(fichier=BOOKS_FILE):
 class Stats:
     def __init__(self):
         """Initialisation des statistiques"""
-        
-        load_books_csv()
-        load_users_csv()
 
         self.nombre_total_livre = len(dict_books)  # Nombre total de livres (différents titres)
         

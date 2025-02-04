@@ -1,5 +1,5 @@
-from buttons.emprunt_retour_books import load_loans_csv
-from buttons.add_remove_books import load_books_csv
+# from buttons.emprunt_retour_books import load_loans_csv
+# from buttons.add_remove_books import load_books_csv
 from init import dict_books, loans_list_dict
 
 import matplotlib.pyplot as plt
@@ -9,8 +9,8 @@ import numpy as np
 # Visualization: Pie chart of borrowings by genre
 def diagram(button: str):
     print(f"{button} button Hit Action 8")
-    load_loans_csv()
-    load_books_csv()
+    # load_loans_csv()
+    # load_books_csv()
     for ele in loans_list_dict:
         print("Ele: ", ele)
     all_emprunt: list = find_by_type() # mount list by gender

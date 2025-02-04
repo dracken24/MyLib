@@ -1,17 +1,19 @@
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+# import sys
+# import os
+# sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+# import csv
 from init import dict_button, dict_books, dict_users, loans_list_dict
-import csv
-
+from csv_control import save_loans_csv, save_books_csv, save_users_csv
 from utility import our_input, EXIT_CODE, BASE_CHOICE_STR
+
+
 
 def add_remove_books(button: str):
 	"""Gestion des livres quand le bouton est cliqué"""
-	text: str = load_books_csv()
-	if (text):  # Charger les livres au début
-		our_input(f"--- Gestion des livres ---\n\n{text}\n\n{BASE_CHOICE_STR}")
-		return BASE_CHOICE_STR
+	# text: str = load_books_csv()
+	# if (text):  # Charger les livres au début
+	# 	our_input(f"--- Gestion des livres ---\n\n{text}\n\n{BASE_CHOICE_STR}")
+	# 	return BASE_CHOICE_STR
 	
 	menu()
 
@@ -113,48 +115,48 @@ def display_books():
 # 	print(f"\nNombre total d'exemplaires dans la bibliothèque : {total_books}")
 
 # Sauvegarder les livres dans un fichier CSV
-def save_books_csv(file="books.csv"):
-	"""Sauvegarde les livres dans un fichier CSV"""
-	with open(file, "w", newline="", encoding="utf-8") as f:
-		writer = csv.writer(f)
-		writer.writerow(["Titre", "Auteur", "Genre", "Exemplaires", "Emprunts"])
-		for titre, book in dict_books.items():
-			writer.writerow([
-				titre,
-				book['Auteur'],
-				book['Genre'],
-				book['Exemplaires'],
-				book['Emprunts']
-			])
-	print("\nLes livres ont été sauvegardés avec succès.")
+# def save_books_csv(file="books.csv"):
+# 	"""Sauvegarde les livres dans un fichier CSV"""
+# 	with open(file, "w", newline="", encoding="utf-8") as f:
+# 		writer = csv.writer(f)
+# 		writer.writerow(["Titre", "Auteur", "Genre", "Exemplaires", "Emprunts"])
+# 		for titre, book in dict_books.items():
+# 			writer.writerow([
+# 				titre,
+# 				book['Auteur'],
+# 				book['Genre'],
+# 				book['Exemplaires'],
+# 				book['Emprunts']
+# 			])
+# 	print("\nLes livres ont été sauvegardés avec succès.")
 
 
-# Charger les livres depuis un fichier CSV
-def load_books_csv(file="books.csv"):
-	"""Charge les livres depuis un fichier CSV"""
-	if os.path.exists(file):
-		with open(file, "r", encoding="utf-8") as f:
-			# Vérifier si le fichier n'est pas vide
-			if os.path.getsize(file) > 0:
-				reader = csv.reader(f)
-				headers = next(reader)  # Lire la première ligne pour les en-têtes
-				dict_books.clear()
-				for row in reader:
-					if len(row) >= 5:  # Vérifier qu'on a assez de colonnes
-						titre = row[0]
-						dict_books[titre] = {
-							'Auteur': row[1],
-							'Genre': row[2],
-							'Exemplaires': int(row[3]),
-							'Emprunts': int(row[4])
-						}
-				return None
-			else:
-				print("\nLe fichier CSV est vide. Un nouveau fichier sera créé lors de la sauvegarde.")
-				return None
-	else:
-		print("\nAucun fichier CSV trouvé. Un nouveau fichier sera créé lors de la sauvegarde.")
-		return None
+# # Charger les livres depuis un fichier CSV
+# def load_books_csv(file="books.csv"):
+# 	"""Charge les livres depuis un fichier CSV"""
+# 	if os.path.exists(file):
+# 		with open(file, "r", encoding="utf-8") as f:
+# 			# Vérifier si le fichier n'est pas vide
+# 			if os.path.getsize(file) > 0:
+# 				reader = csv.reader(f)
+# 				headers = next(reader)  # Lire la première ligne pour les en-têtes
+# 				dict_books.clear()
+# 				for row in reader:
+# 					if len(row) >= 5:  # Vérifier qu'on a assez de colonnes
+# 						titre = row[0]
+# 						dict_books[titre] = {
+# 							'Auteur': row[1],
+# 							'Genre': row[2],
+# 							'Exemplaires': int(row[3]),
+# 							'Emprunts': int(row[4])
+# 						}
+# 				return None
+# 			else:
+# 				print("\nLe fichier CSV est vide. Un nouveau fichier sera créé lors de la sauvegarde.")
+# 				return None
+# 	else:
+# 		print("\nAucun fichier CSV trouvé. Un nouveau fichier sera créé lors de la sauvegarde.")
+# 		return None
 
 # Menu principal pour gérer les livres
 def menu():
@@ -202,7 +204,7 @@ def menu():
 
 if __name__ == "__main__":
 	# Charger les livres au démarrage
-	load_books_csv()
+	# load_books_csv()
 	
 	# Lancer le menu principal
 	menu()

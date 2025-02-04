@@ -1,7 +1,7 @@
 from init import dict_button, loans_list_dict, dict_books
 from utility import our_input, BASE_CHOICE_STR
-from buttons.add_remove_books import load_books_csv
-from buttons.emprunt_retour_books import load_loans_csv
+# from buttons.add_remove_books import load_books_csv
+# from buttons.emprunt_retour_books import load_loans_csv
 from datetime import datetime, timedelta
 
 genre = []
@@ -10,8 +10,8 @@ genre = []
 def calcul_emprunt_books(button: str):
     # print(f"{button} button Hit Action 5")
     affich_text = "--- La durée moyenne des emprunts, par genre ---\n"
-    load_books_csv()
-    load_loans_csv()
+    # load_books_csv()
+    # load_loans_csv()
     # print("\n\033[1m\033[4m--La durée moyenne des emprunts, par genre--\033[0m")
     dict_button[button]["text"] = "--- La durée moyenne des emprunts, par genre ---"
     trier_genre()

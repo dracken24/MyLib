@@ -7,6 +7,8 @@ from pyray import LIGHTGRAY, DARKGRAY, WHITE, MOUSE_BUTTON_LEFT
 from init import init, text_entry, TEXT_OFFSET, WINDOW_TITLE, WINDOW_HEIGHT, WINDOW_WIDTH, dict_button, TEXT_BOX
 from utility import adjust_text_in_box_and_draw_result, BASE_CHOICE_STR
 from buttons.button import draw_button
+
+from csv_control import load_books_csv, load_loans_csv, load_users_csv
 # from text_entry import TextEntry
 
 """ Main function for run the programm """
@@ -16,6 +18,9 @@ def main():
 
     # comment
     init()
+    load_books_csv()
+    load_loans_csv()
+    load_users_csv()
 
     quit_ct: bool = False       # Counter for the exit button to quit main loop
     affich_text: str = lorem    # Text visible on the textBox

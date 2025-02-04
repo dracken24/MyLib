@@ -1,4 +1,4 @@
-from buttons.emprunt_retour_books import load_loans_csv
+# from buttons.emprunt_retour_books import load_loans_csv
 from init import loans_list_dict
 from utility import our_input, EXIT_CODE
 
@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 # Visualization: Monthly evolution of borrowing
 def monthly_evolution(button: str):
-	load_loans_csv()
+	# load_loans_csv()
 
 	visible_text: str = "--- Evolution mensuelle des emprunts ---\n\nQuel an voulez vous voir ? (1900-2055)"
 	

@@ -1,15 +1,16 @@
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-import csv
+# import csv
 import re
 
-from init import dict_button, dict_books, dict_users, loans_list_dict
+from init import dict_users, loans_list_dict
+from csv_control import save_users_csv
 from utility import our_input, EXIT_CODE, BASE_CHOICE_STR
 
 def add_remove_users(button: str):
 	"""Gestion des utilisateurs quand le bouton est cliqué"""
-	load_users_csv()
+
 	
 	# dict_button[button]["text"] = text
 	menu()
@@ -139,42 +140,42 @@ def display_users():
 		return_text += "Aucun utilisateur enregistré.\n\n"
 		return return_text
 
-def save_users_csv(file="users.csv"):
-	"""Sauvegarde les utilisateurs dans un fichier CSV"""
-	with open(file, "w", newline="", encoding="utf-8") as f:
-		writer = csv.writer(f)
-		writer.writerow(["ID", "Nom", "Prénom", "Email", "Téléphone", "Emprunts", "ListeLivreLu"])
-		for user_id, user in dict_users.items():
-			writer.writerow([
-				user_id,
-				user['Nom'],
-				user['Prénom'],
-				user['Email'],
-				user['Téléphone'],
-				user['Emprunts'],
-				";".join(user['ListeLivreLu']) if user['ListeLivreLu'] else ""
-			])
+# def save_users_csv(file="users.csv"):
+# 	"""Sauvegarde les utilisateurs dans un fichier CSV"""
+# 	with open(file, "w", newline="", encoding="utf-8") as f:
+# 		writer = csv.writer(f)
+# 		writer.writerow(["ID", "Nom", "Prénom", "Email", "Téléphone", "Emprunts", "ListeLivreLu"])
+# 		for user_id, user in dict_users.items():
+# 			writer.writerow([
+# 				user_id,
+# 				user['Nom'],
+# 				user['Prénom'],
+# 				user['Email'],
+# 				user['Téléphone'],
+# 				user['Emprunts'],
+# 				";".join(user['ListeLivreLu']) if user['ListeLivreLu'] else ""
+# 			])
 
-def load_users_csv(file="users.csv"):
-	"""Charge les utilisateurs depuis un fichier CSV"""
-	if os.path.exists(file):
-		with open(file, "r", encoding="utf-8") as f:
-			reader = csv.DictReader(f)  # Utiliser DictReader pour lire directement en dictionnaire
-			dict_users.clear()
-			for row in reader:
-				user_id = row['ID']
-				dict_users[user_id] = {
-					'Nom': row['Nom'],
-					'Prénom': row['Prénom'],
-					'Email': row['Email'],
-					'Téléphone': row['Téléphone'],
-					'Emprunts': int(row['Emprunts']),
-					'ListeLivreLu': row['ListeLivreLu'].split(";") if row['ListeLivreLu'] else []
-				}
-		return None
-	else:
-		# print("\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde.")
-		return "\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde."
+# def load_users_csv(file="users.csv"):
+# 	"""Charge les utilisateurs depuis un fichier CSV"""
+# 	if os.path.exists(file):
+# 		with open(file, "r", encoding="utf-8") as f:
+# 			reader = csv.DictReader(f)  # Utiliser DictReader pour lire directement en dictionnaire
+# 			dict_users.clear()
+# 			for row in reader:
+# 				user_id = row['ID']
+# 				dict_users[user_id] = {
+# 					'Nom': row['Nom'],
+# 					'Prénom': row['Prénom'],
+# 					'Email': row['Email'],
+# 					'Téléphone': row['Téléphone'],
+# 					'Emprunts': int(row['Emprunts']),
+# 					'ListeLivreLu': row['ListeLivreLu'].split(";") if row['ListeLivreLu'] else []
+# 				}
+# 		return None
+# 	else:
+# 		# print("\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde.")
+# 		return "\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde."
 
 def mettre_a_jour_emprunts_utilisateurs():
 	"""Met à jour les emprunts des utilisateurs à partir de la liste des prêts"""

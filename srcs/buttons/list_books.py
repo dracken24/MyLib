@@ -1,13 +1,13 @@
 from init import dict_button, dict_books
 from utility import our_input, BASE_CHOICE_STR
-from buttons.add_remove_books import load_books_csv
+# from buttons.add_remove_books import load_books_csv
 #from init import dict_button, dict_books, dict_users, loans_list_dict
 #from sipbuild.generator import resolve
 
 # List the most borrowed books - DONE
 def list_books(button: str):
     print(f"{button} button Hit Action 4")
-    load_books_csv()
+    # load_books_csv()
     count = 0
     affich_text = "--- Liste des 5 livres les plus empruntés ---\n\n"
     # print("\n\033[1m\033[4m--- Liste des 5 livres les plus empruntés ---\033[0m")
