@@ -188,7 +188,8 @@ def emprunt_retour_books(button: str):
 		# print("1. Emprunt")
 		# print("2. Retour")
 		# print("3. Quitter")
-		choix = our_input(affich_text + text + catch_return)
+		choix = our_input(affich_text + text + "\nChoisissez une option (1-3) :")
+		#choix = our_input(affich_text + text + catch_return)
 		if (choix == EXIT_CODE):
 			return
 		# choix = input("\nChoisissez une option : ") # Come back later

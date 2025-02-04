@@ -9,13 +9,15 @@ def list_books(button: str):
     print(f"{button} button Hit Action 4")
     # load_books_csv()
     count = 0
-    affich_text = "--- Liste des 5 livres les plus empruntés ---\n\n"
+    affich_text = "--- Liste des 5 livres les plus empruntés ---\n"
     # print("\n\033[1m\033[4m--- Liste des 5 livres les plus empruntés ---\033[0m")
     # dict_button[button]["text"] = "- - Liste des 5 livres les plus empruntés - -"
+    affich_text += "\n" + ("-" * 30) + "\n"
     for s in sorted(dict_books.items(), key=lambda v: v[1]['Emprunts'], reverse=True)[:5]:
         count += 1
         affich_text += f'{count}. "{s[0]}": {s[1]["Emprunts"]} emprunt(s)\n'
         # print(f'{count}. "{s[0]}": {s[1]["Emprunts"]} emprunt(s)')
         # dict_button[button]["text"] += f'\n{count}. "{s[0]}": {s[1]["Emprunts"]} emprunt(s)'
+    affich_text += "-" * 30 + "\n\n"
     affich_text += '\n'
     our_input(affich_text +  BASE_CHOICE_STR)
