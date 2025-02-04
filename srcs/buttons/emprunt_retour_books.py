@@ -62,9 +62,9 @@ def rechercher_livre(titre):
     print(f'\033[91mAuncun livre avec le titre "{titre}" retrouvé.\033[0m')
 
 def retour_livre(id, titre):
-    print(WIP)
     for loan in loans_list_dict:
         if id == loan["Utilisateur_ID"] and titre == loan["Livre"] and loan["Date_Retour"] is None:
+        #if id == loan["Utilisateur_ID"] and titre == loan["Livre"] and loan["Date_Retour"] is "":
             # Retourner l'exemplaire
             dict_books[titre]["Exemplaires"] += 1
 
@@ -72,7 +72,7 @@ def retour_livre(id, titre):
             loan["Date_Retour"] = datetime.now().strftime('%Y-%m-%d')
 
             # Calculer Pénalité
-            print(f'Livre "{titre}" \nEmprunté par {dict_users[id]["Nom"]} \nà la date du {loan["Date_Emprunt"]}: \nde retour le {loan["Date_Retour"]}.')
+            print(f'\033[92mLivre "{titre}" \nEmprunté par {dict_users[id]["Nom"]} \nà la date du {loan["Date_Emprunt"]}: \nde retour le {loan["Date_Retour"]}.\033[0m')
             print("\033[93mCalculons la pénalité . . . \033[0m")
             sleep(1)
 
@@ -86,7 +86,7 @@ def retour_livre(id, titre):
                 print(f"\033[91m{jours_retard} jour(s) en retard...")
                 print(f"Pénalité: {penalite:.2f}$\033[0m")
             else:
-                print(f"\033[92mRetour a temps! :)\033[0m")
+                print(f"\033[92mRetour à temps : Pas de pénalité!\033[0m")
             return
     print(f"\033[91mPas d'emprunt en cours retrouvé.\033[0m")
 
@@ -94,12 +94,12 @@ def emprunter_livre(id, titre):
     # Verifier si User a deja le livre sous emprunt en cours
     for loan in loans_list_dict:
         if id == loan["Utilisateur_ID"] and titre == loan["Livre"] and loan["Date_Retour"] is None:
-            print("Vous avez deja ce livre sous emprunt")
+            print("\033[91mVous avez déja ce livre sous emprunt.\033[0m")
             return
 
     # Verifier le nombre d'exemplaire disponibles
     if dict_books[titre]["Exemplaires"] > 0:
-        print("Ce livre est disponible à emprunter.")
+        print("\033[93mCe livre est disponible à emprunter.\033[0m")
         sleep(1)
 
         # Enlever l'exemplaire
@@ -121,18 +121,18 @@ def emprunter_livre(id, titre):
 
         # Creer un emprunt pour ajouter a la list loans_list_dict
         loans_list_dict.append({"Utilisateur_ID": id, "Livre": titre, "Date_Emprunt": date_emp, "Date_Retour": None})
-        print(f'Livre "{titre}" emprunté avec succès.')
+        print(f'\033[92mLivre "{titre}" emprunté avec succès.\033[0m')
     else:
-        print("Il n'y a plus d'exemplaires disponibles à ce moment.")
+        print("\033[91mIl n'y a plus d'exemplaires disponibles à ce moment.\033[0m")
         return
 
 def ajouter_livreLu(id, livre):
     dict_users[id]["ListeLivreLu"]
     if livre in dict_users[id]["ListeLivreLu"]:
-        print("Livre Deja lu")
+        print(f"\033[93mListe de livres lus par cet utilisateur mise-à-jour : {livre} déja sur la liste\033[0m")
     else:
         dict_users[id]["ListeLivreLu"].append(livre)
-        print("Livre no lu avant")
+        print(f"\033[92mListe de livres lus par cet utilisateur mise-à-jour : {livre} ajouté\033[0m")
 
 # Record a loan or return - MAIN FUNCTION!
 def emprunt_retour_books(button: str):
@@ -140,13 +140,13 @@ def emprunt_retour_books(button: str):
     load_books_csv()
     load_users_csv()
     load_loans_csv()
-    dict_button[button]["text"] = "WIP\nCeci est pour un emprunt ou un retour?"
-    dict_button[button]["text"] += "\n1. Emprunt\n2. Retour\n3. Quitter"
     while True:
         print("\033[1mCeci est pour un emprunt ou un retour?\033[0m")
         print("1. Emprunt")
         print("2. Retour")
         print("3. Quitter")
+        # dict_button[button]["text"] = "\nCeci est pour un emprunt ou un retour?"
+        # dict_button[button]["text"] += "\n1. Emprunt\n2. Retour\n3. Quitter"
         choix = input("\nChoisissez une option : ") # Come back later
 
         if choix == "1":
@@ -230,12 +230,18 @@ def load_loans_csv(file="loans.csv"):
             loans_list_dict.clear()
             for row in reader:
                 if len(row) >= 4:  # Vérifier qu'on a assez de colonnes
-                    loans_list_dict.append({
+                    if row[3] == "":
+                        loans_list_dict.append({
                         'Utilisateur_ID': row[0],
                         'Livre': row[1],
                         'Date_Emprunt': row[2],
-                        'Date_Retour': row[3]
-                    })
+                        'Date_Retour': None})
+                    else:
+                        loans_list_dict.append({
+                        'Utilisateur_ID': row[0],
+                        'Livre': row[1],
+                        'Date_Emprunt': row[2],
+                        'Date_Retour': row[3]})
         print("\nLes emprunts ont été chargés depuis le fichier CSV.")
     else:
         print("\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde.")
