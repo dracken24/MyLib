@@ -170,6 +170,10 @@ def load_users_csv(file="users.csv"):
 					'Emprunts': int(row['Emprunts']),
 					'ListeLivreLu': row['ListeLivreLu'].split(";") if row['ListeLivreLu'] else []
 				}
+		return None
+	else:
+		# print("\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde.")
+		return "\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde."
 
 def mettre_a_jour_emprunts_utilisateurs():
 	"""Met à jour les emprunts des utilisateurs à partir de la liste des prêts"""

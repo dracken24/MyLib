@@ -35,7 +35,7 @@ def monthly_evolution(button: str):
 		# Show a graph from those datas
 		Show_graphic(emprunt_list, year)
 		break
-	
+
 #--------------------------------------------------------------------#
 
 def calcul_emprunt(year: str) -> list[str]:
@@ -58,7 +58,7 @@ def calcul_emprunt(year: str) -> list[str]:
 def Show_graphic(emprunt_list: list[str], year: str):
 	month_names = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet",
 					"Aout", "Septembre", "Octobre", "Novembre", "Decembre"]
-	
+
 	# Convert string list to int list for calculation
 	emprunt_list_int: list[int] = [int(x) for x in emprunt_list]
 	max_value = max(emprunt_list_int)
@@ -73,5 +73,5 @@ def Show_graphic(emprunt_list: list[str], year: str):
 	fig.set_size_inches(sceen_whide, sceen_height)
 
 	plt.show()
-	
+
 #--------------------------------------------------------------------#

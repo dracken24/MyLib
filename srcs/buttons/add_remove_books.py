@@ -150,11 +150,11 @@ def load_books_csv(file="books.csv"):
 						}
 				return None
 			else:
-				# print("\nLe fichier CSV est vide. Un nouveau fichier sera créé lors de la sauvegarde.")
-				return "\nLe fichier CSV est vide. Un nouveau fichier sera créé lors de la sauvegarde."
+				print("\nLe fichier CSV est vide. Un nouveau fichier sera créé lors de la sauvegarde.")
+				return None
 	else:
-		# print("\nAucun fichier CSV trouvé. Un nouveau fichier sera créé lors de la sauvegarde.")
-		return "\nAucun fichier CSV trouvé. Un nouveau fichier sera créé lors de la sauvegarde."
+		print("\nAucun fichier CSV trouvé. Un nouveau fichier sera créé lors de la sauvegarde.")
+		return None
 
 # Menu principal pour gérer les livres
 def menu():
@@ -197,7 +197,7 @@ def menu():
 			break
 		else:
 			# print("Option invalide. Veuillez réessayer.")
-			invalid = "Option invalide. Veuillez réessayer."
+			invalid = "Option invalide. Veuillez réessayer.\n\n"
 
 
 if __name__ == "__main__":

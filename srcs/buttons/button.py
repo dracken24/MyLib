@@ -14,6 +14,7 @@ from buttons.input import input_text
 
 BOARDER_THICK = 2
 BORDER_COLOR = DARKGRAY
+BASE_CHOICE_STR = "Veuillez cliquer sur un boutton pour faire un choix\n"
 
 def draw_clicked_button(button: str, rect: Rectangle):
     draw_rectangle_rec(rect, dict_button[button]["clicked_color"])                     # Draw Button
@@ -46,7 +47,7 @@ def draw_button(button: str) -> tuple:
             elif dict_button[button]["action"] == 3:
                 emprunt_retour_books(button)        # Action for the button emprunt_retour_books clicked
                 draw_clicked_button(button, rect)
-                return False, dict_button[button]["text"], True
+                return False, BASE_CHOICE_STR, True
             elif dict_button[button]["action"] == 4:
                 list_books(button)                  # Action for the button list_books clicked
                 draw_clicked_button(button, rect)

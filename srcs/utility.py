@@ -1,10 +1,12 @@
 from pyray import is_mouse_button_pressed, get_mouse_position, MOUSE_BUTTON_LEFT, Rectangle, DARKGRAY # Import for Raylib
 from pyray import begin_scissor_mode, end_scissor_mode, draw_text, measure_text, Rectangle, BLACK
 from pyray import draw_rectangle_rec, draw_rectangle_lines_ex, draw_text, check_collision_point_rec
-from pyray import begin_drawing, end_drawing, clear_background, get_screen_width, draw_text
+from pyray import begin_drawing, end_drawing, clear_background, get_screen_width, draw_text, window_should_close
 from pyray import LIGHTGRAY, DARKGRAY, WHITE, measure_text, draw_rectangle_rec, get_mouse_wheel_move
 
 from init import WINDOW_TITLE, TEXT_BOX, text_entry, dict_button, TEXT_OFFSET
+
+from time import sleep
 
 EXIT_CODE = "!B@A#B$Y%S^H&A*R&K^Y%O$L#O@O!"
 BORDER_COLOR = DARKGRAY
@@ -21,7 +23,7 @@ BASE_CHOICE_STR = "Veuillez cliquer sur un boutton pour faire un choix\n"
         line_ct (int): Text is cut in x line_ct to fix in box whide
     
     Returns:
-        int: Line count
+        int: Line count (Number of time text was cut)
 """
 def adjust_text_in_box_and_draw_result(box: Rectangle, text: str, line_position: int = 0,
                                        scroll_offset: int = 0, line_ct: int = 0) -> int:
@@ -120,12 +122,12 @@ def draw_button_in_function(button: str) -> bool:
 
  # *************************************************************************************************** 
 
-def our_input(text_affichable: str) -> str:
+def our_input(text_affichable: str, delay: int = 0) -> str:
     first_pass: bool = True
     scroll_offset: int = 0      # The offset for the text in the box
     mouse_wheel_ct = 0          # Mouse wheel counter
 
-    while True:
+    while True and not window_should_close():
         # Get the wheel movement
         wheel_move = get_mouse_wheel_move()
         mouse_wheel_ct += wheel_move
@@ -167,3 +169,7 @@ def our_input(text_affichable: str) -> str:
 
         if (entry_text):
             return entry_text
+        # To use our_input like a sleep with a print()
+        if (delay):
+            sleep(delay)
+            return None
