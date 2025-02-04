@@ -5,6 +5,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from init import dict_button, dict_books, dict_users, loans_list_dict
 from buttons.add_remove_books import load_books_csv
 from buttons.emprunt_retour_books import load_loans_csv
+from buttons.ident_actif_users import load_users_csv
 
 
 
@@ -33,6 +34,7 @@ class Stats:
         
         load_books_csv()
         load_loans_csv()
+        load_users_csv()
 
         self.nombre_total_livre = len(dict_books)  # Nombre total de livres (différents titres)
         
@@ -48,8 +50,10 @@ class Stats:
         # Pourcentage de livres disponibles
         self.pourcentage_livre_disponible = (self.nombre_livres_disponibles / self.nombre_total_exemplaires * 100) if self.nombre_total_exemplaires > 0 else 0
 
-        # Nombre moyen de livres empruntés par utilisateur
+        # Nombre total d'utilisateurs
         self.nombre_utilisateurs = len(dict_users)
+
+        # Nombre moyen de livres empruntés par utilisateur
         self.nombre_de_livre_moyen_par_utilisateur = (self.nombre_total_exemplaire_emprunt / self.nombre_utilisateurs) if self.nombre_utilisateurs > 0 else 0
 
     def afficher_stats(self):

@@ -1,3 +1,9 @@
+import sys
+import os
+
+# Ajoutez le répertoire parent au sys.path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from init import dict_button, loans_list_dict, dict_books
 from utility import our_input, BASE_CHOICE_STR
 from buttons.add_remove_books import load_books_csv
