@@ -10,11 +10,6 @@ from utility import our_input, EXIT_CODE, BASE_CHOICE_STR
 
 def add_remove_books(button: str):
 	"""Gestion des livres quand le bouton est cliqué"""
-	# text: str = load_books_csv()
-	# if (text):  # Charger les livres au début
-	# 	our_input(f"--- Gestion des livres ---\n\n{text}\n\n{BASE_CHOICE_STR}")
-	# 	return BASE_CHOICE_STR
-	
 	menu()
 
 	return BASE_CHOICE_STR
@@ -29,17 +24,14 @@ def add_book():
 	book_name = our_input("--- Ajouter un nouveau livre ---\nTitre du livre : ")
 	if (book_name == EXIT_CODE):
 		return EXIT_CODE
-	# book_name = input("Titre du livre : ")
 
 	author = our_input("--- Ajouter un nouveau livre ---\nAuteur : ")
 	if (author == EXIT_CODE):
 		return EXIT_CODE
-	# author = input("Auteur : ")
 
 	genre = our_input("--- Ajouter un nouveau livre ---\nGenre : ")
 	if (genre == EXIT_CODE):
 		return EXIT_CODE
-	# genre = input("Genre : ")
 	
 	text = "--- Ajouter un nouveau livre ---\nNombre de copies disponibles : "
 	while True:
@@ -88,75 +80,17 @@ def display_books():
 		# print("\n--- Liste des livres dans la bibliothèque ---")
 		text_affich += "--- Liste des livres dans la bibliothèque ---\n\n"
 		for book_name, book in dict_books.items():
-			# print("-" * 30)
 			text_affich += "-" * 30
-			# print(f"Titre : {book_name}")
 			text_affich += f"\nTitre : {book_name}"
-			# print(f"Auteur : {book['author']}")
 			text_affich += f"\nAuteur : {book['Auteur']}"
-			# print(f"Genre : {book['genre']}")
 			text_affich += f"\nGenre : {book['Genre']}"
-			# print(f"Copies disponibles : {book['number_of_copies_available']}")
 			text_affich += f"\nCopies disponibles : {book['Exemplaires']}"
-			# print(f"Nombre total d'emprunts : {book['total_times_rented']}")
 			text_affich += f"\nNombre total d'emprunts : {book['Emprunts']}\n"
-			# print("-" * 30)
 			text_affich += "-" * 30 + "\n"
 	else:
-		# print("\nAucun livre dans la bibliothèque.")
 		text_affich += "\nAucun livre dans la bibliothèque.\n"
 	
 	our_input(text_affich + "\n" + BASE_CHOICE_STR)
-
-
-# def display_total_number_of_books_in_library():
-# 	"""Affiche le nombre total d'exemplaires de livres dans la bibliothèque."""
-# 	total_books = sum(book['Copies'] for book in dict_books.values())  # Compte les exemplaires
-# 	print(f"\nNombre total d'exemplaires dans la bibliothèque : {total_books}")
-
-# Sauvegarder les livres dans un fichier CSV
-# def save_books_csv(file="books.csv"):
-# 	"""Sauvegarde les livres dans un fichier CSV"""
-# 	with open(file, "w", newline="", encoding="utf-8") as f:
-# 		writer = csv.writer(f)
-# 		writer.writerow(["Titre", "Auteur", "Genre", "Exemplaires", "Emprunts"])
-# 		for titre, book in dict_books.items():
-# 			writer.writerow([
-# 				titre,
-# 				book['Auteur'],
-# 				book['Genre'],
-# 				book['Exemplaires'],
-# 				book['Emprunts']
-# 			])
-# 	print("\nLes livres ont été sauvegardés avec succès.")
-
-
-# # Charger les livres depuis un fichier CSV
-# def load_books_csv(file="books.csv"):
-# 	"""Charge les livres depuis un fichier CSV"""
-# 	if os.path.exists(file):
-# 		with open(file, "r", encoding="utf-8") as f:
-# 			# Vérifier si le fichier n'est pas vide
-# 			if os.path.getsize(file) > 0:
-# 				reader = csv.reader(f)
-# 				headers = next(reader)  # Lire la première ligne pour les en-têtes
-# 				dict_books.clear()
-# 				for row in reader:
-# 					if len(row) >= 5:  # Vérifier qu'on a assez de colonnes
-# 						titre = row[0]
-# 						dict_books[titre] = {
-# 							'Auteur': row[1],
-# 							'Genre': row[2],
-# 							'Exemplaires': int(row[3]),
-# 							'Emprunts': int(row[4])
-# 						}
-# 				return None
-# 			else:
-# 				print("\nLe fichier CSV est vide. Un nouveau fichier sera créé lors de la sauvegarde.")
-# 				return None
-# 	else:
-# 		print("\nAucun fichier CSV trouvé. Un nouveau fichier sera créé lors de la sauvegarde.")
-# 		return None
 
 # Menu principal pour gérer les livres
 def menu():

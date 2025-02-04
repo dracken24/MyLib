@@ -28,7 +28,7 @@ text_entry: TextEntry = TextEntry(
 dict_button = {
 	"add_book": {  # Name for the button in dico (Key)
 		"title": "Ajouter ou supprimer un livre dans la bibliotheque",	# Text visible on button
-		"text": "Text pour ajouter ou supprimer un livre dans la bibliotheque",	# Text for write on textBox
+		"text": "",	# Text for write on textBox
 		"x": 10,                            	# position x
 		"y": BUTTON_HEIGHT + 10,            	# position y
 		"width": int(WINDOW_WIDTH - 20),    	# Button width
@@ -43,7 +43,7 @@ dict_button = {
 	},
 	"add_user": {
 		"title": "Ajouter ou supprimer un utilisateur",
-		"text": "Text pour ajouter ou supprimer un utilisateur",
+		"text": "",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 2) + 10,
 		"width": int(WINDOW_WIDTH - 20),
@@ -58,7 +58,7 @@ dict_button = {
 	},
 	"emprunt": {
 		"title": "Enregistrer un emprunt ou un retour",
-		"text": "Text pour enregistrer un emprunt ou un retour",
+		"text": "",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 3) + 10,
 		"width": int(WINDOW_WIDTH - 20),
@@ -73,7 +73,7 @@ dict_button = {
 	},
 	"lister": {
 		"title": "Lister les livres les plus empruntes",
-		"text": "Text pour lister les livres les plus empruntes",
+		"text": "",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 4) + 10,
 		"width": int(WINDOW_WIDTH - 20),
@@ -88,7 +88,7 @@ dict_button = {
 	},
 	"calculer": {
 		"title": "Calculer la duree moyenne des emprunts par genre",
-		"text": "Text pour Calculer la duree moyenne des emprunts par genre",
+		"text": "",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 5) + 10,
 		"width": int(WINDOW_WIDTH - 20),
@@ -103,7 +103,7 @@ dict_button = {
 	},
 	"identifier": {
 		"title": "Identifier les utilisateurs les plus actifs",
-		"text": "Text pour identifier les utilisateurs les plus actifs",
+		"text": "",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 6) + 10,
 		"width": int(WINDOW_WIDTH - 20),
@@ -118,7 +118,7 @@ dict_button = {
 	},
 	"status": {
 		"title": "Afficher le statut de la bibliotheque sous forme de statistiques",
-		"text": "Text pour afficher le status de la bibliotheque",
+		"text": "",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 7) + 10,
 		"width": int(WINDOW_WIDTH - 20),
@@ -133,7 +133,7 @@ dict_button = {
 	},
 	"diagramme": {
 		"title": "Visualisation: Diagramme circulaire des emprunts par genre",
-		"text": "Faire apparaitre une box avec un diagramme circulaire detaille",
+		"text": "",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 8) + 10,
 		"width": int(WINDOW_WIDTH - 20),
@@ -148,7 +148,7 @@ dict_button = {
 	},
 	"evolution": {
 		"title": "Visualisation: Evolution mensuelle des emprunt",
-		"text": "Text pour voir l'evolution mensuelle des emprunts",
+		"text": "",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 9) + 10,
 		"width": int(WINDOW_WIDTH - 20),
@@ -160,25 +160,10 @@ dict_button = {
 		"text_color": WHITE,
 		"is_clicked": False,
 		"action": 9
-	# },
-	# "input": {
-	# 	"title": "Input Utilisateur",
-	# 	"text": "Text pour Input",
-	# 	"x": 10,
-	# 	"y": int(BUTTON_HEIGHT * 12) + 20,
-	# 	"width": int(WINDOW_WIDTH - 20),
-	# 	"height": int(BUTTON_HEIGHT - 5),
-	# 	"measure_text": 0,
-	# 	"base_color": BLUE,
-	# 	"hover_color": DARKBLUE,
-	# 	"clicked_color": DARKGREEN,
-	# 	"text_color": WHITE,
-	# 	"is_clicked": False,
-	# 	"action": 10
 	},
 	"quitter": {
 		"title": "Quitter",
-		"text": "Text pour quitter le programme",
+		"text": "",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 10) + 20,
 		"width": int(WINDOW_WIDTH - 20),
@@ -190,7 +175,7 @@ dict_button = {
 		"text_color": WHITE,
 		"is_clicked": False,
 		"action": 11
-	},
+	}
 }
 
 dict_books: dict = {
