@@ -172,7 +172,7 @@ def menu():
 		choice = our_input(invalid + text + "\nChoisissez une option (1-4) :")
 		if (choice == EXIT_CODE):
 			return
-		
+
 		if choice == "1":
 			# print("\n\033[94mVous avez choisi: Ajouter un livre\033[0m")
 			add_book()
@@ -206,4 +206,3 @@ if __name__ == "__main__":
 	
 	# Lancer le menu principal
 	menu()
-

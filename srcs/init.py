@@ -233,73 +233,73 @@ dict_books: dict = {
 }
 
 dict_users = {
-	"1": {
-		"Nom": "Smith",
-		"Prénom": "Alice",
-		"Email": "alice@gmail.com",
-		"Téléphone": "514-888-9696",
-		"Emprunts": 5,
-		"ListeLivreLu":["Python Programming","The Great Gatsby","Marx's Inferno",
-		"Atomic Habits"]
-	},
-	"2": {
-		"Nom": "Brown",
-		"Prénom": "Bob",
-		"Email": "bob@gmail.com",
-		"Téléphone": "430-568-8985",
-		"Emprunts": 2,
-		"ListeLivreLu":["Python Programming","The Great Gatsby"]
+	# "1": {
+	# 	"Nom": "Smith",
+	# 	"Prénom": "Alice",
+	# 	"Email": "alice@gmail.com",
+	# 	"Téléphone": "514-888-9696",
+	# 	"Emprunts": 5,
+	# 	"ListeLivreLu":["Python Programming","The Great Gatsby","Marx's Inferno",
+	# 	"Atomic Habits"]
+	# },
+	# "2": {
+	# 	"Nom": "Brown",
+	# 	"Prénom": "Bob",
+	# 	"Email": "bob@gmail.com",
+	# 	"Téléphone": "430-568-8985",
+	# 	"Emprunts": 2,
+	# 	"ListeLivreLu":["Python Programming","The Great Gatsby"]
 		
-	},
-	"3": {
-		"Nom": "Johnson",
-		"Prénom": "Charlie",
-		"Email": "charlie@gmail.com",
-		"Téléphone": "514-888-9696",
-		"Emprunts": 22,
-		"ListeLivreLu":["Python Programming","The Great Gatsby","Marx's Inferno"]
-	},
-	"4": {
-		"Nom": "Williams",
-		"Prénom": "David",
-		"Email": "david@gmail.com",
-		"Téléphone": "514-888-9696",
-		"Emprunts": 1000000,
-		"ListeLivreLu":["Python Programming","The Great Gatsby","Marx's Inferno","Atomic Habits et +"]
-	}
+	# },
+	# "3": {
+	# 	"Nom": "Johnson",
+	# 	"Prénom": "Charlie",
+	# 	"Email": "charlie@gmail.com",
+	# 	"Téléphone": "514-888-9696",
+	# 	"Emprunts": 22,
+	# 	"ListeLivreLu":["Python Programming","The Great Gatsby","Marx's Inferno"]
+	# },
+	# "4": {
+	# 	"Nom": "Williams",
+	# 	"Prénom": "David",
+	# 	"Email": "david@gmail.com",
+	# 	"Téléphone": "514-888-9696",
+	# 	"Emprunts": 1000000,
+	# 	"ListeLivreLu":["Python Programming","The Great Gatsby","Marx's Inferno","Atomic Habits et +"]
+	# }
 }
 
 loans_list_dict = [
-	{
-		"Utilisateur_ID": "1",
-		"Livre": "Python Programming",
-		"Date_Emprunt": "2024-12-01",
-		"Date_Retour": "2024-12-10"
-	},
-	{
-		"Utilisateur_ID": "2",
-		"Livre": "The Great Gatsby",
-		"Date_Emprunt": "2024-11-25",
-		"Date_Retour": "2024-12-10"
-	},
-	{
-		"Utilisateur_ID": "1",
-		"Livre": "1",
-		"Date_Emprunt": "2024-11-25",
-		"Date_Retour": "2024-11-30"
-	},
-	{
-		"Utilisateur_ID": "2",
-		"Livre": "2",
-		"Date_Emprunt": "2024-02-05",
-		"Date_Retour": "2024-03-15"
-	},
-	{
-		"Utilisateur_ID": "1",
-		"Livre": "3",
-		"Date_Emprunt": "2024-02-05",
-		"Date_Retour": None
-	}
+	# {
+	# 	"Utilisateur_ID": "1",
+	# 	"Livre": "Python Programming",
+	# 	"Date_Emprunt": "2024-12-01",
+	# 	"Date_Retour": "2024-12-10"
+	# },
+	# {
+	# 	"Utilisateur_ID": "2",
+	# 	"Livre": "The Great Gatsby",
+	# 	"Date_Emprunt": "2024-11-25",
+	# 	"Date_Retour": "2024-12-10"
+	# },
+	# {
+	# 	"Utilisateur_ID": "1",
+	# 	"Livre": "1",
+	# 	"Date_Emprunt": "2024-11-25",
+	# 	"Date_Retour": "2024-11-30"
+	# },
+	# {
+	# 	"Utilisateur_ID": "2",
+	# 	"Livre": "2",
+	# 	"Date_Emprunt": "2024-02-05",
+	# 	"Date_Retour": "2024-03-15"
+	# },
+	# {
+	# 	"Utilisateur_ID": "1",
+	# 	"Livre": "3",
+	# 	"Date_Emprunt": "2024-02-05",
+	# 	"Date_Retour": None
+	# }
 ]
 
 # init principal variables for the program
