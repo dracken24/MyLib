@@ -63,7 +63,6 @@ def rechercher_livre(titre):
 	return f'\033[91mAuncun livre avec le titre "{titre}" retrouvé.\033[0m'
 
 def retour_livre(id, titre):
-	print(WIP)
 	for loan in loans_list_dict:
 		if id == loan["Utilisateur_ID"] and titre == loan["Livre"] and loan["Date_Retour"] is None:
 			# Retourner l'exemplaire
@@ -73,9 +72,16 @@ def retour_livre(id, titre):
 			loan["Date_Retour"] = datetime.now().strftime('%Y-%m-%d')
 
 			# Calculer Pénalité
-			print(f'Livre "{titre}" \nEmprunté par {dict_users[id]["Nom"]} \nà la date du {loan["Date_Emprunt"]}: \nde retour le {loan["Date_Retour"]}.')
-			print("\033[93mCalculons la pénalité . . . \033[0m")
-			sleep(1)
+			text = (
+				f'Livre "{titre}" \n'
+				f'Emprunté par {dict_users[id]["Nom"]} \n'
+				f'à la date du {loan["Date_Emprunt"]}: \n'
+				f'de retour le {loan["Date_Retour"]}.\n'
+			)
+			our_input(text, 1)
+			# print(f'Livre "{titre}" \nEmprunté par {dict_users[id]["Nom"]} \nà la date du {loan["Date_Emprunt"]}: \nde retour le {loan["Date_Retour"]}.')
+			# print("\033[93mCalculons la pénalité . . . \033[0m")
+			# sleep(1)
 
 			date = loan["Date_Emprunt"]
 			date_conv = datetime.strptime(date, "%Y-%m-%d")
@@ -86,24 +92,37 @@ def retour_livre(id, titre):
 			if datetime.now() > date_limite:
 				jours_retard = (datetime.now() - date_limite).days
 				penalite = jours_retard * 1.25
-				print(f"\033[91m{jours_retard} jour(s) en retard...")
-				print(f"Pénalité: {penalite:.2f}$\033[0m")
+				return_text = f"\n{jours_retard} jour(s) en retard...\n"
+				return_text += f"Pénalité: {penalite:.2f}$\n\n"
+				# print(f"\033[91m{jours_retard} jour(s) en retard...")
+				# print(f"Pénalité: {penalite:.2f}$\033[0m")
 			else:
-				print(f"\033[92mRetour a temps! :)\033[0m")
-			return
-	print(f"\033[91mPas d'emprunt en cours retrouvé.\033[0m")
+				return_text = "\nRetour a temps! :)\n\n"
+				# print(f"\033[92mRetour a temps! :)\033[0m")
+			return return_text
+	# print(f"\033[91mPas d'emprunt en cours retrouvé.\033[0m")
+	return "\nPas d'emprunt en cours retrouvé. ou livre inexistant\n\n"
 
 def emprunter_livre(id, titre):
 	# Verifier si User a deja le livre sous emprunt en cours
 	for loan in loans_list_dict:
 		if id == loan["Utilisateur_ID"] and titre == loan["Livre"] and loan["Date_Retour"] is None:
-			print("Vous avez deja ce livre sous emprunt")
-			return
+			# print("Vous avez deja ce livre sous emprunt")
+			return "\nVous avez deja ce livre sous emprunt\n"
+	
+	# protection pour chercher un livre qui n'existe peut etre pas
+	found = None
+	for b in dict_books:
+		if b == titre:
+			found = dict_books[titre]
 
 	# Verifier le nombre d'exemplaire disponibles
-	if dict_books[titre]["Exemplaires"] > 0:
-		print("Ce livre est disponible à emprunter.")
-		sleep(1)
+	if  found != None:
+		if dict_books[titre]["Exemplaires"] <= 0:
+			return "\nIl n'y a plus d'exemplaires disponibles à ce moment.\n\n"
+		our_input("--- Emprunt ou Retour de Livres ---\n\n" + "\nCe livre est disponible à emprunter.", 1)
+		# print("Ce livre est disponible à emprunter.")
+		# sleep(1)
 
 		# Enlever l'exemplaire
 		dict_books[titre]["Exemplaires"] -= 1
@@ -124,33 +143,50 @@ def emprunter_livre(id, titre):
 
 		# Creer un emprunt pour ajouter a la list loans_list_dict
 		loans_list_dict.append({"Utilisateur_ID": id, "Livre": titre, "Date_Emprunt": date_emp, "Date_Retour": None})
-		print(f'Livre "{titre}" emprunté avec succès.')
+		# print(f'Livre "{titre}" emprunté avec succès.')
+		return catch_return + f'Livre "{titre}" emprunté avec succès.\n\n'
 	else:
-		print("Il n'y a plus d'exemplaires disponibles à ce moment.")
-		return
+		# print("Il n'y a plus d'exemplaires disponibles à ce moment.")
+		return "\nLivre inexistant dans la bibliotheque\n\n"
 
 def ajouter_livreLu(id, livre):
 	dict_users[id]["ListeLivreLu"]
 	if livre in dict_users[id]["ListeLivreLu"]:
-		print("Livre Deja lu")
+		# print("Livre Deja lu")
+		return "\nLivre Deja lu\n"
 	else:
 		dict_users[id]["ListeLivreLu"].append(livre)
-		print("Livre no lu avant")
+		# print("Livre no lu avant")
+		return "\nLivre no lu avant\n"
 
 # Record a loan or return - MAIN FUNCTION!
 def emprunt_retour_books(button: str):
-	print(f"{button} button Hit Action 3")
+	# print(f"{button} button Hit Action 3")
+	affich_text = "--- Emprunt ou Retour de Livres ---\n"
+	catch_return = ""
+
 	load_books_csv()
 	load_users_csv()
 	load_loans_csv()
-	dict_button[button]["text"] = "WIP\nCeci est pour un emprunt ou un retour?"
-	dict_button[button]["text"] += "\n1. Emprunt\n2. Retour\n3. Quitter"
+
+	text = (
+		"\nCeci est pour un emprunt ou un retour?"
+		"\n1. Emprunt\n"
+		"2. Retour\n"
+		"3. Quitter\n"
+	)
+
+	# dict_button[button]["text"] = "WIP\nCeci est pour un emprunt ou un retour?"
+	# dict_button[button]["text"] += "\n1. Emprunt\n2. Retour\n3. Quitter"
 	while True:
-		print("\033[1mCeci est pour un emprunt ou un retour?\033[0m")
-		print("1. Emprunt")
-		print("2. Retour")
-		print("3. Quitter")
-		choix = input("\nChoisissez une option : ") # Come back later
+		# print("\033[1mCeci est pour un emprunt ou un retour?\033[0m")
+		# print("1. Emprunt")
+		# print("2. Retour")
+		# print("3. Quitter")
+		choix = our_input(affich_text + text + catch_return)
+		if (choix == EXIT_CODE):
+			return
+		# choix = input("\nChoisissez une option : ") # Come back later
 
 		if choix == "1":
 			print("\033[94mVous avez choisi: Emprunt\033[0m")
@@ -206,15 +242,12 @@ def emprunt_retour_books(button: str):
 		if choix == "1":
 			#print("\033[94mIt's a boy! (Emprunt)\033[0m")  # This line is a joke, should delete later
 			catch_return = emprunter_livre(client_verifiee, livre_verifiee)
-			save_books_csv()
-			save_users_csv()
-			save_loans_csv()
 		if choix == "2":
 			#print("\033[95mIt's a girl! (Retour)\033[0m")  # This line is a joke, should delete later
 			catch_return = retour_livre(client_verifiee, livre_verifiee)
-			save_books_csv()
-			save_users_csv()
-			save_loans_csv()
+		save_books_csv()
+		save_users_csv()
+		save_loans_csv()
 
 	our_input(affich_text + catch_return + BASE_CHOICE_STR)
 	# print(f"{button} button Hit Action 11 input text")
@@ -238,26 +271,28 @@ def save_loans_csv(file="loans.csv"):
 
 # Charger les emprunts depuis un fichier CSV
 def load_loans_csv(file="loans.csv"):
-    """Charge les informations des emprunt depuis un fichier CSV."""
-    if os.path.exists(file):
-        with open(file, "r", encoding="utf-8") as f:
-            reader = csv.reader(f)
-            next(reader)  # Skip header row
-            loans_list_dict.clear()
-            for row in reader:
-                if len(row) >= 4:  # Vérifier qu'on a assez de colonnes
-                    if row[3] == "":
-                        loans_list_dict.append({
-                        'Utilisateur_ID': row[0],
-                        'Livre': row[1],
-                        'Date_Emprunt': row[2],
-                        'Date_Retour': None})
-                    else:
-                        loans_list_dict.append({
-                        'Utilisateur_ID': row[0],
-                        'Livre': row[1],
-                        'Date_Emprunt': row[2],
-                        'Date_Retour': row[3]})
+	"""Charge les informations des emprunt depuis un fichier CSV."""
+	if os.path.exists(file):
+		with open(file, "r", encoding="utf-8") as f:
+			reader = csv.reader(f)
+			next(reader)  # Skip header row
+			loans_list_dict.clear()
+			for row in reader:
+				if len(row) >= 4:  # Vérifier qu'on a assez de colonnes
+					if row[3] == "":
+						loans_list_dict.append({
+						'Utilisateur_ID': row[0],
+						'Livre': row[1],
+						'Date_Emprunt': row[2],
+						'Date_Retour': None})
+					else:
+						loans_list_dict.append({
+						'Utilisateur_ID': row[0],
+						'Livre': row[1],
+						'Date_Emprunt': row[2],
+						'Date_Retour': row[3]})
 		print("\nLes emprunts ont été chargés depuis le fichier CSV.")
+		return None
 	else:
-		print("\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde.")
+		# print("\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde.")
+		return "\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde."
