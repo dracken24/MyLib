@@ -15,9 +15,6 @@ def calcul_emprunt_books(button: str):
     # print(f"{button} button Hit Action 5")
     affich_text = "--- La durée moyenne des emprunts, par genre ---\n"
     affich_text += "\n" + ("-" * 30)
-    # load_books_csv()
-    # load_loans_csv()
-    dict_button[button]["text"] = "--- La durée moyenne des emprunts, par genre ---"
     trier_genre()
     affich_text += calculer_moyenne(button)
     affich_text += "-" * 30 + "\n\n"
@@ -59,9 +56,6 @@ def calculer_moyenne(button: str):
         if len(days) == 0:
             continue
         else:
-            # print(f"{sum(days)} / {len(days)} = {sum(days)/len(days)}")
-            # print(f"{gen}: {sum(days)/len(days):.0f} jours")
-            # dict_button[button]["text"] += f"\n * {gen}: {sum(days)/len(days):.0f} jours"
             return_text += f"\n{gen}: {sum(days)/len(days):.0f} jours"
 
     return return_text + "\n\n"

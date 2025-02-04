@@ -59,6 +59,7 @@ def main():
             # if (action == True and text != "Exit" and text != "skip"):
             if (action == True and text != "Exit"):
                 affich_text = text
+                break
 
         entry_text: str = text_entry.get_text()
         if (entry_text):

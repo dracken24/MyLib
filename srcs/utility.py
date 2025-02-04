@@ -1,10 +1,11 @@
 from pyray import is_mouse_button_pressed, get_mouse_position, MOUSE_BUTTON_LEFT, Rectangle, DARKGRAY # Import for Raylib
 from pyray import begin_scissor_mode, end_scissor_mode, draw_text, measure_text, Rectangle, BLACK
 from pyray import draw_rectangle_rec, draw_rectangle_lines_ex, draw_text, check_collision_point_rec
-from pyray import begin_drawing, end_drawing, clear_background, get_screen_width, draw_text, window_should_close
-from pyray import LIGHTGRAY, DARKGRAY, WHITE, measure_text, draw_rectangle_rec, get_mouse_wheel_move
+from pyray import begin_drawing, end_drawing, clear_background, get_screen_width, draw_text
+from pyray import LIGHTGRAY, GRAY, DARKGRAY, WHITE, measure_text, draw_rectangle_rec, get_mouse_wheel_move
+from pyray import BLUE, DARKBLUE, DARKGREEN
 
-from init import WINDOW_TITLE, TEXT_BOX, text_entry, dict_button, TEXT_OFFSET
+from init import WINDOW_TITLE, TEXT_BOX, text_entry, TEXT_OFFSET, WINDOW_WIDTH
 
 from time import sleep
 
@@ -13,6 +14,23 @@ BORDER_COLOR = DARKGRAY
 BOARDER_THICK = 2
 
 BASE_CHOICE_STR = "Veuillez cliquer sur un boutton pour faire un choix\n"
+
+button_return = {
+    "title": "Retour Au Menu Principal",
+    "text": "",
+    "x": 10,
+    "y": 175,
+    "width": int(WINDOW_WIDTH - 20),
+    "height": 80,
+    "measure_text": 0,
+    "base_color": BLUE,
+    "hover_color": DARKBLUE,
+    "clicked_color": DARKGREEN,
+    "text_color": WHITE,
+    "is_clicked": False,
+    "action": 11
+}
+
 
 """Recursive function for draw and scroll text inside a box (rectangle)
     Args:
@@ -75,46 +93,51 @@ def adjust_text_in_box_and_draw_result(box: Rectangle, text: str, line_position:
 # Function neded for our Input
 # *************************************************************************************************** 
 
-def draw_clicked_button(button: str, rect: Rectangle):
-    draw_rectangle_rec(rect, dict_button[button]["clicked_color"])                     # Draw Button
-    draw_text(dict_button[button]["title"].encode('utf-8'), int(rect.x + rect.width / 2 - dict_button[button]["measure_text"]),    # Draw Text
-                int(rect.y + rect.height / 2 - 10), 20, dict_button[button]["text_color"])
+def draw_clicked_button(rect: Rectangle):
+    msur_text = measure_text(button_return["title"].encode('utf-8'), 20) / 2
+
+    draw_rectangle_rec(rect, button_return["clicked_color"])                     # Draw Button
+    draw_text(button_return["title"].encode('utf-8'), int(rect.x + rect.width / 2 - msur_text),    # Draw Text
+                int(rect.y + rect.height / 2 - 10), 20, button_return["text_color"])
     
     # Draw a button border
     draw_rectangle_lines_ex(rect, BOARDER_THICK, BORDER_COLOR)
 
 # *************************************************************************************************** 
 # Draw buttons without function association
+# *************************************************************************************************** 
 
 # Draw a button with a text and return if the mouse is over the button (Return True for close program)
-def draw_button_in_function(button: str) -> bool:
+def draw_return_button() -> bool:
     # Mount position and size button in a rectangle for easy use
-    rect = Rectangle(dict_button[button]["x"], dict_button[button]["y"], dict_button[button]["width"], dict_button[button]["height"])
+    rect = Rectangle(button_return["x"], button_return["y"], button_return["width"], button_return["height"])
+
+    msur_text = measure_text(button_return["title"].encode('utf-8'), 20) / 2
 
     # if mouser is over the button, Check collision with mouse and button
     if (check_collision_point_rec(get_mouse_position(), (rect.x, rect.y, rect.width, rect.height))):
         # If the mouse is over the button, check if the left mouse button is pressed and choose the good action
         if (is_mouse_button_pressed(MOUSE_BUTTON_LEFT)):
-            dict_button[button]["is_clicked"] = True  # Set True for the button clicked
+            button_return["is_clicked"] = True  # Set True for the button clicked
 
-            draw_clicked_button(button, rect)
+            draw_clicked_button(rect)
             # print("AAA")
             return True
 
         # If Mouse is over button but not clicked, Use this color of button (dict_button[button]["hover_color"])
-        elif dict_button[button]["is_clicked"] == False:
-            draw_rectangle_rec(rect, dict_button[button]["hover_color"])                      # Draw Button
-            draw_text(dict_button[button]["title"].encode('utf-8'), int(rect.x + rect.width / 2 - dict_button[button]["measure_text"]),    # Draw Text
-                        int(rect.y + rect.height / 2 - 10), 20, dict_button[button]["text_color"])
+        elif button_return["is_clicked"] == False:
+            draw_rectangle_rec(rect, button_return["hover_color"])                      # Draw Button
+            draw_text(button_return["title"].encode('utf-8'), int(rect.x + rect.width / 2 - msur_text),    # Draw Text
+                        int(rect.y + rect.height / 2 - 10), 20, button_return["text_color"])
         
         # If Mouse is over button and is clicked but mouse not release, Use this color of button (dict_button[button]["clicked_color"])
-        if dict_button[button]["is_clicked"] == True:
-            draw_clicked_button(button, rect)
+        if button_return["is_clicked"] == True:
+            draw_clicked_button(rect)
     # If Mouse is not over button and is not clicked, Use this color of button (dict_button[button]["base_color"])
     else:
-        draw_rectangle_rec(rect, dict_button[button]["base_color"])         # Draw Button
-        draw_text(dict_button[button]["title"].encode('utf-8'), int(rect.x + rect.width / 2 - dict_button[button]["measure_text"]),        # Draw Text
-                    int(rect.y + rect.height / 2 - 10), 20, dict_button[button]["text_color"])
+        draw_rectangle_rec(rect, button_return["base_color"])         # Draw Button
+        draw_text(button_return["title"].encode('utf-8'), int(rect.x + rect.width / 2 - msur_text),        # Draw Text
+                    int(rect.y + rect.height / 2 - 10), 20, button_return["text_color"])
         
     # Draw a button border
     draw_rectangle_lines_ex(rect, BOARDER_THICK, BORDER_COLOR)
@@ -127,7 +150,7 @@ def our_input(text_affichable: str, delay: int = 0) -> str:
     scroll_offset: int = 0      # The offset for the text in the box
     mouse_wheel_ct = 0          # Mouse wheel counter
 
-    while True and not window_should_close():
+    while True:
         # Get the wheel movement
         wheel_move = get_mouse_wheel_move()
         mouse_wheel_ct += wheel_move
@@ -143,13 +166,12 @@ def our_input(text_affichable: str, delay: int = 0) -> str:
         text_width = measure_text(WINDOW_TITLE.encode('utf-8'), 20)
         x_position = int(get_screen_width() / 2 - text_width / 2)
         # Clear screen with LIGHTGRAY color for reset UI at each frame (Use this color for backgroung)
-        clear_background(LIGHTGRAY)
+        clear_background(GRAY)
         draw_text(WINDOW_TITLE.encode('utf-8'), x_position, 15, 20, DARKGRAY)
         # Draw all buttons
-        for button in dict_button:
-            action = draw_button_in_function(button)
-            if (action == True and first_pass == False):
-                return EXIT_CODE
+        action = draw_return_button()
+        if (action == True and first_pass == False):
+            return EXIT_CODE
         first_pass = False
     
         text_entry.update_textBox()

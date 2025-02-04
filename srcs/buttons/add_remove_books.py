@@ -1,18 +1,12 @@
-# import sys
-# import os
-# sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-# import csv
-from init import dict_button, dict_books, dict_users, loans_list_dict
-from csv_control import save_loans_csv, save_books_csv, save_users_csv
+from init import dict_books
+from csv_control import save_books_csv
 from utility import our_input, EXIT_CODE, BASE_CHOICE_STR
-
-
 
 def add_remove_books(button: str):
 	"""Gestion des livres quand le bouton est cliqué"""
-	menu()
+	return_text = menu()
 
-	return BASE_CHOICE_STR
+	return return_text
 
 def remove_book_button(button):
 	print(f"{button} button Hit Action 1")
@@ -90,7 +84,7 @@ def display_books():
 	else:
 		text_affich += "\nAucun livre dans la bibliothèque.\n"
 	
-	our_input(text_affich + "\n" + BASE_CHOICE_STR)
+	return text_affich + "\n" + BASE_CHOICE_STR
 
 # Menu principal pour gérer les livres
 def menu():
@@ -107,30 +101,29 @@ def menu():
 		# choice = input("Choisissez une option (1-4) : ")
 		choice = our_input(invalid + text + "\nChoisissez une option (1-4) :")
 		if (choice == EXIT_CODE):
-			return
+			return BASE_CHOICE_STR
 
 		if choice == "1":
 			# print("\n\033[94mVous avez choisi: Ajouter un livre\033[0m")
 			add_book()
-			return
+			return BASE_CHOICE_STR
 		elif choice == "2":
 			# print("\n\033[94mVous avez choisi: Supprimer un livre\033[0m")
 			book_name = our_input("--- Gestion des livres ---\nVous avez choisi: Supprimer un livre\n\nTitre du livre à supprimer :")
 			if (book_name == EXIT_CODE):
-				return
+				return BASE_CHOICE_STR
 			# book_name = input("Titre du livre à supprimer : ")
 			return_remove = remove_book(book_name)
 			our_input(f"--- Gestion des livres ---\n\n{return_remove}\n\nVeuillez cliquer sur un boutton pour faire un choix")
-			return
+			return BASE_CHOICE_STR
 		elif choice == "3":
 			# print("\n\033[94mVous avez choisi: Afficher tous les livres\033[0m")
-			display_books()
-			return
+			return_text = display_books()
+			return return_text
 		
 		elif choice == "4":
 			# print("\nMerci d'avoir utilisé le gestionnaire de livres.")
-			our_input(f"--- Gestion des livres ---\n\nMerci d'avoir utilisé le gestionnaire de livres.\n\n" + BASE_CHOICE_STR)
-			break
+			return f"--- Gestion des livres ---\n\nMerci d'avoir utilisé le gestionnaire de livres.\n\n" + BASE_CHOICE_STR
 		else:
 			# print("Option invalide. Veuillez réessayer.")
 			invalid = "Option invalide. Veuillez réessayer.\n\n"
