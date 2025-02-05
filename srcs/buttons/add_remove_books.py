@@ -118,11 +118,12 @@ def menu():
 		elif choice == "3":
 			# print("\n\033[94mVous avez choisi: Afficher tous les livres\033[0m")
 			return_text = display_books()
-			return return_text
-		
+			our_input(return_text)
+			return
 		elif choice == "4":
 			# print("\nMerci d'avoir utilisé le gestionnaire de livres.")
-			return f"--- Gestion des livres ---\n\nMerci d'avoir utilisé le gestionnaire de livres.\n\n" + BASE_CHOICE_STR
+			our_input(f"--- Gestion des livres ---\n\nMerci d'avoir utilisé le gestionnaire de livres.\n\n" + BASE_CHOICE_STR)
+			return
 		else:
 			# print("Option invalide. Veuillez réessayer.")
 			invalid = "Option invalide. Veuillez réessayer.\n\n"

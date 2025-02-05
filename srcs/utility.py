@@ -13,7 +13,8 @@ EXIT_CODE = "!B@A#B$Y%S^H&A*R&K^Y%O$L#O@O!"
 BORDER_COLOR = DARKGRAY
 BOARDER_THICK = 2
 
-BASE_CHOICE_STR = "Veuillez cliquer sur un boutton pour faire un choix\n"
+BASE_CHOICE_STR = "Veuillez cliquer sur le bouton de retour\n"
+# BASE_CHOICE_STR = "Veuillez cliquer sur un boutton pour faire un choix\n"
 
 button_return = {
     "title": "Retour Au Menu Principal",
@@ -166,7 +167,7 @@ def our_input(text_affichable: str, delay: int = 0) -> str:
         text_width = measure_text(WINDOW_TITLE.encode('utf-8'), 20)
         x_position = int(get_screen_width() / 2 - text_width / 2)
         # Clear screen with LIGHTGRAY color for reset UI at each frame (Use this color for backgroung)
-        clear_background(GRAY)
+        clear_background(LIGHTGRAY)
         draw_text(WINDOW_TITLE.encode('utf-8'), x_position, 15, 20, DARKGRAY)
         # Draw all buttons
         action = draw_return_button()

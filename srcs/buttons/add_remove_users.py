@@ -18,18 +18,18 @@ def add_remove_users(button: str):
 def add_user():
 	"""Ajoute un nouvel utilisateur"""
 	# print("\n--- Ajouter un nouvel utilisateur ---")
-	prenom = our_input("Vous avez choisi: Ajouter un utilisateur\n--- Ajouter un nouvel utilisateur ---\n\nPrénom : ")
+	prenom = our_input("Vous avez choisi: Ajouter un utilisateur\n\n--- Ajouter un nouvel utilisateur ---\n\nPrénom : ")
 	if (prenom == EXIT_CODE):
 		return
 	# prenom = input("Prénom : ")
-	nom = our_input("Vous avez choisi: Ajouter un utilisateur\n--- Ajouter un nouvel utilisateur ---\n\nNom : ")
+	nom = our_input("Vous avez choisi: Ajouter un utilisateur\n\n--- Ajouter un nouvel utilisateur ---\n\nNom : ")
 	if (nom == EXIT_CODE):
 		return EXIT_CODE
 	# nom = input("Nom : ")
 	
 	invalid = ""
 	while True:
-		email = our_input(f"Vous avez choisi: Ajouter un utilisateur\n--- Ajouter un nouvel utilisateur ---\n\nEmail : {invalid}")
+		email = our_input(f"Vous avez choisi: Ajouter un utilisateur\n\n--- Ajouter un nouvel utilisateur ---\n\nEmail : {invalid}")
 		if (email == EXIT_CODE):
 			return EXIT_CODE
 		# email = input("Email (format: exemple@gmail.com) : ")
@@ -40,7 +40,7 @@ def add_user():
 
 	invalid = ""
 	while True:
-		telephone = our_input(f"Vous avez choisi: Ajouter un utilisateur\n--- Ajouter un nouvel utilisateur ---\n\nTéléphone (format: xxx-xxx-xxxx) : {invalid}")
+		telephone = our_input(f"Vous avez choisi: Ajouter un utilisateur\n\n--- Ajouter un nouvel utilisateur ---\n\nTéléphone (format: xxx-xxx-xxxx) : {invalid}")
 		if (telephone == EXIT_CODE):
 			return EXIT_CODE
 		# telephone = input("Téléphone (format: xxx-xxx-xxxx) : ")
@@ -107,10 +107,10 @@ def remove_user():
 
 def display_users():
 	"""Affiche tous les utilisateurs"""
-	return_text = "--- Gestion des utilisateurs ---\nVous avez choisi: Afficher tous les utilisateurs\n\n"
+	return_text = "--- Gestion des utilisateurs ---\n\nVous avez choisi: Afficher tous les utilisateurs\n"
 	if dict_users:
 		# print("\n--- Liste des utilisateurs ---")
-		return_text += "\n--- Liste des utilisateurs ---"
+		return_text += "\n--- Liste des utilisateurs ---\n"
 		for user_id, user in dict_users.items():
 			# print("-" * 30)
 			return_text += "-" * 30 + "\n"
@@ -139,43 +139,6 @@ def display_users():
 		# print("\nAucun utilisateur enregistré.")
 		return_text += "Aucun utilisateur enregistré.\n\n"
 		return return_text
-
-# def save_users_csv(file="users.csv"):
-# 	"""Sauvegarde les utilisateurs dans un fichier CSV"""
-# 	with open(file, "w", newline="", encoding="utf-8") as f:
-# 		writer = csv.writer(f)
-# 		writer.writerow(["ID", "Nom", "Prénom", "Email", "Téléphone", "Emprunts", "ListeLivreLu"])
-# 		for user_id, user in dict_users.items():
-# 			writer.writerow([
-# 				user_id,
-# 				user['Nom'],
-# 				user['Prénom'],
-# 				user['Email'],
-# 				user['Téléphone'],
-# 				user['Emprunts'],
-# 				";".join(user['ListeLivreLu']) if user['ListeLivreLu'] else ""
-# 			])
-
-# def load_users_csv(file="users.csv"):
-# 	"""Charge les utilisateurs depuis un fichier CSV"""
-# 	if os.path.exists(file):
-# 		with open(file, "r", encoding="utf-8") as f:
-# 			reader = csv.DictReader(f)  # Utiliser DictReader pour lire directement en dictionnaire
-# 			dict_users.clear()
-# 			for row in reader:
-# 				user_id = row['ID']
-# 				dict_users[user_id] = {
-# 					'Nom': row['Nom'],
-# 					'Prénom': row['Prénom'],
-# 					'Email': row['Email'],
-# 					'Téléphone': row['Téléphone'],
-# 					'Emprunts': int(row['Emprunts']),
-# 					'ListeLivreLu': row['ListeLivreLu'].split(";") if row['ListeLivreLu'] else []
-# 				}
-# 		return None
-# 	else:
-# 		# print("\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde.")
-# 		return "\nAucun fichier CSV trouvé. Création d'un nouveau fichier lors de la sauvegarde."
 
 def mettre_a_jour_emprunts_utilisateurs():
 	"""Met à jour les emprunts des utilisateurs à partir de la liste des prêts"""
