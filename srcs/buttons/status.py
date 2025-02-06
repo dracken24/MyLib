@@ -3,14 +3,16 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from init import dict_button, dict_books, dict_users, loans_list_dict
-# from buttons.add_remove_books import load_books_csv
-# from buttons.emprunt_retour_books import load_loans_csv
+from utility import our_input, BASE_CHOICE_STR, EXIT_CODE
 
 
 def status(button: str):
     print(f"{button} button Hit Action 7")
     stats = Stats(button)
-    stats.afficher_stats()
+    text = stats.afficher_stats()  # Afficher les statistiques
+    return_text = our_input(text + BASE_CHOICE_STR)
+    if (return_text == EXIT_CODE):
+        return
 
 
 BOOKS_FILE = "books.csv"  # Nom du fichier contenant les livres
@@ -81,26 +83,31 @@ class Stats:
         text += "-" * 40 + "\n"
         if self.button:
             dict_button[self.button]["text"] = text
-
-
-
-def menu_stats():
-    """Menu interactif pour afficher les statistiques"""
-    while True:
-        print("\n=== Menu des statistiques ===")
-        print("1. Afficher les statistiques\U0001F4CA")
-        print("2. Quitter\u274C")
         
-        choice = input("Choisissez une option (1-2) : ")
+        return text
+
+
+
+# def menu_stats():
+#     """Menu interactif pour afficher les statistiques"""
+#     while True:
+#         print("\n=== Menu des statistiques ===")
+#         print("1. Afficher les statistiques\U0001F4CA")
+#         print("2. Quitter\u274C")
         
-        if choice == "1":
-            stats = Stats()  # Créer un objet Stats
-            stats.afficher_stats()  # Afficher les statistiques
-        elif choice == "2":
-            print("\n\U0001F6AA Au revoir !")
-            break
-        else:
-            print("\u274C Option invalide, veuillez choisir 1 ou 2.")
+#         choice = input("Choisissez une option (1-2) : ")
+        
+#         if choice == "1":
+#             stats = Stats()  # Créer un objet Stats
+#             text = stats.afficher_stats()  # Afficher les statistiques
+#             return_text = our_input(text + BASE_CHOICE_STR)
+#             if (return_text == EXIT_CODE):
+#                 return
+#         elif choice == "2":
+#             print("\n\U0001F6AA Au revoir !")
+#             break
+#         else:
+#             print("\u274C Option invalide, veuillez choisir 1 ou 2.")
 
 # Exécuter le menu
 if __name__ == "__main__":
