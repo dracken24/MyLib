@@ -5,8 +5,12 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
+BOOKS_CSV_PATH = "csv/books.csv"
+USERS_CSV_PATH = "csv/users.csv"
+LOANS_CSV_PATH = "csv/loans.csv"
+
 # ****************************************** book.csv ******************************************
-def save_books_csv(file="books.csv"):
+def save_books_csv(file=BOOKS_CSV_PATH):
 	"""Sauvegarde les livres dans un fichier CSV"""
 	with open(file, "w", newline="", encoding="utf-8") as f:
 		writer = csv.writer(f)
@@ -23,7 +27,7 @@ def save_books_csv(file="books.csv"):
 
 
 # Charger les livres depuis un fichier CSV
-def load_books_csv(file="books.csv"):
+def load_books_csv(file=BOOKS_CSV_PATH):
 	"""Charge les livres depuis un fichier CSV"""
 	if os.path.exists(file):
 		with open(file, "r", encoding="utf-8") as f:
@@ -51,7 +55,7 @@ def load_books_csv(file="books.csv"):
 	
 # ****************************************** users.csv *****************************************
 
-def save_users_csv(file="users.csv"):
+def save_users_csv(file=USERS_CSV_PATH):
 	"""Sauvegarde les utilisateurs dans un fichier CSV"""
 	with open(file, "w", newline="", encoding="utf-8") as f:
 		writer = csv.writer(f)
@@ -67,7 +71,7 @@ def save_users_csv(file="users.csv"):
 				";".join(user['ListeLivreLu']) if user['ListeLivreLu'] else ""
 			])
 
-def load_users_csv(file="users.csv"):
+def load_users_csv(file=USERS_CSV_PATH):
 	"""Charge les utilisateurs depuis un fichier CSV"""
 	if os.path.exists(file):
 		with open(file, "r", encoding="utf-8") as f:
@@ -90,7 +94,7 @@ def load_users_csv(file="users.csv"):
 
 # ****************************************** loans.csv ******************************************
 
-def save_loans_csv(file="loans.csv"):
+def save_loans_csv(file=LOANS_CSV_PATH):
 	"""Sauvegarde les informations des emprunts dans un fichier CSV."""
 	with open(file, "w", newline="", encoding="utf-8") as f:
 		writer = csv.writer(f)
@@ -106,7 +110,7 @@ def save_loans_csv(file="loans.csv"):
 
 
 # Charger les emprunts depuis un fichier CSV
-def load_loans_csv(file="loans.csv"):
+def load_loans_csv(file=LOANS_CSV_PATH):
 	"""Charge les informations des emprunt depuis un fichier CSV."""
 	if os.path.exists(file):
 		with open(file, "r", encoding="utf-8") as f:
