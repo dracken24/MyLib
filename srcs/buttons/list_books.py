@@ -9,7 +9,7 @@ def list_books(button: str):
 
     print(verifier_livre_emprunt())
 
-    if dict_books == {} or verifier_livre_emprunt() == False:
+    if dict_books == {} or verifier_livre_emprunt() == False:   #Au cas ou il n'a pas de livres sauvegardees
         affich_text += "\n" + ("-" * 30)
         affich_text += "\nAucun livre enregistré.\n"
         affich_text += "-" * 30 + "\n\n"
@@ -23,7 +23,6 @@ def list_books(button: str):
 
         for s in sorted(dict_books.items(), key=lambda v: v[1]['Emprunts'], reverse=True)[:5]:
             count += 1
-            #affich_text += f'{count}. "{s[0]}": {s[1]["Emprunts"]} emprunt(s)\n'
             affich_text += f'* #{count}. "{s[0]}" - Emprunts : {s[1]["Emprunts"]}\n'
         affich_text += "\n" + "-" * 30 + "\n"
         affich_text += '\n'

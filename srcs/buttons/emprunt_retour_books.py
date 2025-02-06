@@ -161,7 +161,6 @@ def emprunt_retour_books(button: str):
 		#choix = our_input(affich_text + text + catch_return)
 		if (choix == EXIT_CODE):
 			return
-		# choix = input("\nChoisissez une option : ") # Come back later
 
 		if choix == "1":
 			affich_text = "--- Emprunter un livre en cours ---\n"
@@ -181,12 +180,12 @@ def emprunt_retour_books(button: str):
 			afficher_books()
 		if choix.lower() == "users" or choix.lower() == "u":
 			afficher_users()
+
 		else:
 			catch_return = "\nChoix invalide, réessayez."
 
 	# Trouver le client
 	while True:
-
 		text_u = "\n--Liste des utilisateurs--\n"	# Pour afficher une liste des utilisateurs
 		for user in dict_users.keys():
 			text_u += f'* {user} - {dict_users[user]["Prénom"]} {dict_users[user]["Nom"].upper()}\n'
@@ -203,9 +202,8 @@ def emprunt_retour_books(button: str):
 		elif client.lower() == "stop": # To exit loop
 			break
 	# Trouver le livre
-	if client_verifiee: # Next Step:
-		while True: # Trouver le livre
-
+	if client_verifiee:
+		while True:
 			text_b = "\n\n--Liste des livres--\n"
 			for book in dict_books.keys():
 				text_b += f'* {book}\n'
@@ -214,7 +212,6 @@ def emprunt_retour_books(button: str):
 			catch_return = ""
 			if (livre == EXIT_CODE):
 				return
-			# livre = input("\nEntrez le titre du livre : ").title()
 			livre_verifiee = rechercher_livre(livre)
 			if livre_verifiee:
 				catch_return = f'\033[92mLe livre "{livre_verifiee}" trouvé.\033[0m'
@@ -222,12 +219,12 @@ def emprunt_retour_books(button: str):
 			elif livre.lower() == "stop": # To exit loop
 				break
 
-	if client_verifiee and livre_verifiee: # Need to make fucntions for both options
+	if client_verifiee and livre_verifiee:
 		if choix == "1":
-			#print("\033[94mIt's a boy! (Emprunt)\033[0m")  # This line is a joke, should delete later
+			#print("\033[94mIt's a boy! (Emprunt)\033[0m")  # This line is a joke, for debuging
 			catch_return = emprunter_livre(client_verifiee, livre_verifiee)
 		if choix == "2":
-			#print("\033[95mIt's a girl! (Retour)\033[0m")  # This line is a joke, should delete later
+			#print("\033[95mIt's a girl! (Retour)\033[0m")  # This line is a joke, for debuging
 			catch_return = retour_livre(client_verifiee, livre_verifiee)
 		save_books_csv()
 		save_users_csv()
