@@ -50,7 +50,6 @@ def calcul_emprunt(year: str) -> list[str]:
 	
 	# Return values in order of months (1 to 12)
 	return_list = [month_count[str(i)] for i in range(1, 13)]
-	print("return_list: ", return_list)
 	return return_list
 
 #--------------------------------------------------------------------#
@@ -68,10 +67,12 @@ def Show_graphic(emprunt_list: list[str], year: str):
 	ax.set(ylabel = "Nombre d\'emprunt", title = f"Evolution des emprunts par mois pour l\'annee {year}", ylim = (0, max_value + 1))
 	ax.bar_label(bar_container, fmt='{:,.0f}')
 
+	# screen size
 	sceen_whide: int = 14
 	sceen_height: int = 7
 	fig.set_size_inches(sceen_whide, sceen_height)
 
+	# Show graph in new window
 	plt.show()
 
 #--------------------------------------------------------------------#
