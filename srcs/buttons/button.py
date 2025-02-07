@@ -2,19 +2,19 @@ from pyray import draw_rectangle_rec, draw_rectangle_lines_ex, draw_text, check_
 from pyray import is_mouse_button_pressed, get_mouse_position, MOUSE_BUTTON_LEFT, Rectangle, DARKGRAY # Import for Raylib
 from init import dict_button
 
+from buttons.emprunt_retour_books import emprunt_retour_books
+from buttons.calcul_emprunt_books import calcul_emprunt_books
+from buttons.monthly_evolution import monthly_evolution
+from buttons.ident_actif_users import ident_actif_users
 from buttons.add_remove_books import add_remove_books
 from buttons.add_remove_users import add_remove_users
-from buttons.emprunt_retour_books import emprunt_retour_books
 from buttons.list_books import list_books
-from buttons.calcul_emprunt_books import calcul_emprunt_books
-from buttons.ident_actif_users import ident_actif_users
-from buttons.status import status
 from buttons.diagram import diagram
-from buttons.monthly_evolution import monthly_evolution
+from buttons.status import status
 
-BOARDER_THICK = 2
-BORDER_COLOR = DARKGRAY
 BASE_CHOICE_STR = "Veuillez cliquer sur un boutton pour faire un choix\n"
+BORDER_COLOR = DARKGRAY
+BOARDER_THICK = 2
 
 def draw_clicked_button(button: str, rect: Rectangle):
     draw_rectangle_rec(rect, dict_button[button]["clicked_color"])                     # Draw Button
@@ -27,7 +27,12 @@ def draw_clicked_button(button: str, rect: Rectangle):
 # Draw a button with a text and return if the mouse is over the button (Return True for close program)
 def draw_button(button: str) -> tuple:
     # Mount position and size button in a rectangle for easy use
-    rect = Rectangle(dict_button[button]["x"], dict_button[button]["y"], dict_button[button]["width"], dict_button[button]["height"])
+    rect = Rectangle(
+        dict_button[button]["x"],
+        dict_button[button]["y"],
+        dict_button[button]["width"],
+        dict_button[button]["height"]
+    )
 
     # if mouser is over the button, Check collision with mouse and button
     if (check_collision_point_rec(get_mouse_position(), (rect.x, rect.y, rect.width, rect.height))):

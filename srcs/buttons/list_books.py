@@ -1,4 +1,4 @@
-from init import dict_button, dict_books
+from init import dict_books
 from utility import our_input, BASE_CHOICE_STR
 
 # List the most borrowed books - DONE

@@ -2,7 +2,7 @@ import csv
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-from init import dict_button, dict_books, dict_users, loans_list_dict
+from init import dict_books, dict_users, loans_list_dict
 from utility import our_input, BASE_CHOICE_STR, EXIT_CODE
 
 
@@ -59,56 +59,16 @@ class Stats:
     def afficher_stats(self):
         """Affiche les statistiques de la bibliothèque"""
         text =""
-        print("-" * 40)
         text += "-" * 40 + "\n"
-        print("\U0001F4CA Statistiques de la bibliothèque")
         text += "\U0001F4CA Statistiques de la bibliothèque\n"
-        print("-" * 40)
         text += "-" * 40 + "\n"
-        print(f"* Nombre total de titres (livres différents) : {self.nombre_total_livre}")
         text += f"* Nombre total de titres (livres différents) : {self.nombre_total_livre}\n"
-        print(f"* Nombre total d'exemplaires (tous livres confondus) : {self.nombre_total_exemplaires}")
         text += f"* Nombre total d'exemplaires (tous livres confondus) : {self.nombre_total_exemplaires}\n"
-        print(f"* Nombre total d'exemplaires empruntés : {self.nombre_total_exemplaire_emprunt}")
         text += f"* Nombre total d'exemplaires empruntés : {self.nombre_total_exemplaire_emprunt}\n"
-        print(f"* Nombre d'exemplaires disponibles : {self.nombre_livres_disponibles}")
         text += f"* Nombre d'exemplaires disponibles : {self.nombre_livres_disponibles}\n"
-        print(f"* Pourcentage de livres disponibles : {self.pourcentage_livre_disponible:.2f}%")
         text += f"* Pourcentage de livres disponibles : {self.pourcentage_livre_disponible:.2f}%\n"
-        print(f"* Nombre d'utilisateurs : {self.nombre_utilisateurs}")
         text += f"* Nombre d'utilisateurs : {self.nombre_utilisateurs}\n"
-        print(f"* Moyenne de livres empruntés par utilisateur : {self.nombre_de_livre_moyen_par_utilisateur:.2f}")
         text += f"* Moyenne de livres empruntés par utilisateur : {self.nombre_de_livre_moyen_par_utilisateur:.2f}\n"
-        print("-" * 40)
         text += "-" * 40 + "\n"
-        if self.button:
-            dict_button[self.button]["text"] = text
         
         return text
-
-
-
-# def menu_stats():
-#     """Menu interactif pour afficher les statistiques"""
-#     while True:
-#         print("\n=== Menu des statistiques ===")
-#         print("1. Afficher les statistiques\U0001F4CA")
-#         print("2. Quitter\u274C")
-        
-#         choice = input("Choisissez une option (1-2) : ")
-        
-#         if choice == "1":
-#             stats = Stats()  # Créer un objet Stats
-#             text = stats.afficher_stats()  # Afficher les statistiques
-#             return_text = our_input(text + BASE_CHOICE_STR)
-#             if (return_text == EXIT_CODE):
-#                 return
-#         elif choice == "2":
-#             print("\n\U0001F6AA Au revoir !")
-#             break
-#         else:
-#             print("\u274C Option invalide, veuillez choisir 1 ou 2.")
-
-# Exécuter le menu
-if __name__ == "__main__":
-    menu_stats()

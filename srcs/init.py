@@ -13,7 +13,12 @@ TEXT_OFFSET = 20
 FONT_COLOR = DARKGRAY
 BUTTON_HEIGHT = int(30 + 5)
 
-TEXT_BOX: Rectangle = Rectangle(10, int(WINDOW_HEIGHT / 4 * 3) - 90, int(WINDOW_WIDTH - 20), int(WINDOW_HEIGHT / 4 - 10) + 89) # Make rectangle from values
+TEXT_BOX: Rectangle = Rectangle(
+	10,
+	int(WINDOW_HEIGHT / 4 * 3) - 90,
+	int(WINDOW_WIDTH - 20),
+	int(WINDOW_HEIGHT / 4 - 10) + 89
+) # Make rectangle from values
 
 # Text_entry init
 
@@ -28,7 +33,6 @@ text_entry: TextEntry = TextEntry(
 dict_button = {
 	"add_book": {  # Name for the button in dico (Key)
 		"title": "Ajouter ou supprimer un livre dans la bibliotheque",	# Text visible on button
-		"text": "",	# Text for write on textBox
 		"x": 10,                            	# position x
 		"y": BUTTON_HEIGHT + 10,            	# position y
 		"width": int(WINDOW_WIDTH - 20),    	# Button width
@@ -43,7 +47,6 @@ dict_button = {
 	},
 	"add_user": {
 		"title": "Ajouter ou supprimer un utilisateur",
-		"text": "",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 2) + 10,
 		"width": int(WINDOW_WIDTH - 20),
@@ -58,7 +61,6 @@ dict_button = {
 	},
 	"emprunt": {
 		"title": "Enregistrer un emprunt ou un retour",
-		"text": "",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 3) + 10,
 		"width": int(WINDOW_WIDTH - 20),
@@ -73,7 +75,6 @@ dict_button = {
 	},
 	"lister": {
 		"title": "Lister les livres les plus empruntes",
-		"text": "",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 4) + 10,
 		"width": int(WINDOW_WIDTH - 20),
@@ -88,7 +89,6 @@ dict_button = {
 	},
 	"calculer": {
 		"title": "Calculer la duree moyenne des emprunts par genre",
-		"text": "",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 5) + 10,
 		"width": int(WINDOW_WIDTH - 20),
@@ -103,7 +103,6 @@ dict_button = {
 	},
 	"identifier": {
 		"title": "Identifier les utilisateurs les plus actifs",
-		"text": "",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 6) + 10,
 		"width": int(WINDOW_WIDTH - 20),
@@ -118,7 +117,6 @@ dict_button = {
 	},
 	"status": {
 		"title": "Afficher le statut de la bibliotheque sous forme de statistiques",
-		"text": "",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 7) + 10,
 		"width": int(WINDOW_WIDTH - 20),
@@ -133,7 +131,6 @@ dict_button = {
 	},
 	"diagramme": {
 		"title": "Visualisation: Diagramme circulaire des emprunts par genre",
-		"text": "",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 8) + 10,
 		"width": int(WINDOW_WIDTH - 20),
@@ -148,7 +145,6 @@ dict_button = {
 	},
 	"evolution": {
 		"title": "Visualisation: Evolution mensuelle des emprunt",
-		"text": "",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 9) + 10,
 		"width": int(WINDOW_WIDTH - 20),
@@ -163,7 +159,6 @@ dict_button = {
 	},
 	"quitter": {
 		"title": "Quitter",
-		"text": "",
 		"x": 10,
 		"y": int(BUTTON_HEIGHT * 10) + 20,
 		"width": int(WINDOW_WIDTH - 20),
@@ -178,114 +173,11 @@ dict_button = {
 	}
 }
 
-dict_books: dict = {
-	# "Python Programming": {
-	# 	"Auteur": "John Doe",
-	# 	"Genre": "Programmation",
-	# 	"Exemplaires": 5,
-	# 	"Emprunts": 10
-	# },
-	# "The Great Gatsby": {
-	# 	"Auteur": "F. Scott Fitzgerald",
-	# 	"Genre": "Roman",
-	# 	"Exemplaires": 2,
-	# 	"Emprunts": 7
-	# },
-	# "1": {
-	# 	"Auteur": "A",
-	# 	"Genre": "Roman",
-	# 	"Exemplaires": 5,
-	# 	"Emprunts": 10
-	# },
-	# "2": {
-	# 	"Auteur": "B",
-	# 	"Genre": "Programmation",
-	# 	"Exemplaires": 11,
-	# 	"Emprunts": 20
-	# },
-	# "3": {
-	# 	"Auteur": "C",
-	# 	"Genre": "Programmation",
-	# 	"Exemplaires": 1,
-	# 	"Emprunts": 5
-	# },
-	# "4": {
-	# 	"Auteur": "D",
-	# 	"Genre": "Test",
-	# 	"Exemplaires": 2,
-	# 	"Emprunts": 8
-	# }
-}
+dict_books: dict = {}
 
-dict_users = {
-	# "1": {
-	# 	"Nom": "Smith",
-	# 	"Prénom": "Alice",
-	# 	"Email": "alice@gmail.com",
-	# 	"Téléphone": "514-888-9696",
-	# 	"Emprunts": 5,
-	# 	"ListeLivreLu":["Python Programming","The Great Gatsby","Marx's Inferno",
-	# 	"Atomic Habits"]
-	# },
-	# "2": {
-	# 	"Nom": "Brown",
-	# 	"Prénom": "Bob",
-	# 	"Email": "bob@gmail.com",
-	# 	"Téléphone": "430-568-8985",
-	# 	"Emprunts": 2,
-	# 	"ListeLivreLu":["Python Programming","The Great Gatsby"]
-		
-	# },
-	# "3": {
-	# 	"Nom": "Johnson",
-	# 	"Prénom": "Charlie",
-	# 	"Email": "charlie@gmail.com",
-	# 	"Téléphone": "514-888-9696",
-	# 	"Emprunts": 22,
-	# 	"ListeLivreLu":["Python Programming","The Great Gatsby","Marx's Inferno"]
-	# },
-	# "4": {
-	# 	"Nom": "Williams",
-	# 	"Prénom": "David",
-	# 	"Email": "david@gmail.com",
-	# 	"Téléphone": "514-888-9696",
-	# 	"Emprunts": 1000000,
-	# 	"ListeLivreLu":["Python Programming","The Great Gatsby","Marx's Inferno","Atomic Habits et +"]
-	# }
-}
+dict_users: dict = {}
 
-loans_list_dict = [
-	# {
-	# 	"Utilisateur_ID": "1",
-	# 	"Livre": "Python Programming",
-	# 	"Date_Emprunt": "2024-12-01",
-	# 	"Date_Retour": "2024-12-10"
-	# },
-	# {
-	# 	"Utilisateur_ID": "2",
-	# 	"Livre": "The Great Gatsby",
-	# 	"Date_Emprunt": "2024-11-25",
-	# 	"Date_Retour": "2024-12-10"
-	# },
-	# {
-	# 	"Utilisateur_ID": "1",
-	# 	"Livre": "1",
-	# 	"Date_Emprunt": "2024-11-25",
-	# 	"Date_Retour": "2024-11-30"
-	# },
-	# {
-	# 	"Utilisateur_ID": "2",
-	# 	"Livre": "2",
-	# 	"Date_Emprunt": "2024-02-05",
-	# 	"Date_Retour": "2024-03-15"
-	# },
-	# {
-	# 	"Utilisateur_ID": "1",
-	# 	"Livre": "3",
-	# 	"Date_Emprunt": "2024-02-05",
-	# 	"Date_Retour": None
-	# }
-]
+loans_list_dict: list = []
 
 # init principal variables for the program
 def init():

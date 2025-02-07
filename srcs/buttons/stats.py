@@ -2,7 +2,7 @@ import csv
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-from init import dict_button, dict_books, dict_users, loans_list_dict
+from init import dict_books, dict_users, loans_list_dict
 
 BOOKS_FILE = "books.csv"  # Nom du fichier contenant les livres
 
@@ -86,10 +86,7 @@ def stats(button: str):
     if len(dict_users) > 0:
         moyenne_emprunts = total_emprunts / len(dict_users)
         text += f"Moyenne d'emprunts par utilisateur : {moyenne_emprunts:.2f}\n"
-    
-    dict_button[button]["text"] = text
-    print(f"{button} button Hit Action 7")
 
-# Exécuter le menu
-if __name__ == "__main__":
-    menu_stats()
+# # Exécuter le menu
+# if __name__ == "__main__":
+#     menu_stats()

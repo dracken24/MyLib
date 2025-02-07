@@ -1,6 +1,6 @@
 import sys
 import os
-from init import dict_button, loans_list_dict, dict_books
+from init import loans_list_dict, dict_books
 from utility import our_input, BASE_CHOICE_STR
 from datetime import datetime
 

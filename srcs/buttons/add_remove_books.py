@@ -68,7 +68,7 @@ def remove_book(book_name):
 # Afficher tous les livres
 def display_books():
 	"""Affiche les informations de tous les livres."""
-	text_affich: str = "--- Gestion des livres ---\n"
+	text_affich: str = "--- Gestion des livres ---\n\n"
 	if dict_books:
 		# print("\n--- Liste des livres dans la bibliothèque ---")
 		text_affich += "--- Liste des livres dans la bibliothèque ---\n\n"

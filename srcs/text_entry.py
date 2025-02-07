@@ -132,7 +132,7 @@ class TextEntry:
                                 # GET
 ########################################################################
 
-	# Get text if enter key is pressed
+	# Get text if enter key is pressed else, return None
 	def get_text(self) -> str:
 		if (is_key_pressed(KEY_ENTER)):
 			text_temp: str = self.__text

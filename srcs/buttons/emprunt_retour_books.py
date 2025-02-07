@@ -1,6 +1,6 @@
 import sys
 import os
-from init import dict_button, dict_books, dict_users, loans_list_dict
+from init import dict_books, dict_users, loans_list_dict
 from datetime import datetime, timedelta
 from csv_control import save_loans_csv, save_books_csv, save_users_csv
 from utility import our_input, EXIT_CODE, BASE_CHOICE_STR

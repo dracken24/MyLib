@@ -10,9 +10,6 @@ from utility import our_input, EXIT_CODE, BASE_CHOICE_STR
 
 def add_remove_users(button: str):
 	"""Gestion des utilisateurs quand le bouton est cliqué"""
-
-	
-	# dict_button[button]["text"] = text
 	menu()
 
 def add_user():
