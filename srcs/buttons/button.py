@@ -1,4 +1,5 @@
-from pyray import draw_rectangle_rec, draw_rectangle_lines_ex, draw_text, check_collision_point_rec, is_mouse_button_pressed, get_mouse_position, MOUSE_BUTTON_LEFT, Rectangle, DARKGRAY # Import for Raylib
+from pyray import draw_rectangle_rec, draw_rectangle_lines_ex, draw_text, check_collision_point_rec
+from pyray import is_mouse_button_pressed, get_mouse_position, MOUSE_BUTTON_LEFT, Rectangle, DARKGRAY # Import for Raylib
 from init import dict_button
 
 from buttons.add_remove_books import add_remove_books

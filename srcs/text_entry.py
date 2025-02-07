@@ -42,10 +42,10 @@ class TextEntry:
 		if (self.__is_active):
 			cursor_x = text_pos_x + measure_text(text_subtext(self.__text, 0, self.__cursor_position), self.__font_size)
 			draw_line_ex(
-				Vector2(cursor_x, self.__rect.y + 4), 					# Starting point of the line
+				Vector2(cursor_x, self.__rect.y + 4), 						# Starting point of the line
 				Vector2(cursor_x, self.__rect.y + self.__rect.height - 4),	# End point of the line
-				2, 														# thick
-				MAROON													# Color
+				2, 															# thick
+				MAROON														# Color
 			)
 
 	# update the textBox
@@ -140,4 +140,3 @@ class TextEntry:
 			return text_temp
 		
 		return None
-		
