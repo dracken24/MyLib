@@ -1,6 +1,12 @@
 # MyLib
 
-Team project
+Projet de groupe avec:
+- Jean-François Lefebvre
+- Natacha Meyer
+- Nadia Desjardins
+
+Pour le cours de programmation 1
+Le projet choisi est MyLib, un programme de gestion d'une bibliotheque avec une getion des livres, des utilisateurs, d'emprunts et de retour de livres avec un interface graphique fonctionnel.
 
 Install raylib. First make sure you have the latest pip installed:
 ```
