@@ -69,7 +69,6 @@ def draw_button(button: str) -> tuple:
                 monthly_evolution(button)           # Action for the button monthly_evolution clicked
                 draw_clicked_button(button, rect)
             elif dict_button[button]["action"] == 11:
-                print(f"{button} button Hit Action 10") # EXIT
                 return True, "Exit", True
             return False, BASE_CHOICE_STR, True
             # *************************************************************************************************** 
