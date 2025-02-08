@@ -54,7 +54,6 @@ def main():
 		# Draw all buttons
 		for button in dict_button:
 			quit_ct, text, action = draw_button(button)
-			# if (action == True and text != "Exit" and text != "skip"):
 			if (action == True and text != "Exit"):
 				affich_text = text
 				break

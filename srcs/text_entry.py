@@ -1,12 +1,29 @@
 # Import for Raylib
-from pyray import get_mouse_position, check_collision_point_rec, set_mouse_cursor, is_mouse_button_pressed
-from pyray import draw_line_ex, begin_scissor_mode, end_scissor_mode, is_mouse_button_pressed
-from pyray import get_char_pressed, is_key_down, text_subtext, Rectangle, get_mouse_position
-from pyray import Vector2 ,Color, draw_rectangle_rec, draw_rectangle_lines_ex, draw_text
-from pyray import measure_text, text_subtext, check_collision_point_rec, is_key_pressed
-from pyray import MOUSE_CURSOR_IBEAM, MOUSE_LEFT_BUTTON, MOUSE_CURSOR_DEFAULT, KEY_BACKSPACE
-from pyray import KEY_DELETE, KEY_LEFT, KEY_RIGHT, KEY_ENTER
-from pyray import MAROON, BLACK, DARKBLUE, WHITE
+from pyray import (
+    # Window/Drawing functions
+    begin_scissor_mode, end_scissor_mode,
+    
+    # Text functions
+    draw_text, measure_text, text_subtext,
+    
+    # Mouse/Input functions
+    get_mouse_position, set_mouse_cursor, get_char_pressed, is_key_down,
+    is_mouse_button_pressed,is_key_pressed,
+    
+    # Shapes/Drawing
+    Rectangle, draw_rectangle_rec, draw_rectangle_lines_ex, draw_line_ex,
+    Vector2, Color,
+    
+    # Collision
+    check_collision_point_rec,
+    
+    # Constants - Colors
+    DARKBLUE, MAROON, BLACK, WHITE,
+    
+    # Constants - Input
+    MOUSE_CURSOR_IBEAM, MOUSE_CURSOR_DEFAULT, MOUSE_LEFT_BUTTON,
+    KEY_BACKSPACE, KEY_DELETE, KEY_LEFT, KEY_RIGHT, KEY_ENTER
+)
 
 LIGHTDARKGREEN = ( 0, 166, 69, 255 )
 

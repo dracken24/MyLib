@@ -1,11 +1,9 @@
-import sys
-import os
 from init import dict_books, dict_users, loans_list_dict
 from datetime import datetime, timedelta
 from csv_control import save_loans_csv, save_books_csv, save_users_csv
 from utility import our_input, EXIT_CODE, BASE_CHOICE_STR
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
+# ------------------------------------------------------------------------------------ #
 # Affichage for DEBUG
 def afficher_users():
 	print("\n\033[1m\033[4m--List of Users--\033[0m")
@@ -17,9 +15,9 @@ def afficher_users():
 		print(f'Téléphone: {dict_users[user]["Téléphone"]}')
 		print(f'Emprunts: {dict_users[user]["Emprunts"]}')
 		print(f'Liste Livre Lu:')
-		#print(f'ListeLivreLu: {dict_users[user]["ListeLivreLu"]}')
 		for livre in dict_users[user]["ListeLivreLu"]:
 			print(f' - {livre}')
+
 def afficher_books():
 	print("\n\033[1m\033[4m--List of Books--\033[0m")
 	for book in dict_books.keys():
@@ -28,6 +26,7 @@ def afficher_books():
 		print(f"Genre: {dict_books[book]["Genre"]}")
 		print(f"Exemplaires: {dict_books[book]["Exemplaires"]}")
 		print(f"Emprunts: {dict_books[book]["Emprunts"]}")
+
 def afficher_loans():
 	print("\n\033[1m\033[4m--List of Loans--\033[0m")
 	for loan in loans_list_dict:
@@ -36,6 +35,8 @@ def afficher_loans():
 		print(f"Date_Emprunt: {loan["Date_Emprunt"]}")
 		print(f"Date_Retour: {loan["Date_Retour"]}")
 
+# ------------------------------------------------------------------------------------ #
+
 # Rechercher of dicts
 def rechercher_user(id):
 	for user in dict_users:
@@ -43,6 +44,7 @@ def rechercher_user(id):
 			return user
 	print(f"\033[91mAuncun utilisateur sous ce code d'identité {id} retrouvé.\033[0m")
 	return None
+
 def rechercher_livre(titre):
 	for livre in dict_books:
 		if livre == titre:
@@ -101,7 +103,6 @@ def emprunter_livre(id, titre):
 		if dict_books[titre]["Exemplaires"] <= 0:
 			return "\nIl n'y a plus d'exemplaires disponibles à ce moment.\n\n"
 		our_input("--- Emprunt ou Retour de Livres ---\n\n" + "Ce livre est disponible à emprunter", 3)
-		# sleep(1)
 
 		# Enlever l'exemplaire
 		dict_books[titre]["Exemplaires"] -= 1
@@ -126,10 +127,6 @@ def emprunter_livre(id, titre):
 			f'à la date du {loan["Date_Emprunt"]}: \n'
 			f'à retourner avant le {date_exp}.\n'
 		)
-		# our_input(text, 3)
-
-		# return catch_return + f'Livre "{titre}" emprunté avec succès.\n\n'
-		# return text + catch_return + f'Livre "{titre}" emprunté avec succès.\n\n'
 		return f'\nLivre "{titre}" emprunté avec succès.\n' + text + catch_return + '\n'
 	else:
 		return "\nLivre inexistant dans la bibliothèque\n\n"
@@ -138,15 +135,12 @@ def ajouter_livreLu(id, livre):
 	dict_users[id]["ListeLivreLu"]
 	if livre in dict_users[id]["ListeLivreLu"]:
 		return f"\n{dict_users[id]["Prénom"]} a déjà lu ce livre : Liste de livres lus non changée.\n"
-		# return f"\nLivre Deja lu\n"
 	else:
 		dict_users[id]["ListeLivreLu"].append(livre)
 		return f"\n{dict_users[id]["Prénom"]} n'a pas lu ce livre : Liste de livres lus mis à jour.\n"
-		# return f"\nLivre no lu avant\n"
 
 # Record a loan or return - MAIN FUNCTION HERE!
 def emprunt_retour_books(button: str):
-	# print(f"{button} button Hit Action 3")
 	affich_text = "--- Gestion des emprunts ou retours ---\n"
 	catch_return = ""
 
@@ -158,7 +152,6 @@ def emprunt_retour_books(button: str):
 
 	while True:
 		choix = our_input(affich_text + text + "\nChoisissez une option (1-3) :")
-		#choix = our_input(affich_text + text + catch_return)
 		if (choix == EXIT_CODE):
 			return
 
@@ -221,14 +214,11 @@ def emprunt_retour_books(button: str):
 
 	if client_verifiee and livre_verifiee:
 		if choix == "1":
-			#print("\033[94mIt's a boy! (Emprunt)\033[0m")  # This line is a joke, for debuging
 			catch_return = emprunter_livre(client_verifiee, livre_verifiee)
 		if choix == "2":
-			#print("\033[95mIt's a girl! (Retour)\033[0m")  # This line is a joke, for debuging
 			catch_return = retour_livre(client_verifiee, livre_verifiee)
 		save_books_csv()
 		save_users_csv()
 		save_loans_csv()
 
 	our_input(affich_text + catch_return + BASE_CHOICE_STR)
-	# print(f"{button} button Hit Action 11 input text")

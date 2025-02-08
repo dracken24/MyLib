@@ -183,7 +183,7 @@ loans_list_dict: list = []
 def init():
 	# Window init
 	init_window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE.encode('utf-8'))
-	set_target_fps(10)  # FPS to 10 frame sec
+	set_target_fps(12)  # FPS to 12 frame sec
 	
 	for b in loans_list_dict:
 		print(b)

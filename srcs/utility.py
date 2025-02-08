@@ -1,9 +1,27 @@
-from pyray import is_mouse_button_pressed, get_mouse_position, MOUSE_BUTTON_LEFT, Rectangle, DARKGRAY # Import for Raylib
-from pyray import begin_scissor_mode, end_scissor_mode, draw_text, measure_text, Rectangle, BLACK
-from pyray import draw_rectangle_rec, draw_rectangle_lines_ex, draw_text, check_collision_point_rec
-from pyray import begin_drawing, end_drawing, clear_background, get_screen_width, draw_text
-from pyray import LIGHTGRAY, GRAY, DARKGRAY, WHITE, measure_text, draw_rectangle_rec, get_mouse_wheel_move
-from pyray import BLUE, DARKBLUE, DARKGREEN
+# Import for Raylib
+from pyray import (
+    # Window/Drawing functions
+    begin_scissor_mode, end_scissor_mode, get_screen_width,
+	begin_drawing, clear_background, end_drawing,
+    
+    # Text functions
+    draw_text, measure_text,
+    
+    # Mouse/Input functions
+    get_mouse_position, is_mouse_button_pressed, get_mouse_wheel_move,
+    
+    # Shapes/Drawing
+    Rectangle, draw_rectangle_rec, draw_rectangle_lines_ex,
+    
+    # Collision
+    check_collision_point_rec,
+    
+    # Constants - Colors
+    DARKBLUE, BLACK, WHITE, DARKGRAY, BLUE, DARKGREEN, LIGHTGRAY,
+    
+    # Constants - Input
+    MOUSE_BUTTON_LEFT
+)
 
 from init import WINDOW_TITLE, TEXT_BOX, text_entry, TEXT_OFFSET, WINDOW_WIDTH
 
@@ -29,7 +47,6 @@ button_return = {
 	"is_clicked": False,
 	"action": 11
 }
-
 
 """Recursive function for draw and scroll text inside a box (rectangle)
 	Args:
@@ -66,7 +83,6 @@ def adjust_text_in_box_and_draw_result(box: Rectangle, text: str, line_position:
 
 	# if the text is to whide for the box or \n find in line
 	if text_width > writable_length or find == True:
-
 		# Erase that line from the text at max length or at the \n(ct + 1 for skip \n)
 		if (find == True):
 			text = text[ct + 1:]
@@ -89,7 +105,7 @@ def adjust_text_in_box_and_draw_result(box: Rectangle, text: str, line_position:
 	return line_ct
 
 # *************************************************************************************************** 
-# Function neded for our Input
+# Functions neded for our Input
 # *************************************************************************************************** 
 
 def draw_clicked_button(rect: Rectangle):
@@ -102,9 +118,9 @@ def draw_clicked_button(rect: Rectangle):
 	# Draw a button border
 	draw_rectangle_lines_ex(rect, BOARDER_THICK, BORDER_COLOR)
 
-# *************************************************************************************************** 
+# --------------------------------------------------------------------------------------------------
 # Draw buttons without function association
-# *************************************************************************************************** 
+# --------------------------------------------------------------------------------------------------
 
 # Draw a button without associating function with a text and
 # return if the mouse is over the button (Return True for close program)

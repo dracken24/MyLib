@@ -9,7 +9,7 @@ from csv_control import load_users_csv  # Add this import
 # from buttons.add_remove_users import load_users_csv  # On supprime `User` qui n'est pas utilisé ici
 
 USERS_FILE = "csv/users.csv"  # Nom du fichier contenant les utilisateurs et leurs emprunts
-dict_users_tmp = {}
+dict_users_tmp = {} # Pour calculer le nombre d'emprunt
 
 def load_users_with_loans():
     """Charge les utilisateurs et leurs emprunts depuis `users.csv` et met à jour avec loans_list_dict."""
@@ -36,7 +36,6 @@ def load_users_with_loans():
 
 # Identifier les utilisateurs les plus actifs
 def ident_actif_users(button: str):
-    # print(f"{button} button Hit Action 6")
     afficher_utilisateurs_plus_actifs()
 
 def afficher_utilisateurs_plus_actifs(nombre_top=3):
