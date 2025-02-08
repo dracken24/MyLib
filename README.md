@@ -45,3 +45,5 @@ c:\Users\[utilisateur]\AppData\Local\Programs\Python\Python313\python.exe -m pip
 [Raylib documentation](https://www.raylib.com/cheatsheet/cheatsheet.html)
 
 [Raylib Python Documentation](https://electronstudio.github.io/raylib-python-cffi/)
+
+Projet MyLib on [GitHub](https://github.com/dracken24/MyLib)
