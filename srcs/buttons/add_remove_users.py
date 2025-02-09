@@ -1,5 +1,3 @@
-import sys
-import os
 import re
 
 from init import dict_users, loans_list_dict
@@ -94,7 +92,7 @@ def display_users():
 		return_text += "\n--- Liste des utilisateurs ---\n"
 		for user_id, user in dict_users.items():
 			return_text += "-" * 30 + "\n"
-			return_text += f"ID : {user_id}"
+			return_text += f"ID : {user_id}\n"
 			return_text += f"Nom : {user['Nom']}\n"
 			return_text += f"Prénom : {user['Prénom']}\n"
 			return_text += f"Email : {user['Email']}\n"

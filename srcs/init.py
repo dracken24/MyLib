@@ -185,8 +185,8 @@ def init():
 	init_window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE.encode('utf-8'))
 	set_target_fps(12)  # FPS to 12 frame sec
 	
-	for b in loans_list_dict:
-		print(b)
+	# for b in loans_list_dict:
+	# 	print(b)
 
 	# Init each text wide in pixel for center text in button
 	for button in dict_button:

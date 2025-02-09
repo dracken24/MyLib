@@ -42,7 +42,7 @@ def draw_button(button: str) -> tuple:
 
             # ***************************************Actions for Buttons*****************************************
             if dict_button[button]["action"] == 1:
-                text = add_remove_books(button)            # Action for the button add_remove_books clicked
+                add_remove_books(button)            # Action for the button add_remove_books clicked
                 draw_clicked_button(button, rect)
             elif dict_button[button]["action"] == 2:
                 add_remove_users(button)            # Action for the button add_remove_users clicked

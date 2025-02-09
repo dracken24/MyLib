@@ -27,7 +27,6 @@ def main():
 	mouse_wheel_ct = 0          		# Mouse wheel counter
 	line_ct: int = 0            		# Line counter
 
-	
 	# Draw title text
 	text_width = measure_text(WINDOW_TITLE.encode('utf-8'), 20) # For center the text in window
 	x_position = int(get_screen_width() / 2 - text_width / 2)
