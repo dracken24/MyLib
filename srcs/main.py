@@ -6,7 +6,7 @@ from pyray import (
 )
 
 from init import init, text_entry, TEXT_OFFSET, WINDOW_TITLE,dict_button, TEXT_BOX
-from utility import adjust_text_in_box_and_draw_result, BASE_CHOICE_STR
+from utility import adjust_text_in_box_and_draw_result
 from buttons.button import draw_button
 
 from csv_control import load_books_csv, load_loans_csv, load_users_csv
@@ -22,7 +22,7 @@ def main():
 	load_users_csv()
 
 	quit_ct: bool = False         		# Counter for the exit button to quit main loop
-	affich_text: str = BASE_CHOICE_STR	# Text visible on the textBox
+	affich_text: str = "Veuillez cliquer sur un boutton pour faire un choix"	# Text visible on the textBox
 	scroll_offset: int = 0      		# The offset for the text in the box
 	mouse_wheel_ct = 0          		# Mouse wheel counter
 	line_ct: int = 0            		# Line counter
