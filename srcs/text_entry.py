@@ -134,6 +134,7 @@ class TextEntry:
 			# if text is more short than the writing space, reset to 0
 			if text_width <= visible_width:
 				self.__text_offset = 0
+				
 			# Block cursor to go to far to left
 			elif text_width - self.__text_offset < visible_width:
 				self.__text_offset = text_width - visible_width + 10
